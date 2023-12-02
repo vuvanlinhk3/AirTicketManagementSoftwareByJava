@@ -1,0 +1,15 @@
+.background_main_img{
+    -fx-background-image: url("BackgroundMain.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+.background_rgba_3{
+    -fx-background-color: rgba(0,0,0,0.3);
+}
+.background_rgba_5{
+    -fx-background-color: rgba(0,0,0,0.5);
+}
+.background_rgba_7{
+    -fx-background-color: rgba(0,0,0,0.7);
+}
+

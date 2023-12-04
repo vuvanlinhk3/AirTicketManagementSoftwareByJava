@@ -13,247 +13,358 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1300.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="1300.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="200.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
          <center>
-            <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1200.0" style="-fx-background-color: #fff;" vbarPolicy="NEVER">
-                     <content>
-                        <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1200.0" style="-fx-background-color: #Fff;">
-                           <top>
-                              <BorderPane maxHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                 <left>
-                                    <Pane prefHeight="80.0" prefWidth="226.0" BorderPane.alignment="CENTER">
-                                       <children>
-                                          <ImageView fitHeight="84.0" fitWidth="240.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view_logo" />
-                                       </children>
-                                    </Pane>
-                                 </left>
-                                 <center>
-                                    <Pane prefHeight="56.0" prefWidth="159.0" BorderPane.alignment="CENTER" />
-                                 </center>
-                                 <right>
-                                    <BorderPane prefHeight="56.0" prefWidth="595.0" BorderPane.alignment="CENTER">
-                                       <bottom>
-                                          <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                             <children>
-                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Button">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <styleClass>
-                                                      <String fx:value="transparent-button" />
-                                                      <String fx:value="background_hover" />
-                                                      <String fx:value="border_radius_top_left_fight" />
-                                                   </styleClass>
-                                                </Button>
-                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Button">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <styleClass>
-                                                      <String fx:value="transparent-button" />
-                                                      <String fx:value="background_hover" />
-                                                      <String fx:value="border_radius_top_left_fight" />
-                                                   </styleClass>
-                                                </Button>
-                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Button">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <styleClass>
-                                                      <String fx:value="transparent-button" />
-                                                      <String fx:value="background_hover" />
-                                                      <String fx:value="border_radius_top_left_fight" />
-                                                   </styleClass>
-                                                </Button>
-                                                <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Button">
-                                                   <HBox.margin>
-                                                      <Insets />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <styleClass>
-                                                      <String fx:value="transparent-button" />
-                                                      <String fx:value="background_hover" />
-                                                      <String fx:value="border_radius_top_left_fight" />
-                                                   </styleClass>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </bottom>
-                                       <top>
-                                          <Pane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                             <children>
-                                                <Label layoutX="417.0" layoutY="11.0" text="Vũ Văn Linh">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="519.0" layoutY="11.0" text="Đăng Xuất">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </Pane>
-                                       </top>
-                                    </BorderPane>
-                                 </right>
-                              </BorderPane>
-                           </top>
+            <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="1200.0" style="-fx-background-color: #fff;" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="1005.0" prefWidth="1200.0" style="-fx-background-color: #Fff;">
+                     <top>
+                        <BorderPane maxHeight="-Infinity" prefHeight="80.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <left>
+                              <Pane prefHeight="80.0" prefWidth="226.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <ImageView fitHeight="84.0" fitWidth="240.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view_logo" />
+                                 </children>
+                              </Pane>
+                           </left>
                            <center>
-                              <BorderPane prefHeight="393.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-                                 <top>
-                                    <Pane prefHeight="250.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                              <Pane prefHeight="80.0" prefWidth="334.0" BorderPane.alignment="CENTER" />
+                           </center>
+                           <right>
+                              <BorderPane prefHeight="80.0" prefWidth="695.0" BorderPane.alignment="CENTER">
+                                 <bottom>
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <ImageView fitHeight="250.0" fitWidth="1200.0" nodeOrientation="INHERIT" pickOnBounds="true" styleClass="image-view_main" />
-                                          <Pane layoutX="100.0" layoutY="204.0" prefHeight="46.0" prefWidth="800.0">
-                                             <children>
-                                                <Pane prefHeight="46.0" prefWidth="1000.0">
-                                                   <children>
-                                                      <Button layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Mua Vé" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Cambria Bold" size="16.0" />
-                                                         </font>
-                                                         <styleClass>
-                                                            <String fx:value="transparent-button" />
-                                                            <String fx:value="background_hover" />
-                                                         </styleClass>
-                                                      </Button>
-                                                      <Button layoutX="500.0" layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Chuyến Bay 5 sao" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Cambria Bold" size="16.0" />
-                                                         </font>
-                                                         <styleClass>
-                                                            <String fx:value="transparent-button" />
-                                                            <String fx:value="background_hover" />
-                                                         </styleClass>
-                                                      </Button>
-                                                      <Button layoutX="750.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Tra Cứu Chuyến Bay" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Cambria Bold" size="16.0" />
-                                                         </font>
-                                                         <styleClass>
-                                                            <String fx:value="transparent-button" />
-                                                            <String fx:value="background_hover" />
-                                                         </styleClass>
-                                                      </Button>
-                                                      <Button layoutX="250.0" layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Quản Lý Đặt Chổ" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Cambria Bold" size="16.0" />
-                                                         </font>
-                                                         <styleClass>
-                                                            <String fx:value="transparent-button" />
-                                                            <String fx:value="background_hover" />
-                                                         </styleClass>
-                                                      </Button>
-                                                   </children>
-                                                   <styleClass>
-                                                      <String fx:value="background_green_rgba_3" />
-                                                      <String fx:value="border_radius_top_left_fight" />
-                                                   </styleClass>
-                                                </Pane>
-                                             </children>
-                                          </Pane>
+                                          <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Lên kế hoạch">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font name="Cambria" size="14.0" />
+                                             </font>
+                                             <styleClass>
+                                                <String fx:value="transparent-button" />
+                                                <String fx:value="background_hover" />
+                                                <String fx:value="border_radius_top_left_fight" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" text="Thông tin hành trình">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font name="Cambria" size="14.0" />
+                                             </font>
+                                             <styleClass>
+                                                <String fx:value="transparent-button" />
+                                                <String fx:value="background_hover" />
+                                                <String fx:value="border_radius_top_left_fight" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="135.0" text="Sản phẩm khác">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font name="Cambria" size="14.0" />
+                                             </font>
+                                             <styleClass>
+                                                <String fx:value="transparent-button" />
+                                                <String fx:value="background_hover" />
+                                                <String fx:value="border_radius_top_left_fight" />
+                                             </styleClass>
+                                          </Button>
+                                          <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="VIP">
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <font>
+                                                <Font name="Cambria" size="14.0" />
+                                             </font>
+                                             <styleClass>
+                                                <String fx:value="transparent-button" />
+                                                <String fx:value="background_hover" />
+                                                <String fx:value="border_radius_top_left_fight" />
+                                             </styleClass>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </bottom>
+                                 <top>
+                                    <Pane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label layoutX="510.0" layoutY="11.0" text="Vũ Văn Linh">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="616.0" layoutY="11.0" text="Đăng Xuất">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </Pane>
                                  </top>
-                                 <center>
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                              </BorderPane>
+                           </right>
+                        </BorderPane>
+                     </top>
+                     <center>
+                        <BorderPane prefHeight="393.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <Pane prefHeight="250.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <ImageView fitHeight="250.0" fitWidth="1200.0" nodeOrientation="INHERIT" pickOnBounds="true" styleClass="image-view_main" />
+                                    <Pane layoutX="100.0" layoutY="204.0" prefHeight="46.0" prefWidth="800.0">
+                                       <children>
+                                          <Pane prefHeight="46.0" prefWidth="1000.0">
+                                             <children>
+                                                <Button layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Mua Vé" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Cambria Bold" size="16.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="transparent-button" />
+                                                      <String fx:value="background_hover" />
+                                                   </styleClass>
+                                                </Button>
+                                                <Button layoutX="500.0" layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Chuyến Bay 5 sao" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Cambria Bold" size="16.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="transparent-button" />
+                                                      <String fx:value="background_hover" />
+                                                   </styleClass>
+                                                </Button>
+                                                <Button layoutX="750.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Tra Cứu Chuyến Bay" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Cambria Bold" size="16.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="transparent-button" />
+                                                      <String fx:value="background_hover" />
+                                                   </styleClass>
+                                                </Button>
+                                                <Button layoutX="250.0" layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Quản Lý Đặt Chổ" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Cambria Bold" size="16.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="transparent-button" />
+                                                      <String fx:value="background_hover" />
+                                                   </styleClass>
+                                                </Button>
+                                             </children>
+                                             <styleClass>
+                                                <String fx:value="background_green_rgba_3" />
+                                                <String fx:value="border_radius_top_left_fight" />
+                                             </styleClass>
+                                          </Pane>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </top>
+                           <center>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <top>
+                                    <BorderPane prefHeight="266.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                                        <top>
-                                          <BorderPane prefHeight="300.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-                                             <top>
-                                                <Pane prefHeight="122.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                          <Pane prefHeight="122.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Pane layoutX="100.0" prefHeight="90.0" prefWidth="1000.0">
                                                    <children>
-                                                      <Pane layoutX="100.0" prefHeight="90.0" prefWidth="1000.0">
+                                                      <Pane prefHeight="90.0" prefWidth="250.0">
                                                          <children>
-                                                            <Pane prefHeight="90.0" prefWidth="250.0">
-                                                               <children>
-                                                                  <TextField layoutX="14.0" layoutY="32.0" />
-                                                                  <Button layoutX="163.0" layoutY="32.0" mnemonicParsing="false" text="⇅" />
-                                                                  <Label layoutX="14.0" layoutY="14.0" text="Từ" />
-                                                               </children>
-                                                            </Pane>
-                                                            <Pane layoutX="500.0" prefHeight="90.0" prefWidth="250.0">
-                                                               <children>
-                                                                  <DatePicker layoutX="13.0" layoutY="33.0" />
-                                                                  <Label layoutX="14.0" layoutY="14.0" text="Ngày đi" />
-                                                               </children>
-                                                            </Pane>
-                                                            <Pane layoutX="750.0" prefHeight="90.0" prefWidth="250.0">
-                                                               <children>
-                                                                  <DatePicker layoutX="13.0" layoutY="33.0" />
-                                                                  <Label layoutX="14.0" layoutY="14.0" text="Ngày về" />
-                                                               </children>
-                                                            </Pane>
-                                                            <Pane layoutX="250.0" prefHeight="90.0" prefWidth="250.0">
-                                                               <children>
-                                                                  <TextField layoutX="14.0" layoutY="32.0" />
-                                                                  <Button layoutX="163.0" layoutY="32.0" mnemonicParsing="false" text="⇅" />
-                                                                  <Label layoutX="14.0" layoutY="14.0" text="Đến" />
-                                                               </children>
-                                                            </Pane>
+                                                            <TextField layoutX="14.0" layoutY="32.0" />
+                                                            <Button layoutX="163.0" layoutY="32.0" mnemonicParsing="false" text="⇅" />
+                                                            <Label layoutX="14.0" layoutY="14.0" text="Từ" />
                                                          </children>
-                                                         <styleClass>
-                                                            <String fx:value="background_lightOrange_rgba_3" />
-                                                            <String fx:value="border_radius_bottom_left_fight" />
-                                                         </styleClass>
+                                                      </Pane>
+                                                      <Pane layoutX="500.0" prefHeight="90.0" prefWidth="250.0">
+                                                         <children>
+                                                            <DatePicker layoutX="13.0" layoutY="33.0" />
+                                                            <Label layoutX="14.0" layoutY="14.0" text="Ngày đi" />
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane layoutX="750.0" prefHeight="90.0" prefWidth="250.0">
+                                                         <children>
+                                                            <DatePicker layoutX="13.0" layoutY="33.0" />
+                                                            <Label layoutX="14.0" layoutY="14.0" text="Ngày về" />
+                                                         </children>
+                                                      </Pane>
+                                                      <Pane layoutX="250.0" prefHeight="90.0" prefWidth="250.0">
+                                                         <children>
+                                                            <TextField layoutX="14.0" layoutY="32.0" />
+                                                            <Button layoutX="163.0" layoutY="32.0" mnemonicParsing="false" text="⇅" />
+                                                            <Label layoutX="14.0" layoutY="14.0" text="Đến" />
+                                                         </children>
                                                       </Pane>
                                                    </children>
+                                                   <styleClass>
+                                                      <String fx:value="background_lightOrange_rgba_3" />
+                                                      <String fx:value="border_radius_bottom_left_fight" />
+                                                      <String fx:value="node-with-shadow" />
+                                                   </styleClass>
                                                 </Pane>
+                                             </children>
+                                          </Pane>
+                                       </top>
+                                       <center>
+                                          <BorderPane prefHeight="161.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                                             <top>
+                                                <Pane prefHeight="90.0" prefWidth="1200.0" style="-fx-background-color: #f8f3e7;" BorderPane.alignment="CENTER" />
+                                             </top>
+                                             <center>
+                                                <Pane prefHeight="61.0" prefWidth="1000.0" styleClass="node-with-bottom-border" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <Label layoutY="15.0" text="⇲ " textFill="#907f39">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="20.0" layoutY="15.0" text="Tin Tức :" textFill="#907f39">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="110.0" layoutY="16.0" text="13/09/2023 Xuất trình thẻ hành lý khi nối chuyến tại sân bay Charles-de-Gaulle (CDG)" textFill="#285c75">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </center>
+                                          </BorderPane>
+                                       </center>
+                                    </BorderPane>
+                                 </top>
+                                 <center>
+                                    <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <top>
+                                                <BorderPane prefHeight="80.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                                                   <left>
+                                                      <BorderPane prefHeight="80.0" prefWidth="505.0" BorderPane.alignment="CENTER">
+                                                         <center>
+                                                            <Label prefHeight="17.0" prefWidth="518.0" text="--------------------------------------------------------------------------------------------------------" BorderPane.alignment="CENTER" />
+                                                         </center>
+                                                      </BorderPane>
+                                                   </left>
+                                                   <center>
+                                                      <BorderPane prefHeight="84.0" prefWidth="653.0" BorderPane.alignment="CENTER">
+                                                         <center>
+                                                            <Label text="Thông tin nổi bật" BorderPane.alignment="CENTER">
+                                                               <font>
+                                                                  <Font name="Candara Bold" size="24.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </center>
+                                                      </BorderPane>
+                                                   </center>
+                                                   <right>
+                                                      <BorderPane prefHeight="80.0" prefWidth="505.0" BorderPane.alignment="CENTER">
+                                                         <center>
+                                                            <Label text="---------------------------------------------------------------------------------------------------------" BorderPane.alignment="CENTER" />
+                                                         </center>
+                                                      </BorderPane>
+                                                   </right>
+                                                </BorderPane>
                                              </top>
                                              <center>
                                                 <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                                   <top>
-                                                      <Pane prefHeight="128.0" prefWidth="1000.0" style="-fx-background-color: #f8f3e7;" BorderPane.alignment="CENTER" />
-                                                   </top>
-                                                   <center>
-                                                      <Pane prefHeight="61.0" prefWidth="1000.0" styleClass="node-with-bottom-border" BorderPane.alignment="CENTER">
+                                                   <left>
+                                                      <Pane prefHeight="200.0" prefWidth="340.0" style="-fx-background-color: #ddf2fa;" BorderPane.alignment="CENTER">
                                                          <children>
-                                                            <Label layoutY="15.0" text="⇲ " textFill="#907f39">
+                                                            <ImageView fitHeight="180.0" fitWidth="340.0" pickOnBounds="true" styleClass="image-view_item_1" />
+                                                            <Label layoutX="14.0" layoutY="188.0" text="Hạng Thương Gia">
                                                                <font>
-                                                                  <Font name="Calibri Bold" size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label layoutX="20.0" layoutY="15.0" text="Tin Tức :" textFill="#907f39">
-                                                               <font>
-                                                                  <Font name="Calibri Bold" size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label layoutX="110.0" layoutY="16.0" text="13/09/2023 Xuất trình thẻ hành lý khi nối chuyến tại sân bay Charles-de-Gaulle (CDG)" textFill="#285c75">
-                                                               <font>
-                                                                  <Font size="14.0" />
+                                                                  <Font size="18.0" />
                                                                </font>
                                                             </Label>
                                                          </children>
+                                                         <BorderPane.margin>
+                                                            <Insets />
+                                                         </BorderPane.margin>
+                                                      </Pane>
+                                                   </left>
+                                                   <center>
+                                                      <Pane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="340.0" style="-fx-background-color: #ddf2fa;" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <ImageView fitHeight="180.0" fitWidth="340.0" pickOnBounds="true">
+                                                               <styleClass>
+                                                                  <String fx:value="image-view_item_2" />
+                                                                  <String fx:value="-hover_image-view" />
+                                                                  <String fx:value="-hover_image-view" />
+                                                               </styleClass>
+                                                            </ImageView>
+                                                            <Label layoutX="14.0" layoutY="188.0" text="Hạng Phổ Thông Đặc Biệt">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                         <BorderPane.margin>
+                                                            <Insets left="20.0" right="20.0" />
+                                                         </BorderPane.margin>
                                                       </Pane>
                                                    </center>
+                                                   <right>
+                                                      <Pane prefHeight="200.0" prefWidth="340.0" style="-fx-background-color: #ddf2fa;" BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <ImageView fitHeight="180.0" fitWidth="340.0" pickOnBounds="true" styleClass="image-view_item_3" />
+                                                            <Label layoutX="14.0" layoutY="188.0" text="Dịch Vụ Trên Không">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                         <BorderPane.margin>
+                                                            <Insets />
+                                                         </BorderPane.margin>
+                                                      </Pane>
+                                                   </right>
                                                 </BorderPane>
                                              </center>
                                           </BorderPane>
+                                       </center>
+                                       <top>
+                                          <Pane prefHeight="100.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Label layoutX="14.0" layoutY="14.0" text="Khám Phá Các Chuyến Bay Phổ Biến Nhất Của Chúng Tôi">
+                                                   <font>
+                                                      <Font name="Candara" size="24.0" />
+                                                   </font>
+                                                </Label>
+                                                <Button layoutX="14.0" layoutY="56.0" mnemonicParsing="false" text="Xem Thêm">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="background_hover" />
+                                                      <String fx:value="background_green_rgba_3" />
+                                                      <String fx:value="border_radius_top_left_right" />
+                                                      <String fx:value="border_radius_bottom_left_right" />
+                                                   </styleClass>
+                                                </Button>
+                                             </children>
+                                          </Pane>
                                        </top>
                                     </BorderPane>
                                  </center>
                               </BorderPane>
                            </center>
                         </BorderPane>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </Pane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </ScrollPane>
          </center>
       </BorderPane>
    </center>

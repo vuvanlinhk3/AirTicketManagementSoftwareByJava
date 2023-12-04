@@ -12,4 +12,41 @@
 .background_rgba_7{
     -fx-background-color: rgba(0,0,0,0.7);
 }
-
+.background_green_rgba_3{
+    -fx-background-color: rgba(42,99,121,0.4);
+    /*-fx-border-color: rgba(0,128,0,0.4);*/
+}
+.background_lightOrange_rgba_3{
+    -fx-background-color: rgba(251,249,121,0.4);
+    /*-fx-border-color: rgba(0,128,0,0.4);*/
+}
+.transparent-button {
+    -fx-background-color: null;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+.image-view_logo{
+    -fx-image: url('logo.png');
+    -fx-fit-width: 100%; /* Kích thước theo chiều rộng của hình ảnh */
+    -fx-fit-height: 100%;
+}
+.image-view_main {
+    -fx-image: url('tet.jpg');
+    -fx-fit-width: 100%; /* Kích thước theo chiều rộng của hình ảnh */
+    -fx-fit-height: 100%;
+}
+.border_radius_top_left_fight {
+    -fx-background-radius: 5 5 0 0; /* Top-left, top-right, bottom-right, bottom-left */
+}
+.border_radius_bottom_left_fight {
+    -fx-background-radius: 0 0 5 5; /* Top-left, top-right, bottom-right, bottom-left */
+}
+.background_hover:hover{ /*khi di chuột vào gì đó thì đổi màu*/
+    -fx-background-color: rgba(42,99,121,0.2);
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+.node-with-bottom-border {
+    -fx-border-color: transparent transparent green transparent;
+    -fx-border-width: 0 0 1 0; /* Chỉ định độ dày của border dưới cùng là 2px, các giá trị khác là 0 */
+}

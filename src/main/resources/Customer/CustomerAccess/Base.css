@@ -56,7 +56,11 @@
 }
 .node-with-bottom-border {
     -fx-border-color: transparent transparent green transparent;
-    -fx-border-width: 0 0 1 0; /* Chỉ định độ dày của border dưới cùng là 2px, các giá trị khác là 0 */
+    -fx-border-width: 0 0 1 0;
+}
+.border_Orange{
+    -fx-border-color: rgba(255, 253, 173,0.7);
+    -fx-border-width: 5;
 }
 .node-with-shadow {
     -fx-effect: dropshadow(gaussian, black, 7, 0, 2, 2);
@@ -76,4 +80,11 @@
     -fx-image: url('item3.png');
     -fx-fit-width: 100%; /* Kích thước theo chiều rộng của hình ảnh */
     -fx-fit-height: 100%;
+}
+
+.orange-text{
+    -fx-text-fill: #333; /* Màu chữ mặc định */
+}
+.orange-text:hover {
+    -fx-text-fill: #ff9900;
 }

@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="1300.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="1300.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
          <center>
@@ -49,6 +50,9 @@
                                                 <String fx:value="background_hover" />
                                                 <String fx:value="border_radius_top_left_fight" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                           <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" text="Thông tin hành trình">
                                              <HBox.margin>
@@ -62,6 +66,9 @@
                                                 <String fx:value="background_hover" />
                                                 <String fx:value="border_radius_top_left_fight" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                           <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="135.0" text="Sản phẩm khác">
                                              <HBox.margin>
@@ -75,6 +82,9 @@
                                                 <String fx:value="background_hover" />
                                                 <String fx:value="border_radius_top_left_fight" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                           <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="VIP">
                                              <HBox.margin>
@@ -88,6 +98,9 @@
                                                 <String fx:value="background_hover" />
                                                 <String fx:value="border_radius_top_left_fight" />
                                              </styleClass>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                     </HBox>
@@ -99,11 +112,17 @@
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Label>
                                           <Label layoutX="616.0" layoutY="11.0" text="Đăng Xuất">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Label>
                                        </children>
                                     </Pane>
@@ -130,6 +149,9 @@
                                                       <String fx:value="transparent-button" />
                                                       <String fx:value="background_hover" />
                                                    </styleClass>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <Button layoutX="500.0" layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Chuyến Bay 5 sao" textFill="WHITE">
                                                    <font>
@@ -139,6 +161,9 @@
                                                       <String fx:value="transparent-button" />
                                                       <String fx:value="background_hover" />
                                                    </styleClass>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                                 <Button layoutX="750.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Tra Cứu Chuyến Bay" textFill="WHITE">
                                                    <font>
@@ -148,8 +173,11 @@
                                                       <String fx:value="transparent-button" />
                                                       <String fx:value="background_hover" />
                                                    </styleClass>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
-                                                <Button layoutX="250.0" layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Quản Lý Đặt Chổ" textFill="WHITE">
+                                                <Button layoutX="250.0" layoutY="1.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="250.0" text="Quản Lý Chuyến Bay Của Tôi" textFill="WHITE">
                                                    <font>
                                                       <Font name="Cambria Bold" size="16.0" />
                                                    </font>
@@ -157,6 +185,9 @@
                                                       <String fx:value="transparent-button" />
                                                       <String fx:value="background_hover" />
                                                    </styleClass>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                              </children>
                                              <styleClass>
@@ -236,6 +267,9 @@
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </Label>
                                                    </children>
                                                 </Pane>
@@ -292,6 +326,9 @@
                                                          <BorderPane.margin>
                                                             <Insets />
                                                          </BorderPane.margin>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </Pane>
                                                    </left>
                                                    <center>
@@ -313,6 +350,9 @@
                                                          <BorderPane.margin>
                                                             <Insets left="20.0" right="20.0" />
                                                          </BorderPane.margin>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </Pane>
                                                    </center>
                                                    <right>
@@ -328,6 +368,9 @@
                                                          <BorderPane.margin>
                                                             <Insets />
                                                          </BorderPane.margin>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
                                                       </Pane>
                                                    </right>
                                                 </BorderPane>
@@ -352,6 +395,9 @@
                                                       <String fx:value="border_radius_top_left_right" />
                                                       <String fx:value="border_radius_bottom_left_right" />
                                                    </styleClass>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </Button>
                                              </children>
                                           </Pane>

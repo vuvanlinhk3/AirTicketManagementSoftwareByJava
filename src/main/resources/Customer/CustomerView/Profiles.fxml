@@ -1,14 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Customer.Controller.ProfilesController"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <BorderPane prefHeight="80.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <left>
+            <BorderPane prefHeight="80.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="35.0" text="↺  Quay Trở Lại">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="transparent-button" />
+                              <String fx:value="orange-text" />
+                           </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </Pane>
+               </center>
+            </BorderPane>
+         </left>
+         <center>
+            <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+               <center>
+                  <BorderPane maxHeight="-Infinity" prefHeight="80.0" prefWidth="1197.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <Pane prefHeight="80.0" prefWidth="168.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ImageView fitHeight="79.0" fitWidth="200.0" layoutX="62.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../CustomerAccess/logo.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </left>
+                     <center>
+                        <Pane prefHeight="80.0" prefWidth="334.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <right>
+                        <BorderPane prefHeight="80.0" prefWidth="695.0" BorderPane.alignment="CENTER">
+                           <bottom>
+                              <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                           </bottom>
+                           <top>
+                              <Pane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label layoutX="510.0" layoutY="11.0" text="Vũ Văn Linh">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Label>
+                                    <Label layoutX="616.0" layoutY="11.0" text="Đăng Xuất">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </top>
+                        </BorderPane>
+                     </right>
+                  </BorderPane>
+               </center>
+            </BorderPane>
+         </center>
+         <right>
+            <BorderPane prefHeight="80.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ddd;" BorderPane.alignment="CENTER">
+         <center>
+            <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <BorderPane prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ImageView fitHeight="200.0" fitWidth="1200.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../CustomerAccess/tet.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Button layoutX="14.0" layoutY="136.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" style="-fx-background-radius: 50%; -fx-border-radius: 50%;" />
+                              <Button layoutX="1105.0" layoutY="161.0" mnemonicParsing="false" text="Thay đổi bìa" />
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+               </top>
+               <center>
+                  <BorderPane prefHeight="414.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>

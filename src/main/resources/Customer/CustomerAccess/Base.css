@@ -57,7 +57,7 @@
     -fx-border-width: 5;
 }
 .node-with-shadow {
-    -fx-effect: dropshadow(gaussian, black, 7, 0, 2, 2);
+    -fx-effect: dropshadow(gaussian, #bbb, 7, 0, 2, 2);
     -fx-z-index: 1; /* Đặt z-index lớn hơn 0 */
 }
 .image-view_item_1 {
@@ -81,4 +81,8 @@
 }
 .orange-text_hover:hover {
     -fx-text-fill: #ff9900;
+}
+.border_radius_20 {
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
 }

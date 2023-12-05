@@ -43,12 +43,6 @@
     -fx-background-radius: 0 0 5 5;
     -fx-border-radius: 0 0 5 5;/* Top-left, top-right, bottom-right, bottom-left */
 }
-.border_radius{
-    -fx-background-radius: 0 0 5 5;
-    -fx-border-radius: 0 0 5 5;
-    -fx-background-radius: 5 5 0 0;
-    -fx-border-radius: 5 5 0 0;
-}
 .background_hover:hover{ /*khi di chuột vào gì đó thì đổi màu*/
     -fx-background-color: rgba(42,99,121,0.2);
     -fx-border-color: null;
@@ -82,9 +76,9 @@
     -fx-fit-height: 100%;
 }
 
-.orange-text{
+.orange-text_hover{
     -fx-text-fill: #333; /* Màu chữ mặc định */
 }
-.orange-text:hover {
+.orange-text_hover:hover {
     -fx-text-fill: #ff9900;
 }

@@ -4,8 +4,9 @@ module planeapp.paneapp {
     requires com.dlsc.formsfx;
     opens Customer to javafx.fxml;
     opens Admin to javafx.fxml;
+    opens Database to javafx.fxml;
 
-    exports Customer.Controller;
+    exports Database;
     exports Admin;
     exports Customer;
 

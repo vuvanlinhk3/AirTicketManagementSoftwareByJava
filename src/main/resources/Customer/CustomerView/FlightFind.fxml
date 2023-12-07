@@ -11,101 +11,147 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <Label text="NHẬP THÔNG TIN CHUYẾN BAY" BorderPane.alignment="TOP_CENTER">
-         <BorderPane.margin>
-            <Insets top="10.0" />
-         </BorderPane.margin>
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <top>
-            <BorderPane prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="14.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+               <left>
+                  <Pane prefHeight="88.0" prefWidth="126.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" text="↺  Quay Trở Lại" />
+                     </children>
+                  </Pane>
+               </left>
                <center>
-                  <Label text="Xin lưu ý: Tất cả các trường có dấu * là bắt buộc" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets right="250.0" />
-                     </BorderPane.margin>
-                     <graphic>
-                        <ImageView fitHeight="37.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                  <Pane prefHeight="89.0" prefWidth="199.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <ImageView fitHeight="65.0" fitWidth="323.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../CustomerAccess/canhbao.jpg" />
+                              <Image url="@../CustomerAccess/logo.png" />
                            </image>
                         </ImageView>
-                     </graphic>
-                  </Label>
+                     </children>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </Pane>
                </center>
+               <right>
+                  <BorderPane prefHeight="89.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+                     <top>
+                        <Pane prefHeight="46.0" prefWidth="427.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="236.0" layoutY="15.0" text="Vũ Văn Linh" />
+                              <Label layoutX="338.0" layoutY="15.0" text="Đăng Xuất" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <bottom>
+                        <HBox prefHeight="42.0" prefWidth="422.0" BorderPane.alignment="CENTER_LEFT">
+                           <children>
+                              <Button mnemonicParsing="false" text="Đặt Chuyến Bay" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="10.0" />
+                                 </HBox.margin></Button>
+                              <Button mnemonicParsing="false" text="Quản Lý Chuyến Bay Của Tôi" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="50.0" top="10.0" />
+                                 </HBox.margin></Button>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </HBox>
+                     </bottom>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </BorderPane>
+               </right>
+               <BorderPane.margin>
+                  <Insets left="50.0" right="50.0" />
+               </BorderPane.margin>
             </BorderPane>
          </top>
          <center>
-            <BorderPane prefHeight="286.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="635.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <top>
-                  <BorderPane prefHeight="36.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-                     <left>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="HÀNH TRÌNH " textAlignment="CENTER" BorderPane.alignment="CENTER_RIGHT">
-                           <BorderPane.margin>
-                              <Insets left="150.0" />
-                           </BorderPane.margin>
-                        </Button>
-                     </left>
-                     <center>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="SỐ HIỆU CHUYẾN BAY" textAlignment="CENTER" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets right="40.0" />
-                           </BorderPane.margin>
-                        </Button>
-                     </center>
-                  </BorderPane>
+                  <Label prefHeight="31.0" prefWidth="746.0" text="Xin lưu ý: * Trường bắt buộc nhập thông tin" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="154.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../CustomerAccess/canhbao.jpg" />
+                           </image></ImageView>
+                     </graphic>
+                     <BorderPane.margin>
+                        <Insets right="50.0" />
+                     </BorderPane.margin>
+                  </Label>
                </top>
                <center>
-                  <HBox prefHeight="212.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <VBox>
-                           <children>
-                              <Pane prefHeight="255.0" prefWidth="318.0" VBox.vgrow="ALWAYS">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <top>
+                        <BorderPane prefHeight="48.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <Pane prefHeight="65.0" prefWidth="700.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label layoutX="14.0" layoutY="6.0" text="Từ* :">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <ComboBox layoutX="48.0" layoutY="37.0" prefHeight="25.0" prefWidth="217.0" />
-                                    <Label layoutX="14.0" layoutY="90.0" text="Ngày khởi hành* :">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <DatePicker layoutX="49.0" layoutY="123.0" prefHeight="32.0" prefWidth="215.0" />
+                                    <Button layoutX="203.0" layoutY="12.0" mnemonicParsing="false" text="HÀNH TRÌNH" />
+                                    <Button layoutX="336.0" layoutY="12.0" mnemonicParsing="false" text="SỐ HIỆU CHUYẾN BAY" />
                                  </children>
+                                 <BorderPane.margin>
+                                    <Insets left="100.0" right="100.0" />
+                                 </BorderPane.margin>
                               </Pane>
-                           </children>
-                        </VBox>
-                        <VBox>
-                           <children>
-                              <Pane prefHeight="228.0" prefWidth="310.0" VBox.vgrow="ALWAYS">
+                           </center>
+                        </BorderPane>
+                     </top>
+                     <center>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <VBox prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Label layoutX="8.0" layoutY="6.0" text="Đến* :">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <ComboBox layoutX="57.0" layoutY="36.0" prefHeight="25.0" prefWidth="216.0" />
-                                    <Button layoutX="196.0" layoutY="199.0" mnemonicParsing="false" text="Tìm Kiếm" />
+                                    <Pane prefHeight="300.0" prefWidth="150.0">
+                                       <children>
+                                          <Label layoutX="107.0" layoutY="21.0" text="Từ* : " />
+                                          <ComboBox layoutX="135.0" layoutY="38.0" prefHeight="25.0" prefWidth="164.0" />
+                                          <Label layoutX="388.0" layoutY="17.0" text="Đến* : " />
+                                          <ComboBox layoutX="416.0" layoutY="34.0" prefWidth="150.0" />
+                                          <Label layoutX="107.0" layoutY="82.0" text="Ngày khởi hành* :" />
+                                          <DatePicker layoutX="128.0" layoutY="105.0" />
+                                          <Button layoutX="514.0" layoutY="130.0" mnemonicParsing="false" text="Tìm Kiếm" />
+                                          <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="63.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="337.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="63.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../CustomerAccess/gio.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="100.0" right="100.0" />
+                                       </VBox.margin>
+                                    </Pane>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
-                              </Pane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
+                              </VBox>
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
                </center>
+               <BorderPane.margin>
+                  <Insets bottom="50.0" left="50.0" right="50.0" />
+               </BorderPane.margin>
             </BorderPane>
          </center>
       </BorderPane>

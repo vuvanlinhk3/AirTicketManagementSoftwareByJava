@@ -15,7 +15,7 @@ public class MainCustomer extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainCustomer.class.getResource("CustomerView/AccountFind.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainCustomer.class.getResource("CustomerView/FlightFind.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1400, 650);
         // Set minimum width and height
         stage.setMinWidth(1400);

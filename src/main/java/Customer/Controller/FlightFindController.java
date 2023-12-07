@@ -1,16 +1,14 @@
 package Customer.Controller;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class FlightFindController extends Application {
+import java.io.IOException;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+public class FlightFindController {
 
-    @Override
-    public void start(Stage primaryStage) {
 
-    }
 }

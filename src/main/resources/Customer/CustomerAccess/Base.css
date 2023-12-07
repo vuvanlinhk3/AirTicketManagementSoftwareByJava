@@ -86,3 +86,8 @@
     -fx-background-radius: 20 20 20 20;
     -fx-border-radius: 20 20 20 20;
 }
+.border_color_b7b0a5{
+    -fx-border-color: #b7b0a5;
+    -fx-border-width: 2 2 2 2;
+
+}

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -10,24 +11,24 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="650.0" prefWidth="1400.0" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <BorderPane prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+      <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <top>
-            <BorderPane prefHeight="14.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="80.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <left>
                   <Pane prefHeight="88.0" prefWidth="126.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button mnemonicParsing="false" text="↺  Quay Trở Lại" />
+                        <Button layoutY="14.0" mnemonicParsing="false" text="↺  Quay Trở Lại" />
                      </children>
                   </Pane>
                </left>
                <center>
-                  <Pane prefHeight="89.0" prefWidth="199.0" BorderPane.alignment="CENTER">
+                  <Pane prefHeight="92.0" prefWidth="461.0" BorderPane.alignment="CENTER">
                      <children>
-                        <ImageView fitHeight="65.0" fitWidth="323.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="243.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../CustomerAccess/logo.png" />
                            </image>
@@ -39,118 +40,138 @@
                   </Pane>
                </center>
                <right>
-                  <BorderPane prefHeight="89.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+                  <BorderPane prefHeight="88.0" prefWidth="478.0" BorderPane.alignment="CENTER">
                      <top>
-                        <Pane prefHeight="46.0" prefWidth="427.0" BorderPane.alignment="CENTER">
+                        <Pane prefHeight="40.0" prefWidth="427.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="236.0" layoutY="15.0" text="Vũ Văn Linh" />
-                              <Label layoutX="338.0" layoutY="15.0" text="Đăng Xuất" />
+                              <Label layoutX="308.0" layoutY="15.0" text="Vũ Văn Linh" />
+                              <Label layoutX="408.0" layoutY="15.0" text="Đăng Xuất" />
                            </children>
                         </Pane>
                      </top>
-                     <bottom>
-                        <HBox prefHeight="42.0" prefWidth="422.0" BorderPane.alignment="CENTER_LEFT">
-                           <children>
-                              <Button mnemonicParsing="false" text="Đặt Chuyến Bay" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="30.0" top="10.0" />
-                                 </HBox.margin></Button>
-                              <Button mnemonicParsing="false" text="Quản Lý Chuyến Bay Của Tôi" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="50.0" top="10.0" />
-                                 </HBox.margin></Button>
-                           </children>
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
-                        </HBox>
-                     </bottom>
                      <BorderPane.margin>
                         <Insets />
                      </BorderPane.margin>
+                     <bottom>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_LEFT">
+                           <children>
+                              <Button mnemonicParsing="false" text="Đặt Chuyến Bay">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="transparent-button" />
+                                    <String fx:value="background_hover" />
+                                    <String fx:value="border_radius_top_left_right" />
+                                 </styleClass>
+                              </Button>
+                              <Button mnemonicParsing="false" text="Quản Lý Chuyến Bay Của Tôi">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="transparent-button" />
+                                    <String fx:value="background_hover" />
+                                    <String fx:value="border_radius_top_left_right" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </bottom>
                   </BorderPane>
                </right>
                <BorderPane.margin>
-                  <Insets left="50.0" right="50.0" />
+                  <Insets />
                </BorderPane.margin>
             </BorderPane>
          </top>
          <center>
-            <BorderPane prefHeight="635.0" prefWidth="900.0" BorderPane.alignment="CENTER">
-               <top>
-                  <Label prefHeight="31.0" prefWidth="746.0" text="Xin lưu ý: * Trường bắt buộc nhập thông tin" BorderPane.alignment="CENTER">
-                     <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="154.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../CustomerAccess/canhbao.jpg" />
-                           </image></ImageView>
-                     </graphic>
-                     <BorderPane.margin>
-                        <Insets right="50.0" />
-                     </BorderPane.margin>
-                  </Label>
-               </top>
+            <BorderPane prefHeight="433.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                <center>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <BorderPane prefHeight="443.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                      <top>
                         <BorderPane prefHeight="48.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                            <center>
-                              <Pane prefHeight="65.0" prefWidth="700.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Button layoutX="203.0" layoutY="12.0" mnemonicParsing="false" text="HÀNH TRÌNH" />
-                                    <Button layoutX="336.0" layoutY="12.0" mnemonicParsing="false" text="SỐ HIỆU CHUYẾN BAY" />
-                                 </children>
+                              <Pane prefHeight="65.0" prefWidth="700.0" style="-fx-background-color: #d5dad529;" BorderPane.alignment="CENTER">
                                  <BorderPane.margin>
-                                    <Insets left="100.0" right="100.0" />
+                                    <Insets />
                                  </BorderPane.margin>
+                                 <children>
+                                    <Label layoutX="44.0" layoutY="13.0" text="Tìm Chuyến Bay">
+                                       <font>
+                                          <Font name="Cambria Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
                               </Pane>
                            </center>
                         </BorderPane>
                      </top>
                      <center>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="496.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                            <center>
-                              <VBox prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-                                 <children>
-                                    <Pane prefHeight="300.0" prefWidth="150.0">
-                                       <children>
-                                          <Label layoutX="107.0" layoutY="21.0" text="Từ* : " />
-                                          <ComboBox layoutX="135.0" layoutY="38.0" prefHeight="25.0" prefWidth="164.0" />
-                                          <Label layoutX="388.0" layoutY="17.0" text="Đến* : " />
-                                          <ComboBox layoutX="416.0" layoutY="34.0" prefWidth="150.0" />
-                                          <Label layoutX="107.0" layoutY="82.0" text="Ngày khởi hành* :" />
-                                          <DatePicker layoutX="128.0" layoutY="105.0" />
-                                          <Button layoutX="514.0" layoutY="130.0" mnemonicParsing="false" text="Tìm Kiếm" />
-                                          <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="63.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="337.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="63.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../CustomerAccess/gio.jpg" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets left="100.0" right="100.0" />
-                                       </VBox.margin>
-                                    </Pane>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </VBox>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <BorderPane prefHeight="382.0" prefWidth="1100.0" style="-fx-background-color: #d5dad529;" BorderPane.alignment="CENTER">
+                                       <top>
+                                          <Pane maxWidth="-Infinity" prefHeight="60.0" prefWidth="773.0" style="-fx-background-color: #e6e1da; -fx-border-color: #e6e1de;" styleClass="border_radius_top_left_right" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button layoutX="45.0" layoutY="34.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="105.0" style="-fx-background-color: #fbf9f2;" text="HÀNH TRÌNH">
+                                                   <styleClass>
+                                                      <String fx:value="border_radius_top_left_right" />
+                                                      <String fx:value="border_color_b7b0a5" />
+                                                   </styleClass>
+                                                </Button>
+                                                <Button layoutX="150.0" layoutY="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="SỐ HIỆU CHUYẾN BAY">
+                                                   <styleClass>
+                                                      <String fx:value="transparent-button" />
+                                                      <String fx:value="background_hover" />
+                                                   </styleClass>
+                                                </Button>
+                                             </children>
+                                          </Pane>
+                                       </top>
+                                       <center>
+                                          <Pane prefHeight="252.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Pane layoutX="214.0" prefHeight="170.0" prefWidth="773.0" style="-fx-background-color: #fbf9f2; -fx-border-color: #b7b0a5;" styleClass="border_radius_bottom_left_right">
+                                                   <children>
+                                                      <Label layoutX="120.0" layoutY="17.0" text="Từ* : " />
+                                                      <ComboBox layoutX="120.0" layoutY="35.0" prefHeight="25.0" prefWidth="164.0" />
+                                                      <ComboBox layoutX="463.0" layoutY="35.0" prefWidth="150.0" />
+                                                      <Label layoutX="120.0" layoutY="85.0" text="Ngày khởi hành* :" />
+                                                      <DatePicker layoutX="115.0" layoutY="105.0" />
+                                                      <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="53.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="387.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label layoutX="463.0" layoutY="15.0" text="Đến* : " />
+                                                      <Button layoutX="538.0" layoutY="130.0" mnemonicParsing="false" text="Tìm Kiếm">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </Pane>
+                                       </center>
+                                    </BorderPane>
+                                 </center>
+                              </BorderPane>
                            </center>
                         </BorderPane>
                      </center>
                   </BorderPane>
                </center>
                <BorderPane.margin>
-                  <Insets bottom="50.0" left="50.0" right="50.0" />
+                  <Insets />
                </BorderPane.margin>
             </BorderPane>
          </center>

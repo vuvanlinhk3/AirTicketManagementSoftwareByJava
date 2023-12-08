@@ -1,8 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="518.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Customer.Controller.BookingController">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="25.0" minWidth="50.0" prefHeight="600.0" prefWidth="1300.0" style="-fx-background-color: #7ed6df;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Pane minHeight="-Infinity" prefHeight="60.0" prefWidth="1300.0" style="-fx-background-color: #7ed6df;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="28.0" prefHeight="60.0" prefWidth="107.0" text="San bay" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+   <left>
+      <Pane minWidth="-Infinity" prefHeight="520.0" prefWidth="30.0" style="-fx-background-color: #7ed6df;" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Pane minWidth="-Infinity" prefHeight="520.0" prefWidth="30.0" style="-fx-background-color: #7ed6df;" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <Pane minHeight="-Infinity" prefHeight="30.0" style="-fx-background-color: #7ed6df;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1240.0" BorderPane.alignment="CENTER">
+         <center>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" styleClass="transparent-button" stylesheets="@../CustomerAccess/Base.css" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox minHeight="10.0" minWidth="20.0" prefHeight="1000.0" prefWidth="1240.0" spacing="20.0" style="-fx-background-color: #dff9fb;" styleClass="border_radius_20" stylesheets="@../CustomerAccess/Base.css">
+                     <children>
+                        <Pane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="1200.0" style="-fx-background-color: #c7ecee;" stylesheets="@../CustomerAccess/Base.css">
+                           <styleClass>
+                              <String fx:value="border_radius_20" />
+                              <String fx:value="node-with-shadow" />
+                           </styleClass>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Pane>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>

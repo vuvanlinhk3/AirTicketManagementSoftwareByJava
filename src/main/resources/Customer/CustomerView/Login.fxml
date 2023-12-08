@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -22,11 +23,6 @@
                      </font>
                   </Label>
                   <TextField layoutX="25.0" layoutY="219.0" prefHeight="40.0" prefWidth="450.0" promptText="Số thẻ Hội viên/ Email/ Số điện thoại">
-                     <font>
-                        <Font name="Arial Italic" size="14.0" />
-                     </font>
-                  </TextField>
-                  <TextField layoutX="25.0" layoutY="323.0" prefHeight="40.0" prefWidth="450.0" promptText="Mật khẩu">
                      <font>
                         <Font name="Arial Italic" size="14.0" />
                      </font>
@@ -61,6 +57,11 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <PasswordField layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </PasswordField>
                </children>
                <styleClass>
                   <String fx:value="node-with-shadow" />

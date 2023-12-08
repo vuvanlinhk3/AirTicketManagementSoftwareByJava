@@ -116,7 +116,7 @@
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Button layoutX="952.0" layoutY="555.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea;" text="Đăng ký" textFill="WHITE">
+                        <Button layoutX="952.0" layoutY="555.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Đăng ký" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>

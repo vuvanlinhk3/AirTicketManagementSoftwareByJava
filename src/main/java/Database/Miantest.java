@@ -3,7 +3,9 @@ package Database;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class DatabaseUtil extends Application {
+import java.sql.Connection;
+
+public class Miantest extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -11,6 +13,7 @@ public class DatabaseUtil extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
+        Connection connection = DatabaseContection.getConnettion();
+        System.out.println(connection);
     }
 }

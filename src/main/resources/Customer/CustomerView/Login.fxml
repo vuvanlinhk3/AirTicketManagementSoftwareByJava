@@ -24,7 +24,7 @@
                   </Label>
                   <TextField layoutX="25.0" layoutY="219.0" prefHeight="40.0" prefWidth="450.0" promptText="Số thẻ Hội viên/ Email/ Số điện thoại">
                      <font>
-                        <Font name="Arial Italic" size="14.0" />
+                        <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
                   <Button layoutX="325.0" layoutY="391.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Đăng nhập">

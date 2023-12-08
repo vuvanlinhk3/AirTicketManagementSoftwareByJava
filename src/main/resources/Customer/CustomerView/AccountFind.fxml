@@ -80,9 +80,6 @@
    </center>
    <top>
       <Button mnemonicParsing="false" styleClass="orange-text_hover" text="← Cancel" BorderPane.alignment="TOP_LEFT">
-         <padding>
-            <Insets right="10.0" />
-         </padding>
          <font>
             <Font size="13.0" />
          </font>

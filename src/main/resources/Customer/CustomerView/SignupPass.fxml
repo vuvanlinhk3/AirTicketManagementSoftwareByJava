@@ -13,13 +13,30 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <Pane prefHeight="650.0" prefWidth="237.0" style="-fx-background-color: #48A5EA;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="163.0" fitWidth="170.0" layoutX="34.0" layoutY="14.0">
+               <image>
+                  <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="44.0" fitWidth="249.0" layoutY="14.0" preserveRatio="true">
+               <image>
+                  <Image url="@../CustomerAccess/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </left>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <center>
             <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <center>
-                  <AnchorPane maxWidth="-Infinity" prefHeight="601.0" prefWidth="1200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="601.0" prefWidth="1200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                      <children>
                         <TextField layoutX="158.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
                            <font>
@@ -27,6 +44,16 @@
                            </font>
                         </TextField>
                         <TextField layoutX="711.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </TextField>
+                        <TextField layoutX="833.0" layoutY="431.0" prefHeight="25.0" prefWidth="229.0" promptText="Số điện thoại">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </TextField>
+                        <TextField layoutX="713.0" layoutY="502.0" prefHeight="25.0" prefWidth="349.0" promptText="Nhập Email">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -81,6 +108,11 @@
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
+                        <Label layoutX="571.0" layoutY="395.0" text="Di động*">
+                           <font>
+                              <Font name="Calibri Bold" size="15.0" />
+                           </font>
+                        </Label>
                         <Label layoutX="590.0" layoutY="443.0">
                            <font>
                               <Font name="Calibri Bold" size="15.0" />
@@ -95,7 +127,13 @@
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="952.0" layoutY="529.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Đăng ký" textFill="WHITE">
+                        <ComboBox layoutX="571.0" layoutY="431.0" prefHeight="25.0" prefWidth="230.0" promptText="Chọn quốc gia/vùng" />
+                        <Label layoutX="571.0" layoutY="505.0" text="Địa chỉ thư điện tử*">
+                           <font>
+                              <Font name="Calibri Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="952.0" layoutY="555.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Đăng ký" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -118,20 +156,4 @@
          </center>
       </BorderPane>
    </center>
-   <left>
-      <Pane maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="237.0" style="-fx-background-color: #48A5EA;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="163.0" fitWidth="170.0" layoutX="34.0" layoutY="14.0">
-               <image>
-                  <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="44.0" fitWidth="249.0" layoutX="260.0" layoutY="14.0" preserveRatio="true">
-               <image>
-                  <Image url="@../CustomerAccess/logo.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-   </left>
 </BorderPane>

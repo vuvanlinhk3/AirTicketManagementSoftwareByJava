@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="Customer.Controller.SignupController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <center>
@@ -31,7 +31,7 @@
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <Label layoutX="274.0" layoutY="82.0" text="Đăng Ký" textFill="#48a5ea">
+                        <Label layoutX="274.0" layoutY="71.0" text="Đăng Ký" textFill="#48a5ea">
                            <font>
                               <Font name="Cambria Bold" size="30.0" />
                            </font>
@@ -66,17 +66,17 @@
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="571.0" layoutY="219.0" text="Quốc gia/Vùng*">
+                        <Label layoutX="571.0" layoutY="231.0" text="Quốc gia/Vùng*">
                            <font>
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="571.0" layoutY="280.0" text="Tỉnh/Bang*">
+                        <Label layoutX="570.0" layoutY="299.0" text="Tỉnh/Bang*">
                            <font>
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="571.0" layoutY="348.0" text="Quận/Thành phố*">
+                        <Label layoutX="571.0" layoutY="364.0" text="Quận/Thành phố*">
                            <font>
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
@@ -88,14 +88,14 @@
                         </Label>
                         <ComboBox layoutX="157.0" layoutY="360.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn quốc tịch" />
                         <ComboBox layoutX="157.0" layoutY="431.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn ngôn ngữ" />
-                        <ComboBox layoutX="713.0" layoutY="215.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn quốc gia/vùng" />
-                        <ComboBox layoutX="713.0" layoutY="276.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn tỉnh" />
-                        <TextField layoutX="711.0" layoutY="344.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                        <ComboBox layoutX="713.0" layoutY="227.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn quốc gia/vùng" />
+                        <ComboBox layoutX="712.0" layoutY="295.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn tỉnh" />
+                        <TextField layoutX="711.0" layoutY="360.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="952.0" layoutY="529.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Đăng ký" textFill="WHITE">
+                        <Button layoutX="949.0" layoutY="529.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Tiếp Tục" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -111,6 +111,11 @@
                         </Button>
                         <DatePicker layoutX="158.0" layoutY="295.0" prefHeight="25.0" prefWidth="186.0" />
                         <ComboBox layoutX="158.0" layoutY="228.0" prefHeight="25.0" prefWidth="187.0" promptText="Chọn giới tính" />
+                        <Label layoutX="71.0" layoutY="120.0" text="Lưu ý : * là những trường bắt buộc nhập" textFill="#906262">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </center>

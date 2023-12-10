@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:controller="Customer.Controller.SignupController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: #fff;" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Customer.Controller.SignupController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <center>
@@ -21,12 +21,12 @@
                <center>
                   <AnchorPane maxWidth="-Infinity" prefHeight="601.0" prefWidth="1200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                      <children>
-                        <TextField layoutX="158.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                        <TextField fx:id="nameuser_textfield" layoutX="158.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <TextField layoutX="711.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                        <TextField fx:id="address_textfield" layoutX="711.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -86,16 +86,16 @@
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="157.0" layoutY="360.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn quốc tịch" />
-                        <ComboBox layoutX="157.0" layoutY="431.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn ngôn ngữ" />
-                        <ComboBox layoutX="713.0" layoutY="227.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn quốc gia/vùng" />
-                        <ComboBox layoutX="712.0" layoutY="295.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn tỉnh" />
-                        <TextField layoutX="711.0" layoutY="360.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                        <ComboBox fx:id="nationality_combobox" layoutX="157.0" layoutY="360.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn quốc tịch" />
+                        <ComboBox fx:id="language_combobox" layoutX="157.0" layoutY="431.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn ngôn ngữ" />
+                        <ComboBox fx:id="country_combobox" layoutX="713.0" layoutY="227.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn quốc gia/vùng" />
+                        <ComboBox fx:id="provinces_combobox" layoutX="712.0" layoutY="295.0" prefHeight="25.0" prefWidth="349.0" promptText="Chọn tỉnh" />
+                        <TextField fx:id="city_textfield" layoutX="711.0" layoutY="360.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="949.0" layoutY="529.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Tiếp Tục" textFill="WHITE">
+                        <Button layoutX="949.0" layoutY="529.0" mnemonicParsing="false" onAction="#next_click" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Tiếp Tục" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -109,8 +109,8 @@
                               <String fx:value="background_hover" />
                            </styleClass>
                         </Button>
-                        <DatePicker layoutX="158.0" layoutY="295.0" prefHeight="25.0" prefWidth="186.0" />
-                        <ComboBox layoutX="158.0" layoutY="228.0" prefHeight="25.0" prefWidth="187.0" promptText="Chọn giới tính" />
+                        <DatePicker fx:id="birthday_date" layoutX="158.0" layoutY="295.0" prefHeight="25.0" prefWidth="186.0" />
+                        <ComboBox fx:id="Gender_combobox" layoutX="158.0" layoutY="228.0" prefHeight="25.0" prefWidth="187.0" promptText="Chọn giới tính" />
                         <Label layoutX="71.0" layoutY="120.0" text="Lưu ý : * là những trường bắt buộc nhập" textFill="#906262">
                            <font>
                               <Font name="Cambria" size="12.0" />

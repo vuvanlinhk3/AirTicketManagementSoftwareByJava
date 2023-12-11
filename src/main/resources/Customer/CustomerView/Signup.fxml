@@ -21,7 +21,7 @@
                <center>
                   <AnchorPane maxWidth="-Infinity" prefHeight="601.0" prefWidth="1200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                      <children>
-                        <TextField fx:id="nameuser_textfield" layoutX="158.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                        <TextField fx:id="nameuser_textfield" layoutX="158.0" layoutY="159.0" prefHeight="25.0" prefWidth="353.0" promptText="Vd : VU VAN LINH">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -112,6 +112,51 @@
                         <DatePicker fx:id="birthday_date" layoutX="158.0" layoutY="295.0" prefHeight="25.0" prefWidth="186.0" />
                         <ComboBox fx:id="Gender_combobox" layoutX="158.0" layoutY="228.0" prefHeight="25.0" prefWidth="187.0" promptText="Chọn giới tính" />
                         <Label layoutX="71.0" layoutY="120.0" text="Lưu ý : * là những trường bắt buộc nhập" textFill="#906262">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_name" layoutX="158.0" layoutY="143.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_gender" layoutX="157.0" layoutY="211.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_bird" layoutX="157.0" layoutY="279.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_nationality" layoutX="157.0" layoutY="344.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_language" layoutX="157.0" layoutY="415.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_address" layoutX="713.0" layoutY="143.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_country" layoutX="713.0" layoutY="211.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_provinces" layoutX="713.0" layoutY="279.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_city" layoutX="711.0" layoutY="344.0" prefHeight="16.0" prefWidth="227.0" textFill="RED">
                            <font>
                               <Font name="Cambria" size="12.0" />
                            </font>

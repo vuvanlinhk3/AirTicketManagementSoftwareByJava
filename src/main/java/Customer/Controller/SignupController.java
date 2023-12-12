@@ -20,6 +20,7 @@ import javafx.util.Duration;
 import javafx.util.converter.DefaultStringConverter;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.function.UnaryOperator;
 
 public class SignupController {
@@ -41,6 +42,7 @@ public class SignupController {
     private ComboBox<String> provinces_combobox;
     @FXML
     private TextField city_textfield;
+//    private boolean focus = false;
 
     @FXML
     public void initialize() {
@@ -126,6 +128,7 @@ public class SignupController {
             }
         });
         nameuser_textfield.addEventFilter(KeyEvent.KEY_TYPED, this::filterNameInput);
+        // kiểm tra null
 
     };
 
@@ -192,6 +195,7 @@ public class SignupController {
 
     // lay gia tri value nhap vao
     private String nameuser;
+    private LocalDate birthday;
     private String gender;
     private String nationality;
     private String language;
@@ -208,6 +212,7 @@ public class SignupController {
     @FXML
     private void next_click(ActionEvent event) throws IOException {
         // trước khi chuyển form kiểm tra
+//        focus = true;
         if (!validateFields()) {
             return;
         }
@@ -219,6 +224,7 @@ public class SignupController {
         stage.show();
 
         nameuser = nameuser_textfield.getText();
+        birthday = birthday_date.getValue();
         gender = Gender_combobox.getValue();
         nationality = nationality_combobox.getValue();
         language = language_combobox.getValue();
@@ -227,7 +233,7 @@ public class SignupController {
         provinces = provinces_combobox.getValue();
         city = city_textfield.getText();
 
-        SignupPassController.setReceivedData(nameuser, gender, nationality, language,
+        SignupPassController.setReceivedData(nameuser,birthday , gender, nationality, language,
                 address, country, provinces, city);
     }
     // quay lại form đăng nhập

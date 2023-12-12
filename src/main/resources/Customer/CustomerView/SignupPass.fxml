@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:controller="Customer.Controller.SignupPassController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1400.0" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1400.0" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Customer.Controller.SignupPassController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="1200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <center>
@@ -30,12 +30,12 @@
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Button layoutX="953.0" layoutY="554.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Đăng ký" textFill="WHITE">
+                        <Button layoutX="953.0" layoutY="554.0" mnemonicParsing="false" onAction="#signup_click" prefHeight="27.0" prefWidth="112.0" style="-fx-background-color: #48a5ea; -fx-background-radius: 10;" text="Đăng ký" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
-                        <TextField layoutX="209.0" layoutY="208.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                        <TextField fx:id="number_phone_TF" layoutX="209.0" layoutY="208.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -45,7 +45,7 @@
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="209.0" layoutY="285.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                        <TextField fx:id="email_TF" layoutX="209.0" layoutY="285.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -55,7 +55,7 @@
                               <Font name="Calibri Bold" size="15.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="717.0" layoutY="285.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                        <TextField fx:id="code_sent" layoutX="717.0" layoutY="285.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -70,17 +70,12 @@
                               <Font name="Cambria" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="919.0" layoutY="364.0" opacity="0.86" text="Gửi Mã">
+                        <Button layoutX="981.0" layoutY="360.0" mnemonicParsing="false" onAction="#comfirm_click" prefHeight="24.0" prefWidth="88.0" text="Xác nhận">
                            <font>
-                              <Font name="Cambria" size="15.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="983.0" layoutY="362.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="88.0" text="Xác nhận">
-                           <font>
-                              <Font name="Arial Bold" size="13.0" />
+                              <Font name="Cambria Bold" size="14.0" />
                            </font>
                         </Button>
-                        <ComboBox layoutX="919.0" layoutY="208.0" prefWidth="150.0" promptText="Email">
+                        <ComboBox fx:id="conflic_number_email" layoutX="919.0" layoutY="208.0" prefWidth="150.0" promptText="Email">
                            <styleClass>
                               <String fx:value="transparent-button" />
                               <String fx:value="border_color_b7b0a5" />
@@ -89,6 +84,55 @@
                         <Label layoutX="801.0" layoutY="211.0" opacity="0.86" text="Xác nhận qua :">
                            <font>
                               <Font name="Cambria" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_number" layoutX="209.0" layoutY="192.0" prefHeight="16.0" prefWidth="213.0" textFill="#906262">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_email" layoutX="209.0" layoutY="269.0" prefHeight="16.0" prefWidth="213.0" textFill="#906262">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="884.0" layoutY="360.0" mnemonicParsing="false" onAction="#send_code_click" prefHeight="24.0" prefWidth="88.0" text="Gửi mã">
+                           <font>
+                              <Font name="Cambria" size="14.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="transparent-button" />
+                              <String fx:value="orange-text_hover" />
+                           </styleClass>
+                        </Button>
+                        <TextField fx:id="password" layoutX="209.0" layoutY="458.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="69.0" layoutY="461.0" text="*Nhập mật khẩu :">
+                           <font>
+                              <Font name="Calibri Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="cf_password" layoutX="718.0" layoutY="458.0" prefHeight="25.0" prefWidth="353.0" promptText="Nhập">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="582.0" layoutY="462.0" text="*Nhập lại mật khẩu :">
+                           <font>
+                              <Font name="Calibri Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_password" layoutX="209.0" layoutY="444.0" prefHeight="16.0" prefWidth="213.0" textFill="#906262">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="warning_input_password_cf" layoutX="718.0" layoutY="444.0" prefHeight="16.0" prefWidth="213.0" textFill="#906262">
+                           <font>
+                              <Font name="Cambria" size="12.0" />
                            </font>
                         </Label>
                      </children>

@@ -1,5 +1,8 @@
 package Customer.Controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import javafx.util.Duration;
 import javafx.util.converter.DefaultStringConverter;
 
 import java.io.IOException;
@@ -148,6 +152,45 @@ public class SignupController {
         nameuser_textfield.setTextFormatter(formatter);
     }
 
+    // xóa hết value trong tất cả
+    @FXML
+    private void delete_all_click() {
+        // Xóa tất cả giá trị được chọn
+        Gender_combobox.getSelectionModel().clearSelection();
+        nationality_combobox.getSelectionModel().clearSelection();
+        language_combobox.getSelectionModel().clearSelection();
+        country_combobox.getSelectionModel().clearSelection();
+        provinces_combobox.getSelectionModel().clearSelection();
+
+        // Sử dụng Platform.runLater để đặt lại giá trị và PromptText cho ComboBox
+        Platform.runLater(() -> {
+            Gender_combobox.setValue("");
+            Gender_combobox.layout();
+            Gender_combobox.setPromptText("Chọn giới tính");
+
+            nationality_combobox.setValue("");
+            nationality_combobox.setPromptText("Chọn quốc tịch");
+
+            language_combobox.setValue("");
+            language_combobox.setPromptText("Chọn ngôn ngữ");
+
+            country_combobox.setValue("");
+            country_combobox.setPromptText("Chọn quốc gia/vùng");
+
+            provinces_combobox.setValue("");
+            provinces_combobox.setPromptText("Chọn tỉnh");
+        });
+
+        // Xóa hoặc đặt giá trị cho các TextField
+        nameuser_textfield.setText("");
+        address_textfield.setText("");
+        city_textfield.setText("");
+    }
+
+
+
+
+    // lay gia tri value nhap vao
     private String nameuser;
     private String gender;
     private String nationality;
@@ -156,6 +199,7 @@ public class SignupController {
     private String country;
     private String provinces;
     private String city;
+
     // chuyển form
     private Stage stage;
     private Scene scene;
@@ -186,22 +230,31 @@ public class SignupController {
         SignupPassController.setReceivedData(nameuser, gender, nationality, language,
                 address, country, provinces, city);
     }
+    // quay lại form đăng nhập
+    @FXML
+    private void back_login_click(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @FXML
     private Label warning_input_name;
-     @FXML
+    @FXML
     private Label warning_input_gender;
-     @FXML
+    @FXML
     private Label warning_input_nationality;
-     @FXML
+    @FXML
     private Label warning_input_language;
-     @FXML
+    @FXML
     private Label warning_input_address;
-     @FXML
+    @FXML
     private Label warning_input_country;
-     @FXML
+    @FXML
     private Label warning_input_provinces;
-     @FXML
+    @FXML
     private Label warning_input_city;
 
     public boolean validateFields() {

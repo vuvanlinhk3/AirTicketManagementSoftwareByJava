@@ -100,15 +100,6 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button layoutX="63.0" layoutY="529.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #fff; -fx-border-color: #ddd;" text="Xóa hết">
-                           <font>
-                              <Font name="Arial" size="13.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="orange-text_hover" />
-                              <String fx:value="background_hover" />
-                           </styleClass>
-                        </Button>
                         <DatePicker fx:id="birthday_date" layoutX="158.0" layoutY="295.0" prefHeight="25.0" prefWidth="186.0" />
                         <ComboBox fx:id="Gender_combobox" layoutX="158.0" layoutY="228.0" prefHeight="25.0" prefWidth="187.0" promptText="Chọn giới tính" />
                         <Label layoutX="71.0" layoutY="120.0" text="Lưu ý : * là những trường bắt buộc nhập" textFill="#906262">
@@ -161,6 +152,20 @@
                               <Font name="Cambria" size="12.0" />
                            </font>
                         </Label>
+                        <Button layoutX="782.0" layoutY="529.0" mnemonicParsing="false" onAction="#back_login_click" prefHeight="27.0" prefWidth="156.0" style="-fx-background-radius: 3;" text=" Quay lại đăng nhập">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="646.0" layoutY="529.0" mnemonicParsing="false" onAction="#delete_all_click" prefHeight="27.0" prefWidth="81.0" text="Xóa Hết">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="background_hover" />
+                              <String fx:value="orange-text_hover" />
+                           </styleClass>
+                        </Button>
                      </children>
                   </AnchorPane>
                </center>

@@ -5,7 +5,6 @@ module planeapp.paneapp {
     requires mysql.connector.java;
     requires com.dlsc.formsfx;
     requires javafx.base;
-    opens Admin to javafx.fxml;
     opens Database to javafx.fxml;
     opens Customer.Controller to javafx.fxml;
 

@@ -47,21 +47,29 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="422.0" layoutY="496.0" styleClass="orange-text_hover" text="Đăng ký" textFill="#1f3179">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="379.0" layoutY="452.0" styleClass="orange-text_hover" text="Quên mật khẩu" textFill="#1f3179">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
                   <PasswordField layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </PasswordField>
+                  <Button layoutX="357.0" layoutY="447.0" mnemonicParsing="false" text="Quên mật khẩu">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="transparent-button" />
+                        <String fx:value="orange-text_hover" />
+                     </styleClass>
+                  </Button>
+                  <Button layoutX="405.0" layoutY="491.0" mnemonicParsing="false" text="Đăng ký">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="transparent-button" />
+                        <String fx:value="orange-text_hover" />
+                     </styleClass>
+                  </Button>
                </children>
                <styleClass>
                   <String fx:value="node-with-shadow" />

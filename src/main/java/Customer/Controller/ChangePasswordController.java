@@ -34,7 +34,7 @@ public class ChangePasswordController {
     private void initialize(){
         load_email.setText("vanlinh30122003@gmail.com");
         load_nameuser.setText("vũ văn linh");
-        load_phonenumber.setText("036556145");
+        load_phonenumber.setText("0365556145");
         select.setValue("Email");
         ObservableList<String> genderOptions = FXCollections.observableArrayList("Email","Phone Number");
         select.setItems(genderOptions);

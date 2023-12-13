@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -214,18 +215,18 @@
                                                       <String fx:value="node-with-shadow" />
                                                    </styleClass>
                                                    <children>
+                                                      <ComboBox layoutX="395.0" layoutY="33.0" prefHeight="30.0" prefWidth="200.0" />
                                                       <TextField fx:id="endpoint" layoutX="393.0" layoutY="33.0" prefHeight="30.0" prefWidth="173.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Button accessibleRole="COMBO_BOX" layoutX="566.0" layoutY="33.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="⇅" />
-                                                      <DatePicker fx:id="startdate" layoutX="708.0" layoutY="33.0" prefHeight="30.0" prefWidth="203.0" />
+                                                      <DatePicker fx:id="startdate" layoutX="708.0" layoutY="33.0" prefHeight="30.0" prefWidth="200.0" />
                                                       <Label layoutX="708.0" layoutY="11.0" text="Ngày khởi hành" />
                                                       <Label layoutX="393.0" layoutY="11.0" text="Đến" />
-                                                      <Button fx:id="findflight" layoutX="836.0" layoutY="76.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Tìm Kiếm" />
-                                                      <Button fx:id="btnpupup" accessibleRole="COMBO_BOX" layoutX="243.0" layoutY="33.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="⇅" />
-                                                      <TextField fx:id="startpoin" layoutX="70.0" layoutY="33.0" prefWidth="173.0">
+                                                      <Button fx:id="findflight" layoutX="836.0" layoutY="76.0" mnemonicParsing="false" onAction="#find_click" prefHeight="30.0" prefWidth="150.0" text="Tìm Kiếm" />
+                                                      <ComboBox layoutX="83.0" layoutY="33.0" prefHeight="30.0" prefWidth="200.0" />
+                                                      <TextField fx:id="startpoin" layoutX="83.0" layoutY="33.0" prefWidth="173.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>

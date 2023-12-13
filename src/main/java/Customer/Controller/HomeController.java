@@ -1,9 +1,14 @@
 package Customer.Controller;
-
+import Database.DatabaseController;
+import Database.DatabaseContection;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
@@ -13,6 +18,37 @@ public class HomeController  {
 
     @FXML
     private Button btnpupup;
+
+    // tạo biến chung
+    private String sanbaydi;
+
+
+//    @FXML
+//    public void initialize() {
+//        ComboBox<String> optionsComboBox = new ComboBox<>(FXCollections.observableArrayList("Option 1", "Option 2", "Option 3"));
+//
+//        // Xử lý sự kiện khi nút được nhấn
+//        btnpupup.setOnAction(event -> {
+//            // Hiển thị ComboBox như một popup
+//            optionsComboBox.show();
+//        });
+//        // Xử lý sự kiện khi một mục được chọn trong ComboBox
+//        optionsComboBox.setOnAction(event -> {
+//            // Lấy giá trị từ ComboBox và đặt vào TextField
+//            String selectedValue = optionsComboBox.getSelectionModel().getSelectedItem();
+//            startpoin.setText(selectedValue);
+//            optionsComboBox.hide();
+//        });
+//
+//        // Tạo một layout HBox để đặt các thành phần
+//        HBox root = new HBox(10);
+//        root.getChildren().addAll(startpoin, btnpupup);
+//
+//    }
+
+
+
+
 
     public HomeController() {
 
@@ -34,30 +70,20 @@ public class HomeController  {
     public void flightfindclick(){
 
     }
+
+
     @FXML
-    public void initialize() {
-        // Thiết lập vai trò là combobox
-        btnpupup.setAccessibleRoleDescription("combobox");
+    private void find_click(){
 
-        // Mô phỏng dữ liệu trong combobox
-        String[] options = {"Apple", "Banana", "Cherry", "Grapes", "Orange"};
+    }
 
-        // Tạo Popup để hiển thị các mục phù hợp
-        Popup popup = new Popup();
-        for (String option : options) {
-            Button optionButton = new Button(option);
-            optionButton.setOnAction(e -> {
-                startpoin.setText(option);
-                popup.hide();
-            });
-            popup.getContent().add(optionButton);
-        }
 
-        // Thêm sự kiện khi người dùng nhấn nút
-        btnpupup.setOnAction(e -> {
-            popup.show(btnpupup.getScene().getWindow(), btnpupup.getScene().getWindow().getX() + btnpupup.localToScene(10, 10).getX(),
-                    btnpupup.getScene().getWindow().getY() + btnpupup.localToScene(0, 0).getY() + btnpupup.getHeight());
-        });
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
 }

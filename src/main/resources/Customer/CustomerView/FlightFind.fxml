@@ -6,11 +6,14 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1400.0" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Customer.Controller.FlightFindController">
@@ -136,11 +139,11 @@
                                              <children>
                                                 <Pane layoutX="214.0" prefHeight="170.0" prefWidth="773.0" style="-fx-background-color: #fbf9f2; -fx-border-color: #b7b0a5;" styleClass="border_radius_bottom_left_right">
                                                    <children>
-                                                      <Label layoutX="120.0" layoutY="17.0" text="Từ* : " />
-                                                      <ComboBox layoutX="120.0" layoutY="35.0" prefHeight="25.0" prefWidth="164.0" />
-                                                      <ComboBox layoutX="463.0" layoutY="35.0" prefWidth="150.0" />
-                                                      <Label layoutX="120.0" layoutY="85.0" text="Ngày khởi hành* :" />
-                                                      <DatePicker layoutX="115.0" layoutY="105.0" />
+                                                      <Label layoutX="106.0" layoutY="17.0" text="Từ* : " />
+                                                      <ComboBox fx:id="airport_start_combo" layoutX="106.0" layoutY="35.0" prefHeight="25.0" prefWidth="188.0" />
+                                                      <ComboBox fx:id="airport_end_combo" layoutX="463.0" layoutY="35.0" prefWidth="188.0" />
+                                                      <Label layoutX="106.0" layoutY="85.0" text="Ngày khởi hành* :" />
+                                                      <DatePicker layoutX="106.0" layoutY="102.0" prefHeight="25.0" prefWidth="190.0" />
                                                       <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="53.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../CustomerAccess/airplane_2708-fe0f.png" />
@@ -152,13 +155,20 @@
                                                          </image>
                                                       </ImageView>
                                                       <Label layoutX="463.0" layoutY="15.0" text="Đến* : " />
-                                                      <Button layoutX="538.0" layoutY="130.0" mnemonicParsing="false" text="Tìm Kiếm">
+                                                      <Button layoutX="575.0" layoutY="126.0" mnemonicParsing="false" onAction="#findClick" text="Tìm Kiếm">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Button>
+                                                      <TextField fx:id="start_TF" layoutX="106.0" layoutY="35.0" prefHeight="25.0" prefWidth="160.0" />
+                                                      <TextField fx:id="end_TF" layoutX="463.0" layoutY="35.0" prefHeight="25.0" prefWidth="160.0" />
                                                    </children>
                                                 </Pane>
+                                                <ScrollPane layoutX="214.0" layoutY="170.0" prefHeight="294.0" prefWidth="773.0">
+                                                   <content>
+                                                      <VBox fx:id="mainVBox" prefHeight="290.0" prefWidth="771.0" />
+                                                   </content>
+                                                </ScrollPane>
                                              </children>
                                           </Pane>
                                        </center>

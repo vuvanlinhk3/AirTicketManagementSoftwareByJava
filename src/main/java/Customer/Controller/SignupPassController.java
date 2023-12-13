@@ -71,7 +71,6 @@ public class SignupPassController  {
             String city
     ) {
         usernamedata = nameuser;
-
         genderdata = gender;
         birthaydata = birthday;
         nationalitydata = nationality;

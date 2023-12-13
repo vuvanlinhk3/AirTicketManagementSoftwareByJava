@@ -1,5 +1,6 @@
 package Database;
 
+import Customer.Controller.FlightFindController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -124,11 +125,20 @@ public class DatabaseController  {
                     availableSeats = resultSet.getInt("available_seats");
                 }
             }
-
+            FlightFindController.getValueFlight(
+                    flightId,
+                    departureAirport,
+                    destinationAirport,
+                    destinationLocation,
+                    departureDatetime,
+                    arrivalDatetime,
+                    availableSeats
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     // tìm chuyến bay dựa vào sân bay đi và sân bay đến
 
 

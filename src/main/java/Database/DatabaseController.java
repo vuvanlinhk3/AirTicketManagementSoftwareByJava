@@ -99,32 +99,36 @@ public class DatabaseController  {
     private static int availableSeats;
 
     // Hàm này để lấy dữ liệu từ bảng Chuyến Bay và gán vào các biến
-    public static void loadDataFromDatabase() {
+    public static void loadDataFromDatabase(String departureAirportName, String destinationAirportName) {
         String sql = "SELECT A.flight_id, B.airport_name AS departure_airport, C.airport_name AS destination_airport, C.location AS destination_location, " +
                 "A.departure_datetime, A.arrival_datetime, A.available_seats " +
                 "FROM Flights A " +
                 "JOIN Airports B ON A.departure_airport_id = B.airport_id " +
-                "JOIN Airports C ON A.destination_airport_id = C.airport_id";
+                "JOIN Airports C ON A.destination_airport_id = C.airport_id " +
+                "WHERE B.airport_name = ? AND C.airport_name = ?";
 
         try (Connection connection = DatabaseContection.getConnettion();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            if (resultSet.next()) {
-                flightId = resultSet.getInt("flight_id");
-                departureAirport = resultSet.getString("departure_airport");
-                destinationAirport = resultSet.getString("destination_airport");
-                destinationLocation = resultSet.getString("destination_location");
-                departureDatetime = resultSet.getTimestamp("departure_datetime").toLocalDateTime();
-                arrivalDatetime = resultSet.getTimestamp("arrival_datetime").toLocalDateTime();
-                availableSeats = resultSet.getInt("available_seats");
+            preparedStatement.setString(1, departureAirportName);
+            preparedStatement.setString(2, destinationAirportName);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    flightId = resultSet.getInt("flight_id");
+                    departureAirport = resultSet.getString("departure_airport");
+                    destinationAirport = resultSet.getString("destination_airport");
+                    destinationLocation = resultSet.getString("destination_location");
+                    departureDatetime = resultSet.getTimestamp("departure_datetime").toLocalDateTime();
+                    arrivalDatetime = resultSet.getTimestamp("arrival_datetime").toLocalDateTime();
+                    availableSeats = resultSet.getInt("available_seats");
+                }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
     // tìm chuyến bay dựa vào sân bay đi và sân bay đến
 
 

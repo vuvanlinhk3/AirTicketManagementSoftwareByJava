@@ -290,7 +290,7 @@ public class SignupController {
         }
     }
 
-    private boolean validateField(ComboBox<String> comboBox, Label warningLabel) {
+    public static boolean validateField(ComboBox<String> comboBox, Label warningLabel) {
         if (comboBox.getValue() == null || comboBox.getValue().isEmpty()) {
             setRedBorder(comboBox);
             warningLabel.setText("Trường này không được bỏ trống");
@@ -302,19 +302,19 @@ public class SignupController {
         }
     }
 
-    private void setRedBorder(TextField field) {
+    public static void setRedBorder(TextField field) {
         field.setStyle("-fx-border-color: red;");
     }
 
-    private void setRedBorder(ComboBox<String> comboBox) {
+    public static void setRedBorder(ComboBox<String> comboBox) {
         comboBox.setStyle("-fx-border-color: red;");
     }
 
-    private void clearBorder(TextField field) {
+    public static void clearBorder(TextField field) {
         field.setStyle("-fx-border-color: null;");
     }
 
-    private void clearBorder(ComboBox<String> comboBox) {
+    public static void clearBorder(ComboBox<String> comboBox) {
         comboBox.setStyle("-fx-border-color: null;");
     }
 

@@ -90,23 +90,23 @@ public class DatabaseController  {
     // tìm sân bay dựa vào sân bay đến
 
     // tìm chuyến bay dựa vào sân bay đi và sân bay đến
-    private int flightId;
-    private String departureAirport;
-    private String destinationAirport;
-    private String destinationLocation;
-    private LocalDateTime departureDatetime;
-    private LocalDateTime arrivalDatetime;
-    private int availableSeats;
+    private static int flightId;
+    private static String departureAirport;
+    private static String destinationAirport;
+    private static String destinationLocation;
+    private static LocalDateTime departureDatetime;
+    private static LocalDateTime arrivalDatetime;
+    private static int availableSeats;
 
     // Hàm này để lấy dữ liệu từ bảng Chuyến Bay và gán vào các biến
-    public void loadDataFromDatabase() {
+    public static void loadDataFromDatabase() {
         String sql = "SELECT A.flight_id, B.airport_name AS departure_airport, C.airport_name AS destination_airport, C.location AS destination_location, " +
                 "A.departure_datetime, A.arrival_datetime, A.available_seats " +
                 "FROM Flights A " +
                 "JOIN Airports B ON A.departure_airport_id = B.airport_id " +
                 "JOIN Airports C ON A.destination_airport_id = C.airport_id";
 
-        try (Connection connection = DatabaseConnection.getConnection();
+        try (Connection connection = DatabaseContection.getConnettion();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 

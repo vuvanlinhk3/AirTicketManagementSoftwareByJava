@@ -74,7 +74,7 @@ public class FlightFindController {
 
                 if (newValue != null) {
                     StringValue = newValue.toString();
-                    System.out.println(StringValue);
+//                    System.out.println(StringValue);
                     // DatabaseController.getDestinationAirport(StringValue);
 
                     ObservableList<String> DestinationList = DatabaseController.getDestinationAirport(StringValue);
@@ -123,36 +123,34 @@ public class FlightFindController {
     }
 
     // lấy dữ liệu từ database
-    private static int flightId;
-    private static String departureAirport;
-    private static String destinationAirport;
-    private static String destinationLocation;
-    private static LocalDateTime departureDatetime;
-    private static LocalDateTime arrivalDatetime;
-    private static int availableSeats;
+    private static int flightIdData;
+    private static String departureAirportData;
+    private static String destinationAirportData;
+    private static String destinationLocationData;
+    private static LocalDateTime departureDatetimeData;
+    private static LocalDateTime arrivalDatetimeData;
+    private static int availableSeatsData;
+
     public static void getValueFlight(
-            int flightId ,String departureAirport,String destinationAirport,
-            String destinationLocation,LocalDateTime departureDatetime,
-            LocalDateTime arrivalDatetime,int availableSeats
-    ){
-        flightId = flightId;
-        departureAirport = departureAirport;
-        destinationAirport =destinationAirport;
-        destinationLocation =destinationLocation;
-        departureDatetime = departureDatetime;
-        arrivalDatetime =arrivalDatetime;
-        availableSeats = availableSeats;
-
-
+            int flightId, String departureAirport, String destinationAirport,
+            String destinationLocation, LocalDateTime departureDatetime,
+            LocalDateTime arrivalDatetime, int availableSeats) {
+        flightIdData = flightId;
+        departureAirportData = departureAirport;
+        destinationAirportData = destinationAirport;
+        destinationLocationData = destinationLocation;
+        departureDatetimeData = departureDatetime;
+        arrivalDatetimeData = arrivalDatetime;
+        availableSeatsData = availableSeats;
 
     }
 
     @FXML
     private void findClick() {
-        DatabaseController.loadDataFromDatabase(airportStart,airportEnd);
+        DatabaseController.loadDataFromDatabase(airportStart, airportEnd);
         CreateInfoFlight();
-        System.out.println(flightId);
-
+        System.out.println(flightIdData);
+        System.out.println(departureAirportData);
 
     }
 

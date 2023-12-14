@@ -1,16 +1,14 @@
 package Customer.Controller;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
-public class BookedController extends Application {
+public class BookedController  {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage primaryStage) {
 
-    }
+
+
+
 }

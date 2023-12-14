@@ -1,32 +1,28 @@
 package Customer.Controller;
 
-import Database.DatabaseContection;
 import Database.DatabaseController;
-import com.mysql.cj.protocol.x.XMessage;
-import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
-import java.io.StringReader;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class FlightFindController {
     @FXML
@@ -53,7 +49,6 @@ public class FlightFindController {
         FilteredList<String> filteredFlights = new FilteredList<>(genderOptions, s -> true);
         start_TF.textProperty().addListener((observable, oldValue, newValue) -> {
             flightFind(newValue, filteredFlights);
-
             // Check if the ComboBox has been opened, if not, open it
             if (!comboBoxOpened) {
                 airport_start_combo.show();
@@ -67,21 +62,17 @@ public class FlightFindController {
 
         // gọi hàm lấy value cho textfield;
         getValueTextField(airport_start_combo, start_TF);
-        airportStart = start_TF.getText();
 
         try {
             start_TF.textProperty().addListener((observable, oldValue, newValue) -> {
 
                 if (newValue != null) {
                     StringValue = newValue.toString();
-//                    System.out.println(StringValue);
                     // DatabaseController.getDestinationAirport(StringValue);
-
                     ObservableList<String> DestinationList = DatabaseController.getDestinationAirport(StringValue);
                     ObservableList<String> DestinationOptions = FXCollections.observableArrayList(DestinationList);
                     airport_end_combo.setItems(DestinationOptions);
                     getValueTextField(airport_end_combo, end_TF);
-                    airportEnd = end_TF.getText();
                 } else {
                     return;
                 }
@@ -90,7 +81,6 @@ public class FlightFindController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void getValueTextField(ComboBox<String> ComboboxPoint, TextField AddressPoints) {
@@ -106,7 +96,6 @@ public class FlightFindController {
                 try {
                     if (newValue != null) {
                         StringValue = newValue.toString();
-                        System.out.println(StringValue);
 
                         ComboboxPoint.setValue(newValue);
                         AddressPoints.setText(StringValue);
@@ -115,46 +104,60 @@ public class FlightFindController {
                     e.printStackTrace();
                 }
             });
-            // System.out.println(selectedValue);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    // lấy dữ liệu từ database
-    private static int flightIdData;
-    private static String departureAirportData;
-    private static String destinationAirportData;
-    private static String destinationLocationData;
-    private static LocalDateTime departureDatetimeData;
-    private static LocalDateTime arrivalDatetimeData;
-    private static int availableSeatsData;
-
-    public static void getValueFlight(
-            int flightId, String departureAirport, String destinationAirport,
-            String destinationLocation, LocalDateTime departureDatetime,
-            LocalDateTime arrivalDatetime, int availableSeats) {
-        flightIdData = flightId;
-        departureAirportData = departureAirport;
-        destinationAirportData = destinationAirport;
-        destinationLocationData = destinationLocation;
-        departureDatetimeData = departureDatetime;
-        arrivalDatetimeData = arrivalDatetime;
-        availableSeatsData = availableSeats;
-
-    }
-
     @FXML
     private void findClick() {
-        DatabaseController.loadDataFromDatabase(airportStart, airportEnd);
-        CreateInfoFlight();
-        System.out.println(flightIdData);
-        System.out.println(departureAirportData);
+        mainVBox.getChildren().clear();
+        airportStart = start_TF.getText();
+        airportEnd = end_TF.getText();
 
+        List<Integer> flightIds = DatabaseController.getFlightIdsByAirports(airportStart,airportEnd );
+        System.out.println("Departure Airport: " + airportStart);
+        System.out.println("Destination Airport: " + airportEnd);
+
+//         Kiểm tra và hiển thị danh sách flightIds
+        if(airportStart.isEmpty() || airportEnd.isEmpty()){
+            SignupPassController.showAlert("Emty","Sân bay đi và Sân bay đến không được trống !");
+            return;
+        }
+        if (flightIds.isEmpty()) {
+            System.out.println("Không có chuyến bay nào từ " + airportStart + " đến " + airportEnd);
+            SignupPassController.showAlert("Not Fount","Không có chuyến bay nào từ " + airportStart + " đến " + airportEnd);
+            return;
+        } else {
+            System.out.println("Danh sách flightIds:");
+            for (Integer flightId : flightIds) {
+                System.out.println(flightId);
+            }
+        }
+        List<LocalDateTime> flightTimes = DatabaseController.getFlightTimesByFlightIds(flightIds);
+
+        for (int i = 0; i < flightIds.size(); i++) {
+            int flightId = flightIds.get(i);
+            System.out.println(flightId);
+            LocalDateTime flightTime = flightTimes.get(i);
+            System.out.println("Flight departure time: " + flightTime);
+            CreateInfoFlight(airportStart,airportEnd ,flightTime, flightId);
+        }
     }
+    // chuyển form
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    private void viewDetailClick(ActionEvent event , int flightId) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Booking.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        // biến lấy dữ liệu
+        System.out.println(flightId); // đây là dữ liệu cần lấy sang  <------
 
-    private void viewDetailClick() {
 
     }
 
@@ -177,16 +180,17 @@ public class FlightFindController {
     @FXML
     private VBox mainVBox;
 
-    private void CreateInfoFlight() {
+    private void CreateInfoFlight(String sbDi, String sbDen , LocalDateTime Time,int flightId ) {
         Font labelFont = new Font(14);
         Font iconfont = new Font(30);
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ' 'HH'h :' mm");
+        String time = Time.format(formatter).toString();
         // Tạo các Label
-        Label departureAirportLabel = new Label("SB HANOI");
-        Label destinationAirportLabel = new Label("SB VINH");
+        Label departureAirportLabel = new Label(sbDi);
+        Label destinationAirportLabel = new Label(sbDen);
         Label flightIconLabel = new Label("🛫");
         Label timeLabel = new Label("Time: ");
-        Label departureTimeLabel = new Label("8h:00:00");
+        Label departureTimeLabel = new Label(time);
         Label bayThangLabel = new Label("Bay thẳng");
 
         // Đặt Font cho các Label
@@ -199,6 +203,14 @@ public class FlightFindController {
         departureTimeLabel.setFont(labelFont);
         bayThangLabel.setFont(labelFont);
         Button viewDetailButton = new Button("Xem chi tiết");
+        viewDetailButton.setOnAction(event -> {
+            try {
+                viewDetailClick(event, flightId); // Truyền flightId khi click vào nút
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         // Tạo các container
         BorderPane mainPane = new BorderPane();
         BorderPane flightDetailsPane = new BorderPane();

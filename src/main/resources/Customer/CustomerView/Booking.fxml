@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1400.0" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1400.0" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Customer.Controller.BookingController">
    <center>
       <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <top>
@@ -20,7 +20,7 @@
                <left>
                   <Pane prefHeight="88.0" prefWidth="126.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button layoutY="14.0" mnemonicParsing="false" text="↺  Quay Trở Lại" />
+                        <Button layoutY="14.0" mnemonicParsing="false" onAction="#back_click" text="↺  Quay Trở Lại" />
                      </children>
                   </Pane>
                </left>
@@ -110,7 +110,7 @@
                                     <Font name="Cambria Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="202.0" layoutY="55.0" text="SB VINH">
+                              <Label fx:id="sbDi" layoutX="234.0" layoutY="55.0" text="SB VINH">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
@@ -130,17 +130,17 @@
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="202.0" layoutY="120.0" prefHeight="18.0" prefWidth="166.0" text="8h:000:00">
+                              <Label fx:id="thoiGianDi" layoutX="234.0" layoutY="120.0" prefHeight="18.0" prefWidth="166.0" text="8h:000:00">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="202.0" layoutY="260.0" text="Bay thẳng">
+                              <Label layoutX="229.0" layoutY="260.0" text="Bay thẳng">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="202.0" layoutY="181.0" text="SB HANOI">
+                              <Label fx:id="sbDen" layoutX="229.0" layoutY="181.0" text="SB HANOI">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
@@ -166,22 +166,22 @@
                                     <String fx:value="node-with-shadow" />
                                  </styleClass>
                               </Button>
-                              <Label layoutX="334.0" layoutY="53.0" text="Địa điểm">
+                              <Label layoutX="478.0" layoutY="53.0" text="Địa điểm">
                                  <font>
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="467.0" layoutY="55.0" text="Nghệ an">
+                              <Label fx:id="diaDiemDi" layoutX="611.0" layoutY="55.0" text="Nghệ an">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="334.0" layoutY="179.0" text="Địa điểm">
+                              <Label layoutX="478.0" layoutY="179.0" text="Địa điểm">
                                  <font>
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="472.0" layoutY="181.0" text="Hà nội">
+                              <Label fx:id="diaDiemDen" layoutX="616.0" layoutY="181.0" text="Hà nội">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
@@ -201,9 +201,9 @@
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox layoutX="598.0" layoutY="341.0" prefWidth="150.0" />
-                              <ComboBox layoutX="215.0" layoutY="341.0" prefWidth="150.0" />
-                              <Label layoutX="218.0" layoutY="435.0" text="30.000.000">
+                              <ComboBox fx:id="chonMaGhe" layoutX="598.0" layoutY="341.0" prefWidth="150.0" />
+                              <ComboBox fx:id="hangKHoang" layoutX="230.0" layoutY="342.0" prefWidth="150.0" />
+                              <Label fx:id="giaVe" layoutX="230.0" layoutY="435.0" text="30.000.000">
                                  <font>
                                     <Font name="Cambria" size="18.0" />
                                  </font>

@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseController  {
 
@@ -90,57 +92,66 @@ public class DatabaseController  {
     }
     // tìm sân bay dựa vào sân bay đến
 
-    // tìm chuyến bay dựa vào sân bay đi và sân bay đến
-    private static int flightId;
-    private static String departureAirport;
-    private static String destinationAirport;
-    private static String destinationLocation;
-    private static LocalDateTime departureDatetime;
-    private static LocalDateTime arrivalDatetime;
-    private static int availableSeats;
 
-    // Hàm này để lấy dữ liệu từ bảng Chuyến Bay và gán vào các biến
-    public static void loadDataFromDatabase(String departureAirportName, String destinationAirportName) {
-        String sql = "SELECT A.flight_id, B.airport_name AS departure_airport, C.airport_name AS destination_airport, C.location AS destination_location, " +
-                "A.departure_datetime, A.arrival_datetime, A.available_seats " +
-                "FROM Flights A " +
-                "JOIN Airports B ON A.departure_airport_id = B.airport_id " +
-                "JOIN Airports C ON A.destination_airport_id = C.airport_id " +
-                "WHERE B.airport_name = ? AND C.airport_name = ?";
+
+    // tìm tất cả mã chuyến bay dựa vào sân bay đi và sân bay đến
+    public static List<Integer> getFlightIdsByAirports(String departureAirportName, String destinationAirportName) {
+        List<Integer> flightIds = new ArrayList<>();
+
+        String sql = "SELECT F.flight_id FROM Flights F JOIN Airports DA ON F.departure_airport_id = DA.airport_id JOIN Airports AA ON F.destination_airport_id = AA.airport_id WHERE DA.airport_name = ? AND AA.airport_name = ?";
 
         try (Connection connection = DatabaseContection.getConnettion();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
+            // Set parameters
             preparedStatement.setString(1, departureAirportName);
             preparedStatement.setString(2, destinationAirportName);
 
+            // Debug print statements
+            System.out.println("Before executing query");
+
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    flightId = resultSet.getInt("flight_id");
-                    departureAirport = resultSet.getString("departure_airport");
-                    destinationAirport = resultSet.getString("destination_airport");
-                    destinationLocation = resultSet.getString("destination_location");
-                    departureDatetime = resultSet.getTimestamp("departure_datetime").toLocalDateTime();
-                    arrivalDatetime = resultSet.getTimestamp("arrival_datetime").toLocalDateTime();
-                    availableSeats = resultSet.getInt("available_seats");
+                System.out.println("Số lượng ID chuyến bay tìm thấy: " + flightIds.size());
+
+                while (resultSet.next()) {
+                    int flightId = resultSet.getInt("flight_id");
+                    flightIds.add(flightId);
                 }
             }
-            FlightFindController.getValueFlight(
-                    flightId,
-                    departureAirport,
-                    destinationAirport,
-                    destinationLocation,
-                    departureDatetime,
-                    arrivalDatetime,
-                    availableSeats
-            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return flightIds;
     }
+    // tìm tất cả mã chuyến bay dựa vào sân bay đi và sân bay đến
 
-    // tìm chuyến bay dựa vào sân bay đi và sân bay đến
+    // tìm thời gian dựa vào mã chuyến bay
+    public static List<LocalDateTime> getFlightTimesByFlightIds(List<Integer> flightIds) {
+        List<LocalDateTime> flightTimes = new ArrayList<>();
 
+        String sql = "SELECT F.departure_datetime FROM Flights F WHERE F.flight_id = ?";
+
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            for (Integer flightId : flightIds) {
+                preparedStatement.setInt(1, flightId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        LocalDateTime departureTime = resultSet.getTimestamp("departure_datetime").toLocalDateTime();
+                        flightTimes.add(departureTime);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return flightTimes;
+    }
+    // tìm thời gian dựa vào mã chuyến bay
 
 
 

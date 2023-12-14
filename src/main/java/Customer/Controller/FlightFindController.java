@@ -154,7 +154,6 @@ public class FlightFindController {
 
     }
 
-    @FXML
     private void viewDetailClick() {
 
     }

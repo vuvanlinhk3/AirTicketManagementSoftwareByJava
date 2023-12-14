@@ -47,12 +47,12 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <PasswordField layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
+                  <PasswordField fx:id="matkhaulogin" layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </PasswordField>
-                  <Button layoutX="357.0" layoutY="447.0" mnemonicParsing="false" text="Quên mật khẩu">
+                  <Button layoutX="357.0" layoutY="447.0" mnemonicParsing="false" onAction="#quenmkbtn" text="Quên mật khẩu">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -61,7 +61,7 @@
                         <String fx:value="orange-text_hover" />
                      </styleClass>
                   </Button>
-                  <Button layoutX="405.0" layoutY="491.0" mnemonicParsing="false" text="Đăng ký">
+                  <Button layoutX="405.0" layoutY="491.0" mnemonicParsing="false" onAction="#dangkyLGbtn" text="Đăng ký">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -70,6 +70,8 @@
                         <String fx:value="orange-text_hover" />
                      </styleClass>
                   </Button>
+                  <Label fx:id="label1" layoutX="25.0" layoutY="198.0" prefHeight="22.0" prefWidth="308.0" />
+                  <Label fx:id="label2" layoutX="25.0" layoutY="310.0" prefHeight="20.0" prefWidth="308.0" />
                </children>
                <styleClass>
                   <String fx:value="node-with-shadow" />

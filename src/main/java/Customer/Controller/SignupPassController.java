@@ -261,7 +261,7 @@ public class SignupPassController  {
         field.setStyle("-fx-border-color: null;");
     }
 
-    private void showAlert(String title, String content) {
+    public static void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);

@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1400.0" stylesheets="@../CustomerAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
@@ -151,7 +150,7 @@
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="53.0" layoutY="258.0" text="Điểm dừng :">
+                              <Label layoutX="46.0" layoutY="258.0" text="Điểm dừng :">
                                  <font>
                                     <Font name="Cambria" size="18.0" />
                                  </font>
@@ -187,12 +186,12 @@
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="56.0" layoutY="435.0" text="Giá Vé :">
+                              <Label layoutX="49.0" layoutY="435.0" text="Giá Vé :">
                                  <font>
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="56.0" layoutY="342.0" text="Chọn hạng khoang :">
+                              <Label layoutX="49.0" layoutY="343.0" text="Chọn hạng khoang :">
                                  <font>
                                     <Font name="Cambria" size="18.0" />
                                  </font>

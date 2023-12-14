@@ -22,12 +22,12 @@
                         <Font name="Cambria" size="30.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="emailornumber" layoutX="25.0" layoutY="219.0" prefHeight="40.0" prefWidth="450.0" promptText="Số thẻ Hội viên/ Email/ Số điện thoại">
+                  <TextField fx:id="tendangnhap_text" layoutX="25.0" layoutY="219.0" prefHeight="40.0" prefWidth="450.0" promptText="Số thẻ Hội viên/ Email/ Số điện thoại">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="325.0" layoutY="391.0" mnemonicParsing="false" onAction="#dangnhapbtn" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Đăng nhập">
+                  <Button layoutX="325.0" layoutY="391.0" mnemonicParsing="false" onAction="#login_click" prefHeight="40.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Đăng nhập">
                      <font>
                         <Font name="Cambria" size="18.0" />
                      </font>
@@ -47,12 +47,12 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="matkhaulogin" layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
+                  <PasswordField fx:id="matkhau_text" layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </PasswordField>
-                  <Button layoutX="357.0" layoutY="447.0" mnemonicParsing="false" onAction="#quenmkbtn" text="Quên mật khẩu">
+                  <Button layoutX="357.0" layoutY="447.0" mnemonicParsing="false" onAction="#forgot_click" text="Quên mật khẩu">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -61,7 +61,7 @@
                         <String fx:value="orange-text_hover" />
                      </styleClass>
                   </Button>
-                  <Button layoutX="405.0" layoutY="491.0" mnemonicParsing="false" onAction="#dangkyLGbtn" text="Đăng ký">
+                  <Button layoutX="405.0" layoutY="491.0" mnemonicParsing="false" onAction="#signup_click" text="Đăng ký">
                      <font>
                         <Font size="14.0" />
                      </font>

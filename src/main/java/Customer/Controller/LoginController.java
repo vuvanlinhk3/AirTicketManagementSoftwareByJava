@@ -80,7 +80,7 @@ public class LoginController {
            return;
        }
    }
-   private static int passengerIdData;
+   private static int passengerIdData; // home lấy id từ đây  <------
    private static String nameData;
     public static void displayCustomerInfo(int passengerId,String name){
         passengerIdData = passengerId;

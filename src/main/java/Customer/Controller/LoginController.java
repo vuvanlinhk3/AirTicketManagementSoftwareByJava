@@ -1,5 +1,7 @@
 package Customer.Controller;
 
+import Database.DatabaseContection;
+import Database.DatabaseController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 
+import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.sql.SQLOutput;
 
@@ -26,7 +29,8 @@ public class LoginController {
    private String matkhau;
 
    @FXML
-    private void login_click(){
+    private void login_click(ActionEvent event)throws IOException{
+
         if (isNullText()){
             SignupPassController.showAlert("Lỗi" ,"Vui lòng không để trống thông tin !");
             return;
@@ -36,11 +40,53 @@ public class LoginController {
             return;
         }
        else {
-           SignupPassController.showAlert("Lỗi" ,"đã đúng");
+           if(isValidEmail(tendangnhap)){
+               // email
+               boolean successForEmail = DatabaseController.getPassengerForEmail(tendangnhap,matkhau);
+               if(successForEmail){
+                   SignupPassController.showAlert("Thành công" ,"Đăng nhập thành công !");
+
+                    //chuyển forrm
+                   Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
+                   stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                   scene = new Scene(root);
+                   stage.setScene(scene);
+                   stage.show();
+               }
+               else {
+                   SignupPassController.showAlert("Thất bại" ,"Tài khoản hoặc mật khẩu không đúng !");
+               }
+           }
+           if(isValidANumber(tendangnhap)){
+               boolean successForPhone = DatabaseController.getPassengerForPhone(tendangnhap,matkhau);
+
+               if(successForPhone){
+                   // phone
+                   System.out.println(passengerIdData);
+                   System.out.println(nameData);
+                   SignupPassController.showAlert("Thành công" ,"Đăng nhập thành công !");
+                   //chuyển forrm
+                   Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
+                   stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                   scene = new Scene(root);
+                   stage.setScene(scene);
+                   stage.show();
+               }else {
+                   SignupPassController.showAlert("Thất bại" ,"Tài khoản hoặc mật khẩu không đúng !");
+               }
+
+           }
+
            return;
        }
-
    }
+   private static int passengerIdData;
+   private static String nameData;
+    public static void displayCustomerInfo(int passengerId,String name){
+        passengerIdData = passengerId;
+        nameData = name;
+    }
+
    private boolean isValidANumber(String Num){
        try {
            Double.parseDouble(Num);
@@ -53,7 +99,6 @@ public class LoginController {
        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
        return Ema.matches(emailRegex);
    }
-
 
    private boolean isNullText(){
        tendangnhap = tendangnhap_text.getText();

@@ -1,6 +1,8 @@
 package Database;
 
 import Customer.Controller.FlightFindController;
+import Customer.Controller.LoginController;
+import Customer.Controller.SignupPassController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -40,12 +42,6 @@ public class DatabaseController  {
         }
     }
     // thêm thông tin khách hàng ////
-
-
-
-    // đăng nhập tài khoản
-
-
 
 
     // hiển thị sân bay .
@@ -155,23 +151,74 @@ public class DatabaseController  {
 
 
 
+    // dựa vào email và mật khẩu để tìm tài khoản hành khách
+    public static boolean getPassengerForEmail(String email, String password) {
+        String sql = "SELECT * FROM Passengers WHERE email = ? AND password = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Retrieve customer information
+                    int passengerId = resultSet.getInt("passenger_id");
+                    String name = resultSet.getString("name");
+                    // Add more fields as needed
+
+                    // Display customer information (you can customize this part)
+                    LoginController.displayCustomerInfo(passengerId, name);
+
+                } else {
+                    // No matching record found
+//                    SignupPassController.showAlert("Lỗi","Invalid email or password.");
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    // dựa vào email và mật khẩu  để tìm tài khoản hành khách
+
+    // dựa vào số điện thoại để tìm tài khoản hành khách
+    public static boolean getPassengerForPhone(String phone, String password) {
+        String sql = "SELECT * FROM Passengers WHERE phone_number = ? AND password = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, phone);
+            preparedStatement.setString(2, password);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Retrieve customer information
+                    int passengerId = resultSet.getInt("passenger_id");
+                    String name = resultSet.getString("name");
+                    // Add more fields as needed
+
+                    // Display customer information (you can customize this part)
+                    LoginController.displayCustomerInfo(passengerId, name);
+
+                } else {
+                    // No matching record found
+//                    SignupPassController.showAlert("Lỗi","Invalid email or password.");
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    // dựa vào số điện thoại để tìm tài khoản hành khách
 
 
 
 
-    // test case
-//    public static boolean testc (String value){
-//        String query = "INSERT INTO test (value) VALUES (?)";
-//        try(Connection connection = DatabaseContection.getConnettion();
-//        PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//            preparedStatement.setString(1, value);
-//            int rowsAffected = preparedStatement.executeUpdate();
-//            return rowsAffected > 0;
-//        }
-//        catch (SQLException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
-    //tesc ///
+
+
+
+
+
+
+
 }

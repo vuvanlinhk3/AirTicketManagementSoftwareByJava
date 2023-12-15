@@ -20,9 +20,18 @@ public class BookedController  {
     private Scene scene;
     private Parent root;
 
+
     @FXML
     private void back_click(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void booking_click(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Booking.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

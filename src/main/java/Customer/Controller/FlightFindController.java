@@ -114,8 +114,8 @@ public class FlightFindController {
         airportEnd = end_TF.getText();
 
         List<Integer> flightIds = DatabaseController.getFlightIdsByAirports(airportStart,airportEnd );
-        System.out.println("Departure Airport: " + airportStart);
-        System.out.println("Destination Airport: " + airportEnd);
+//        System.out.println("Departure Airport: " + airportStart);
+//        System.out.println("Destination Airport: " + airportEnd);
 
 //         Kiểm tra và hiển thị danh sách flightIds
         if(airportStart.isEmpty() || airportEnd.isEmpty()){
@@ -123,7 +123,7 @@ public class FlightFindController {
             return;
         }
         if (flightIds.isEmpty()) {
-            System.out.println("Không có chuyến bay nào từ " + airportStart + " đến " + airportEnd);
+//            System.out.println("Không có chuyến bay nào từ " + airportStart + " đến " + airportEnd);
             SignupPassController.showAlert("Not Fount","Không có chuyến bay nào từ " + airportStart + " đến " + airportEnd);
             return;
         } else {
@@ -136,9 +136,9 @@ public class FlightFindController {
 
         for (int i = 0; i < flightIds.size(); i++) {
             int flightId = flightIds.get(i);
-            System.out.println(flightId);
+//            System.out.println(flightId);
             LocalDateTime flightTime = flightTimes.get(i);
-            System.out.println("Flight departure time: " + flightTime);
+//            System.out.println("Flight departure time: " + flightTime);
             CreateInfoFlight(airportStart,airportEnd ,flightTime, flightId);
         }
     }

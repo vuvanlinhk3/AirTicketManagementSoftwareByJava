@@ -24,7 +24,7 @@ public class BookingController {
     @FXML
     private Label sbDi;
     @FXML
-    private DatePicker thoiGianDi;
+    private Label thoiGianDi;
     @FXML
     private Label sbDen;
     @FXML
@@ -37,15 +37,17 @@ public class BookingController {
     private ComboBox <String> hangKHoang;
     @FXML
     private ComboBox <String> chonMaGhe;
-
+    private static String Hang_Khoang;
+    private static String maGhe;
 
     // Lấy id chuyến bay
-    private static int flightIdData;
-    private static String  flightTimeData;
-    private static String  airportStartData;
-    private static String  airportEndData;
-    private static String  departureLocationData;
-    private static String  destinationLocationData;
+    public static int flightIdData;
+    public static String  flightTimeData;
+    public static String  airportStartData;
+    public static String  airportEndData;
+    public static String  departureLocationData;
+    public static String  destinationLocationData;
+    public static String  priceData;
 
     // Constructor nhận tham số flightId
     public static void setFlightId(int flightId , String  time , String airport_start, String airport_end) {
@@ -53,25 +55,64 @@ public class BookingController {
         flightTimeData = time;
         airportStartData = airport_start;
         airportEndData = airport_end;
-        System.out.println(flightIdData);
+
+//        getFlightId(flightId);
     }
 
     public static void displayLocation(String departureLocation,String destinationLocation){
         departureLocationData =departureLocation;
         destinationLocationData = destinationLocation;
     }
+
+    public static void displayPrice(String Price){
+        priceData = Price;
+    }
+
     @FXML
     private void initialize() {
+        /// -----
+        sbDi.setText(airportStartData);
+        sbDen.setText(airportEndData);
+        thoiGianDi.setText(flightTimeData);
+        diaDiemDi.setText(departureLocationData);
+        diaDiemDen.setText(destinationLocationData);
+        DatabaseController.getLocationAirport(flightIdData);
         ObservableList<String> genderOptions = FXCollections.observableArrayList("Thương Gia","Phổ Thông");
         hangKHoang.setItems(genderOptions);
-        DatabaseController.getLocationAirport(flightIdData);
+
 
         hangKHoang.valueProperty().addListener((observable, oldValue, newValue) -> {
 
-            ObservableList<String> getSeatNumber = DatabaseController.getSeatNumber(newValue);
-
+            ObservableList<String> getSeatNumber = DatabaseController.getSeatNumber(newValue,flightIdData);
+            chonMaGhe.setItems(getSeatNumber);
+            hangKHoang.setValue(newValue);
+            Hang_Khoang = hangKHoang.getValue();
+            System.out.println(flightIdData);
+            System.out.println(Hang_Khoang);
+            DatabaseController.getPriceTicket(flightIdData,Hang_Khoang);
+            SignupPassController.showAlert("hi",departureLocationData + destinationLocationData);
+            giaVe.setText(priceData);
 
         });
+        chonMaGhe.valueProperty().addListener((observable, oldValue, newValue) ->{
+            chonMaGhe.setValue(newValue);
+            maGhe = chonMaGhe.getValue();
+        });
+    }
+    @FXML
+    private void bookingClick(){
+        if(Hang_Khoang.isEmpty()){
+            SignupPassController.showAlert("Lỗi" , "Chưa chọn hạng khoang");
+            return;
+        }
+        if (maGhe.isEmpty()){
+            SignupPassController.showAlert("Lỗi" , "Chưa chọn Mã ghế");
+            return;
+        }
+
+
+
+        SignupPassController.showAlert("Thành công" , "Đặt vé thành công");
     }
 
 

@@ -208,12 +208,17 @@ public class DatabaseController  {
     // dựa vào số điện thoại để tìm tài khoản hành khách
 
     // dựa vào id chuyến bay lấy ra địa điểm sân bay thông tin
-    public static void getLocationAirport(int flightId) {
-        String sql = "SELECT departure.location AS departure_location, destination.location AS destination_location " +
-                "FROM Flights " +
-                "JOIN Airports departure ON Flights.departure_airport_id = departure.airport_id " +
-                "JOIN Airports destination ON Flights.destination_airport_id = destination.airport_id " +
-                "WHERE Flights.flight_id = ?";
+    public static void getLocationAirport(int flightId ) {
+        String sql = "SELECT " +
+                "F.flight_id, " +
+                "DA.airport_name AS departure_airport_name, " +
+                "DA.location AS departure_location, " +
+                "A.airport_name AS destination_airport_name, " +
+                "A.location AS destination_location " +
+                "FROM Flights F " +
+                "INNER JOIN Airports DA ON F.departure_airport_id = DA.airport_id " +
+                "INNER JOIN Airports A ON F.destination_airport_id = A.airport_id " +
+                "WHERE F.flight_id = ?";
         try (Connection connection = DatabaseContection.getConnettion();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, flightId);
@@ -227,7 +232,7 @@ public class DatabaseController  {
                 } else {
                     // Không tìm thấy bản ghi khớp
                     // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
-                    SignupPassController.showAlert("Lỗi","Lỗi gì đó :>");
+                    SignupPassController.showAlert("Lỗi","Không có dữ liệu !");
                 }
             }
         } catch (SQLException e) {
@@ -237,27 +242,61 @@ public class DatabaseController  {
     // dựa vào id chuyến bay lấy ra địa điểm sân bay thông tin
 
     // lấy ra mã số ghế dựa vào loại ghế
-    public static ObservableList<String> getSeatNumber(String typeSeat) {
-        ObservableList<String> airportList = FXCollections.observableArrayList();
-        String sql = "SELECT SeatNumbers.seat_number " +
-                "FROM SeatNumbers " +
-                "INNER JOIN SeatTypes ON SeatNumbers.seat_type_id = SeatTypes.seat_type_id " +
-                "WHERE SeatTypes.seat_type_name = ?";
+    public static ObservableList<String> getSeatNumber(String seatType, int flightId) {
+        ObservableList<String> seatNumberList = FXCollections.observableArrayList();
+        String sql = "SELECT seat_numbers.seat_number " +
+                "FROM seat_numbers " +
+                "INNER JOIN seat_types ON seat_numbers.seat_type_id = seat_types.seat_type_id " +
+                "WHERE seat_numbers.flight_id = ? AND seat_types.seat_type_name = ?";
         try (Connection connection = DatabaseContection.getConnettion();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            while (resultSet.next()) {
-                String seatNumber = resultSet.getString("seat_number");
-                airportList.add(seatNumber);
+            preparedStatement.setInt(1, flightId);
+            preparedStatement.setString(2, seatType);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String seatNumber = resultSet.getString("seat_number");
+                    seatNumberList.add(seatNumber);
+                }
             }
-        }
-        catch (SQLException e) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return airportList;
+        return seatNumberList;
     }
     // lấy ra mã số ghế dựa vào loại ghế
+    // lấy giá vé dựa vào id chuyến bay và khoang hạng
+    public static void getPriceTicket(int flightId, String typeSeat) {
+        String sql = "SELECT ticket_prices.price " +
+                "FROM ticket_prices " +
+                "INNER JOIN seat_types ON ticket_prices.seat_type_id = seat_types.seat_type_id " +
+                "WHERE ticket_prices.flight_id = ? AND seat_types.seat_type_name = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, flightId);
+            preparedStatement.setString(2, typeSeat);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Lấy thông tin giá vé
+                    String price = resultSet.getString("price");
+                    // Hiển thị thông tin giá vé
+                    BookingController.displayPrice(price);
+                } else {
+                    // Không tìm thấy bản ghi khớp
+                    // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
+                    SignupPassController.showAlert("Lỗi", "Không có dữ liệu!");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    // lấy giá vé dựa vào id chuyến bay và khoang hạng
 
 
 

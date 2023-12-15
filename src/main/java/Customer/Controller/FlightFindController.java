@@ -11,10 +11,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -149,16 +146,40 @@ public class FlightFindController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private void viewDetailClick(ActionEvent event , int flightId) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Booking.fxml"));
+    private void viewDetailClick(ActionEvent event , int flightId , String time ,String airport_start , String airport_end) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Booking.fxml"));
+        root = loader.load();
+
+        BookingController.setFlightId(flightId, time , airport_start , airport_end);// đây là dữ liệu cần lấy sang  <------
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        // biến lấy dữ liệu
-        System.out.println(flightId); // đây là dữ liệu cần lấy sang  <------
-
-
+    }
+    @FXML
+    private void back_click(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void logout_click(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/FlightFind.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void profile_click(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Profiles.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void flightFind(String searchText, FilteredList<String> filteredFlights) {
@@ -205,7 +226,7 @@ public class FlightFindController {
         Button viewDetailButton = new Button("Xem chi tiết");
         viewDetailButton.setOnAction(event -> {
             try {
-                viewDetailClick(event, flightId); // Truyền flightId khi click vào nút
+                viewDetailClick(event, flightId , time , airportStart, airportEnd); // Truyền flightId khi click vào nút
             } catch (IOException e) {
                 e.printStackTrace();
             }

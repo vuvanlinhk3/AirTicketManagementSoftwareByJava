@@ -1,5 +1,6 @@
 package Database;
 
+import Customer.Controller.BookingController;
 import Customer.Controller.FlightFindController;
 import Customer.Controller.LoginController;
 import Customer.Controller.SignupPassController;
@@ -42,7 +43,6 @@ public class DatabaseController  {
         }
     }
     // thêm thông tin khách hàng ////
-
 
     // hiển thị sân bay .
     public static ObservableList<String> getAirports() {
@@ -87,8 +87,6 @@ public class DatabaseController  {
         return airportList;
     }
     // tìm sân bay dựa vào sân bay đến
-
-
 
     // tìm tất cả mã chuyến bay dựa vào sân bay đi và sân bay đến
     public static List<Integer> getFlightIdsByAirports(String departureAirportName, String destinationAirportName) {
@@ -148,8 +146,6 @@ public class DatabaseController  {
         return flightTimes;
     }
     // tìm thời gian dựa vào mã chuyến bay
-
-
 
     // dựa vào email và mật khẩu để tìm tài khoản hành khách
     public static boolean getPassengerForEmail(String email, String password) {
@@ -211,6 +207,57 @@ public class DatabaseController  {
     }
     // dựa vào số điện thoại để tìm tài khoản hành khách
 
+    // dựa vào id chuyến bay lấy ra địa điểm sân bay thông tin
+    public static void getLocationAirport(int flightId) {
+        String sql = "SELECT departure.location AS departure_location, destination.location AS destination_location " +
+                "FROM Flights " +
+                "JOIN Airports departure ON Flights.departure_airport_id = departure.airport_id " +
+                "JOIN Airports destination ON Flights.destination_airport_id = destination.airport_id " +
+                "WHERE Flights.flight_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, flightId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Lấy thông tin địa điểm của sân bay
+                    String departureLocation = resultSet.getString("departure_location");
+                    String destinationLocation = resultSet.getString("destination_location");
+                    // Hiển thị thông tin địa điểm của sân bay (Bạn có thể điều chỉnh phương thức này theo nhu cầu của bạn)
+                    BookingController.displayLocation(departureLocation, destinationLocation);
+                } else {
+                    // Không tìm thấy bản ghi khớp
+                    // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
+                    SignupPassController.showAlert("Lỗi","Lỗi gì đó :>");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // dựa vào id chuyến bay lấy ra địa điểm sân bay thông tin
+
+    // lấy ra mã số ghế dựa vào loại ghế
+    public static ObservableList<String> getSeatNumber(String typeSeat) {
+        ObservableList<String> airportList = FXCollections.observableArrayList();
+        String sql = "SELECT SeatNumbers.seat_number " +
+                "FROM SeatNumbers " +
+                "INNER JOIN SeatTypes ON SeatNumbers.seat_type_id = SeatTypes.seat_type_id " +
+                "WHERE SeatTypes.seat_type_name = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String seatNumber = resultSet.getString("seat_number");
+                airportList.add(seatNumber);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return airportList;
+    }
+    // lấy ra mã số ghế dựa vào loại ghế
 
 
 

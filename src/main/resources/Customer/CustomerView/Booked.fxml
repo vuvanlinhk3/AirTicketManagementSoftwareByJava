@@ -23,7 +23,7 @@
                <left>
                   <Pane prefHeight="80.0" prefWidth="168.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="35.0" text="↺  Quay Trở Lại">
+                        <Button layoutX="6.0" layoutY="5.0" mnemonicParsing="false" onAction="#back_click" prefHeight="35.0" text="↺  Quay Trở Lại">
                            <font>
                               <Font size="14.0" />
                            </font>

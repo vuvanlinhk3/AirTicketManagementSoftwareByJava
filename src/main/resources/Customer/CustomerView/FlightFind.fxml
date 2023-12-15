@@ -24,7 +24,7 @@
                <left>
                   <Pane prefHeight="88.0" prefWidth="126.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button layoutY="14.0" mnemonicParsing="false" text="↺  Quay Trở Lại" />
+                        <Button layoutY="14.0" mnemonicParsing="false" onAction="#back_click" text="↺  Quay Trở Lại" />
                      </children>
                   </Pane>
                </left>
@@ -47,8 +47,16 @@
                      <top>
                         <Pane prefHeight="40.0" prefWidth="427.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="308.0" layoutY="15.0" text="Vũ Văn Linh" />
-                              <Label layoutX="408.0" layoutY="15.0" text="Đăng Xuất" />
+                              <Button layoutX="269.0" layoutY="6.0" mnemonicParsing="false" onAction="#profile_click" styleClass="transparent-button" text="Vũ Văn Linh">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="385.0" layoutY="6.0" mnemonicParsing="false" onAction="#logout_click" styleClass="transparent-button" text="Đăng xuất">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </Pane>
                      </top>

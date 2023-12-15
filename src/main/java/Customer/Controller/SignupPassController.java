@@ -6,7 +6,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -16,6 +21,7 @@ import javafx.stage.Stage;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Properties;
 import java.util.Random;
@@ -213,6 +219,19 @@ public class SignupPassController  {
 
         }
 
+    }
+
+    // chuyển form
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    @FXML
+    private void back_click(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     public boolean validatePaswords() {
         boolean isTr = true;

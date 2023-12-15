@@ -135,6 +135,11 @@
                               <Font name="Cambria" size="12.0" />
                            </font>
                         </Label>
+                        <Button layoutX="66.0" layoutY="568.0" mnemonicParsing="false" onAction="#back_click" prefHeight="27.0" prefWidth="112.0" text="Quay lại Login">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </center>

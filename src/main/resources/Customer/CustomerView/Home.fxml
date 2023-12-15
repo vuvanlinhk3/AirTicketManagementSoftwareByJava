@@ -109,22 +109,16 @@
                                  <top>
                                     <Pane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label layoutX="510.0" layoutY="11.0" text="Vũ Văn Linh">
+                                          <Button layoutX="602.0" layoutY="6.0" mnemonicParsing="false" onAction="#logout_click" text="Đăng xuất">
                                              <font>
-                                                <Font size="14.0" />
+                                                <Font name="Cambria" size="14.0" />
                                              </font>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Label>
-                                          <Label layoutX="616.0" layoutY="11.0" text="Đăng Xuất">
+                                          </Button>
+                                          <Button layoutX="482.0" layoutY="6.0" mnemonicParsing="false" onAction="#profile_click" text="Vũ Văn Linh">
                                              <font>
-                                                <Font size="14.0" />
+                                                <Font name="Cambria" size="14.0" />
                                              </font>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Label>
+                                          </Button>
                                        </children>
                                     </Pane>
                                  </top>
@@ -215,7 +209,7 @@
                                                       <String fx:value="node-with-shadow" />
                                                    </styleClass>
                                                    <children>
-                                                      <ComboBox layoutX="395.0" layoutY="33.0" prefHeight="30.0" prefWidth="200.0" />
+                                                      <ComboBox fx:id="endcombo" layoutX="395.0" layoutY="33.0" prefHeight="30.0" prefWidth="200.0" />
                                                       <TextField fx:id="endpoint" layoutX="393.0" layoutY="33.0" prefHeight="30.0" prefWidth="173.0">
                                                          <font>
                                                             <Font size="14.0" />
@@ -225,7 +219,7 @@
                                                       <Label layoutX="708.0" layoutY="11.0" text="Ngày khởi hành" />
                                                       <Label layoutX="393.0" layoutY="11.0" text="Đến" />
                                                       <Button fx:id="findflight" layoutX="836.0" layoutY="76.0" mnemonicParsing="false" onAction="#find_click" prefHeight="30.0" prefWidth="150.0" text="Tìm Kiếm" />
-                                                      <ComboBox layoutX="83.0" layoutY="33.0" prefHeight="30.0" prefWidth="200.0" />
+                                                      <ComboBox fx:id="start_combo" layoutX="83.0" layoutY="33.0" prefHeight="30.0" prefWidth="200.0" />
                                                       <TextField fx:id="startpoin" layoutX="83.0" layoutY="33.0" prefWidth="173.0">
                                                          <font>
                                                             <Font size="14.0" />

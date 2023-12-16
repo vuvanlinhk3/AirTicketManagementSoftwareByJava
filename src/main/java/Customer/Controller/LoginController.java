@@ -65,6 +65,10 @@ public class LoginController {
                    System.out.println(passengerIdData);
                    System.out.println(nameData);
                    SignupPassController.showAlert("Thành công" ,"Đăng nhập thành công !");
+                   HomeController.getIdPassenderHome(passengerIdData);
+
+
+
                    //chuyển forrm
                    Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

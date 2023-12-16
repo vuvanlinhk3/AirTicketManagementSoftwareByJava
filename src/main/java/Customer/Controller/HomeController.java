@@ -37,7 +37,10 @@ public class HomeController  {
     private String StringValue;
     private String selectedValue;
 
-
+    public static int IdPassenger;
+    public static void getIdPassenderHome(int Id){
+        IdPassenger = Id;
+    }
     // tạo biến chung
     private String sanbaydi;
     @FXML
@@ -136,20 +139,14 @@ public class HomeController  {
     private Scene scene;
     private Parent root;
     @FXML
-    public void bookingclick(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/FlightFind.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    @FXML
     public void Bookedclick(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Booked.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        BookedController.getIdPassender(IdPassenger);
+        System.out.println(IdPassenger);
     }
     @FXML
     public void assessclick(ActionEvent event) throws IOException{
@@ -161,23 +158,13 @@ public class HomeController  {
     }
     @FXML
     public void flightfindclick(ActionEvent event) throws IOException{
+        FlightFindController.getIdPassender(IdPassenger);
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/FlightFind.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-
-
-    @FXML
-    private void find_click(ActionEvent event) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/FlightFind.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     @FXML
     private void logout_click(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));

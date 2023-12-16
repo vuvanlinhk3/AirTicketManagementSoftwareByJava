@@ -1,5 +1,6 @@
 package Customer.Controller;
 
+import Database.DatabaseContection;
 import Database.DatabaseController;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -9,26 +10,29 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class BookingController {
+public class BookingController  {
     @FXML
-    private Label sbDi;
+    private Button show;
     @FXML
-    private Label thoiGianDi;
+    private  Label sbDi;
     @FXML
-    private Label sbDen;
+    private  Label thoiGianDi;
     @FXML
-    private Label diaDiemDi;
+    private  Label sbDen;
+    @FXML
+    private  Label diaDiemDi;
     @FXML
     private  Label diaDiemDen;
     @FXML
@@ -37,9 +41,10 @@ public class BookingController {
     private ComboBox <String> hangKHoang;
     @FXML
     private ComboBox <String> chonMaGhe;
-    private static String Hang_Khoang;
-    private static String maGhe;
-
+    public static String Hang_Khoang;
+    public static String maGhe;
+    public static int idPassenger;
+    public static int idSeat;
     // Lấy id chuyến bay
     public static int flightIdData;
     public static String  flightTimeData;
@@ -48,59 +53,68 @@ public class BookingController {
     public static String  departureLocationData;
     public static String  destinationLocationData;
     public static String  priceData;
-
     // Constructor nhận tham số flightId
     public static void setFlightId(int flightId , String  time , String airport_start, String airport_end) {
         flightIdData = flightId;
         flightTimeData = time;
         airportStartData = airport_start;
         airportEndData = airport_end;
+        DatabaseController.getLocationAirport(flightIdData);
 
-//        getFlightId(flightId);
     }
 
     public static void displayLocation(String departureLocation,String destinationLocation){
         departureLocationData =departureLocation;
         destinationLocationData = destinationLocation;
+
     }
 
     public static void displayPrice(String Price){
         priceData = Price;
     }
+    public static void getIdPassenderForFlight (int id){
+        idPassenger = id;
+    }
+    public static void getIdSeat(int id){
+        idSeat = id;
+    }
 
     @FXML
-    private void initialize() {
-        /// -----
+    private void show_click(){
         sbDi.setText(airportStartData);
         sbDen.setText(airportEndData);
         thoiGianDi.setText(flightTimeData);
         diaDiemDi.setText(departureLocationData);
         diaDiemDen.setText(destinationLocationData);
-        DatabaseController.getLocationAirport(flightIdData);
+        show.setVisible(false);
+
+    }
+    public void initialize() {
+
         ObservableList<String> genderOptions = FXCollections.observableArrayList("Thương Gia","Phổ Thông");
         hangKHoang.setItems(genderOptions);
 
+            hangKHoang.valueProperty().addListener((observable, oldValue, newValue) -> {
+                if(sbDi.getText() != null){
+                    ObservableList<String> getSeatNumber = DatabaseController.getSeatNumber(newValue,flightIdData);
+                    chonMaGhe.setItems(getSeatNumber);
+                    hangKHoang.setValue(newValue);
+                    Hang_Khoang = hangKHoang.getValue();
+                    DatabaseController.getPriceTicket(flightIdData,Hang_Khoang);
+                    giaVe.setText(priceData + " VND");
+                }else {
+                    SignupPassController.showAlert("Thông báo","Vui lòng lấy thông tin chuyến bay !");
+                }
 
-        hangKHoang.valueProperty().addListener((observable, oldValue, newValue) -> {
+            });
+            chonMaGhe.valueProperty().addListener((observable, oldValue, newValue) ->{
+                chonMaGhe.setValue(newValue);
+                maGhe = chonMaGhe.getValue();
+            });
 
-            ObservableList<String> getSeatNumber = DatabaseController.getSeatNumber(newValue,flightIdData);
-            chonMaGhe.setItems(getSeatNumber);
-            hangKHoang.setValue(newValue);
-            Hang_Khoang = hangKHoang.getValue();
-            System.out.println(flightIdData);
-            System.out.println(Hang_Khoang);
-            DatabaseController.getPriceTicket(flightIdData,Hang_Khoang);
-            SignupPassController.showAlert("hi",departureLocationData + destinationLocationData);
-            giaVe.setText(priceData);
-
-        });
-        chonMaGhe.valueProperty().addListener((observable, oldValue, newValue) ->{
-            chonMaGhe.setValue(newValue);
-            maGhe = chonMaGhe.getValue();
-        });
     }
     @FXML
-    private void bookingClick(){
+    private void bookingClick(ActionEvent event)throws IOException{
         if(Hang_Khoang.isEmpty()){
             SignupPassController.showAlert("Lỗi" , "Chưa chọn hạng khoang");
             return;
@@ -109,13 +123,22 @@ public class BookingController {
             SignupPassController.showAlert("Lỗi" , "Chưa chọn Mã ghế");
             return;
         }
+        DatabaseController.getSeatNumberId(flightIdData,Hang_Khoang,maGhe);
 
-
-
-        SignupPassController.showAlert("Thành công" , "Đặt vé thành công");
+        LocalDate currentDate = LocalDate.now();
+        boolean BookingSuccess = DatabaseController.addBooking(idPassenger,flightIdData,currentDate,idSeat,"0");
+        if(BookingSuccess){
+            SignupPassController.showAlert("Thành công","Đặt vé thành công !");
+            Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/FlightFind.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        else {
+            SignupPassController.showAlert("Lỗi","Đặt vé Thất bại!");
+        }
     }
-
-
 
 
 

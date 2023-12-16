@@ -1,9 +1,6 @@
 package Database;
 
-import Customer.Controller.BookingController;
-import Customer.Controller.FlightFindController;
-import Customer.Controller.LoginController;
-import Customer.Controller.SignupPassController;
+import Customer.Controller.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -232,7 +229,7 @@ public class DatabaseController  {
                 } else {
                     // Không tìm thấy bản ghi khớp
                     // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
-                    SignupPassController.showAlert("Lỗi","Không có dữ liệu !");
+                    SignupPassController.showAlert("Lỗi","Không có dữ liệu đia điểm sân bay !");
                 }
             }
         } catch (SQLException e) {
@@ -267,6 +264,7 @@ public class DatabaseController  {
         return seatNumberList;
     }
     // lấy ra mã số ghế dựa vào loại ghế
+
     // lấy giá vé dựa vào id chuyến bay và khoang hạng
     public static void getPriceTicket(int flightId, String typeSeat) {
         String sql = "SELECT ticket_prices.price " +
@@ -286,20 +284,107 @@ public class DatabaseController  {
                 } else {
                     // Không tìm thấy bản ghi khớp
                     // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
-                    SignupPassController.showAlert("Lỗi", "Không có dữ liệu!");
+                    SignupPassController.showAlert("Lỗi", "Không có dữ liệu giá vé!");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
-
     // lấy giá vé dựa vào id chuyến bay và khoang hạng
 
+    // lấy ra chuyến bay dựa vào id khách hàng
+    public static void geBooked(int passengerId) {
+        String sql = "SELECT F.flight_id, A1.airport_name AS departure_airport, A2.airport_name AS destination_airport, " +
+                "F.departure_datetime, ST.seat_type_name, SN.seat_number, TP.price " +
+                "FROM Flights F " +
+                "JOIN Airports A1 ON F.departure_airport_id = A1.airport_id " +
+                "JOIN Airports A2 ON F.destination_airport_id = A2.airport_id " +
+                "JOIN seat_numbers SN ON F.flight_id = SN.flight_id " +
+                "JOIN seat_types ST ON SN.seat_type_id = ST.seat_type_id " +
+                "JOIN ticket_prices TP ON F.flight_id = TP.flight_id AND ST.seat_type_id = TP.seat_type_id " +
+                "JOIN Bookings B ON F.flight_id = B.flight_id " +
+                "WHERE B.passenger_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, passengerId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Lấy thông tin giá vé
+                    int flightID = resultSet.getInt("flight_id");
+                    String departure_airport = resultSet.getString("departure_airport");
+                    String destination_airport = resultSet.getString("destination_airport");
+                    String departure_datetime = resultSet.getString("departure_datetime");
+                    String seat_type_name = resultSet.getString("seat_type_name");
+                    String seat_number = resultSet.getString("seat_number");
+                    String price = resultSet.getString("price");
+                    // Hiển thị thông tin giá vé
+                    BookedController.getFlightBooked(flightID,departure_airport,destination_airport,departure_datetime,
+                            seat_type_name,seat_number,price
+                            );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // lấy ra chuyến bay dựa vào id khách hàng
 
+    // lấy ra id mã ghế dựa vào flightid và mã số ghế và  khoang hạng
+    public static void getSeatNumberId(int flightId, String typeSeat ,String seatNumber) {
+        String sql = "SELECT su.seat_id " +
+                "FROM seat_numbers su " +
+                "JOIN seat_types st ON su.seat_type_id = st.seat_type_id " +
+                "WHERE su.flight_id = ?" +
+                "  AND su.seat_number = ?" +
+                "  AND st.seat_type_name = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, flightId);
+            preparedStatement.setString(3, typeSeat);
+            preparedStatement.setString(2, seatNumber);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Lấy thông tin giá vé
+                    int seat_id = resultSet.getInt("seat_id");
+                    // Hiển thị thông tin giá vé
+                    BookingController.getIdSeat(seat_id);
+                } else {
+                    // Không tìm thấy bản ghi khớp
+                    // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
+                    SignupPassController.showAlert("Lỗi", "Không có dữ liệu ghế!");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // lấy ra id mã ghế dựa vào flightid và mã số ghế và  khoang hạng
 
+    // đặt vé
+    public static boolean addBooking(int passengerId, int flightId, LocalDate bookingDate, int seatId, String bookingStatus) {
+        String sql = "INSERT INTO Bookings (passenger_id, flight_id, booking_date, seat_id, booking_status) VALUES (?, ?, ?, ?, ?)";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, passengerId);
+            preparedStatement.setInt(2, flightId);
+            preparedStatement.setObject(3, bookingDate);
+            preparedStatement.setInt(4, seatId);
+            preparedStatement.setString(5, bookingStatus);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Booking added successfully.");
+            } else {
+                System.out.println("Failed to add booking.");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+    // đặt vé
 
 
 

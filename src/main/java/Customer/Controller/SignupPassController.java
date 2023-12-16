@@ -192,8 +192,9 @@ public class SignupPassController  {
 
     }
 
+
     @FXML
-    private void signup_click(){
+    private void signup_click(ActionEvent event) throws IOException{
 
         if(!validateFields()){
             return;
@@ -213,6 +214,11 @@ public class SignupPassController  {
             boolean addUser = DatabaseController.addPassenger(usernamedata,birthaydata , genderdata, nationalitydata , specificAddress , email, number_phone ,passwordata );
             if(addUser){
                 showAlert("Đăng ký thành công", "Đăng ký thành công !");
+                Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
             }else {
                 showAlert("Thất bại","Đăng ký không thành công !");
             }

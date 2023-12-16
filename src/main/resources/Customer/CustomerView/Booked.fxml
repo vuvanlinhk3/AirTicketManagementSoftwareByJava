@@ -135,9 +135,9 @@
                            <center>
                               <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <center>
-                                    <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c6d5c8;" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
+                                    <TableView fx:id="flightTableView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c6d5c8;" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                                       <columns>
-                                        <TableColumn prefWidth="210.0" text="Sân bay đi" />
+                                        <TableColumn fx:id="flightIdColumn" prefWidth="210.0" text="Sân bay đi" />
                                         <TableColumn minWidth="0.0" prefWidth="228.0" text="Sân bay đến" />
                                       </columns>
                                     </TableView>

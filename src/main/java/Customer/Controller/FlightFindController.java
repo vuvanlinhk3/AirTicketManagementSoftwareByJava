@@ -37,7 +37,11 @@ public class FlightFindController {
     private boolean comboBoxOpened;
     private String selectedValue;
     private String StringValue;
+    private static int IdPassenger;
 
+    public static void  getIdPassender(int id){
+        IdPassenger = id;
+    }
     @FXML
     private void initialize() {
         ObservableList<String> airportList = DatabaseController.getAirports();
@@ -142,6 +146,8 @@ public class FlightFindController {
             CreateInfoFlight(airportStart,airportEnd ,flightTime, flightId);
         }
     }
+
+
     // chuyển form
     private Stage stage;
     private Scene scene;
@@ -149,7 +155,7 @@ public class FlightFindController {
     private void viewDetailClick(ActionEvent event , int flightId , String time ,String airport_start , String airport_end) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Booking.fxml"));
         root = loader.load();
-
+        BookingController.getIdPassenderForFlight(IdPassenger);
         BookingController.setFlightId(flightId, time , airport_start , airport_end);// đây là dữ liệu cần lấy sang  <------
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -45,14 +45,14 @@
                         </Label>
                      </top>
                      <center>
-                        <TextField alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="505.0" BorderPane.alignment="CENTER">
+                        <TextField fx:id="phone_find_text" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="505.0" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets left="50.0" right="50.0" />
                            </BorderPane.margin>
                         </TextField>
                      </center>
                      <bottom>
-                        <Button mnemonicParsing="false" styleClass="orange-text_hover" text="Tìm Kiếm" BorderPane.alignment="CENTER_RIGHT">
+                        <Button mnemonicParsing="false" onAction="#click_phone_find" styleClass="orange-text_hover" text="Tìm Kiếm" BorderPane.alignment="CENTER_RIGHT">
                            <BorderPane.margin>
                               <Insets right="50.0" />
                            </BorderPane.margin>
@@ -66,7 +66,7 @@
             </BorderPane>
          </top>
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="account_find" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn prefWidth="150.39996945858002" text="Tên tài khoản" />
                 <TableColumn minWidth="0.0" prefWidth="206.4000244140625" text="xác nhận" />

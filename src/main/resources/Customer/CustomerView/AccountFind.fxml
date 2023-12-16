@@ -68,7 +68,7 @@
          <center>
             <TableView fx:id="account_find" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="150.39996945858002" text="Tên tài khoản" />
+                <TableColumn fx:id="namecl" prefWidth="150.39996945858002" text="Tên tài khoản" />
                 <TableColumn minWidth="0.0" prefWidth="206.4000244140625" text="xác nhận" />
               </columns>
                <BorderPane.margin>

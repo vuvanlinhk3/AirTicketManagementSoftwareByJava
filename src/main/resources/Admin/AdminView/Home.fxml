@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:controller="Admin.Controller.HomeController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="1295.0" stylesheets="@../AdminAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="1295.0" stylesheets="@../AdminAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.Controller.HomeController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
@@ -36,24 +36,24 @@
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="816.0" layoutY="82.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" text="Tìm kiếm">
+                                                      <Button layoutX="816.0" layoutY="82.0" mnemonicParsing="false" onAction="#findClick" prefHeight="30.0" prefWidth="82.0" text="Tìm kiếm">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Button>
-                                                      <ComboBox layoutX="225.0" layoutY="21.0" prefHeight="30.0" prefWidth="201.0" />
-                                                      <TextField layoutX="225.0" layoutY="21.0">
+                                                      <ComboBox fx:id="airport_start_combo" layoutX="225.0" layoutY="21.0" prefHeight="30.0" prefWidth="201.0" />
+                                                      <TextField fx:id="start_TF" layoutX="225.0" layoutY="21.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <ComboBox layoutX="225.0" layoutY="81.0" prefHeight="30.0" prefWidth="201.0" />
+                                                      <ComboBox fx:id="airport_end_combo" layoutX="225.0" layoutY="81.0" prefHeight="30.0" prefWidth="201.0" />
                                                       <Label layoutX="61.0" layoutY="90.0" text="Nhập Sân bay đến : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField layoutX="225.0" layoutY="81.0">
+                                                      <TextField fx:id="end_TF" layoutX="225.0" layoutY="81.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -68,9 +68,9 @@
                                                 </Pane>
                                              </top>
                                              <center>
-                                                <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                                <ScrollPane fx:id="pane_ngoai" maxWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                                                    <content>
-                                                      <VBox prefHeight="335.0" prefWidth="1288.0" />
+                                                      <VBox fx:id="mainVBox" prefHeight="335.0" prefWidth="1000.0" />
                                                    </content>
                                                 </ScrollPane>
                                              </center>
@@ -83,17 +83,19 @@
                                              <top>
                                                 <Pane prefHeight="387.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
                                                    <children>
+                                                      <ComboBox fx:id="airport_start_combo" layoutX="366.0" layoutY="58.0" prefHeight="30.0" prefWidth="205.0" />
+                                                      <ComboBox layoutX="366.0" layoutY="115.0" prefHeight="30.0" prefWidth="204.0" />
                                                       <Label layoutX="171.0" layoutY="64.0" text="Nhập Sân bay đi : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="1030.0" layoutY="334.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="145.0" text="Thêm">
+                                                      <Button layoutX="1106.0" layoutY="335.0" mnemonicParsing="false" onAction="#AddCick" prefHeight="39.0" prefWidth="145.0" text="Thêm">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Button>
-                                                      <TextField layoutX="366.0" layoutY="58.0">
+                                                      <TextField fx:id="start_TF" layoutX="366.0" layoutY="58.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -103,7 +105,7 @@
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField layoutX="366.0" layoutY="115.0">
+                                                      <TextField fx:id="SBDEN" layoutX="366.0" layoutY="115.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -113,7 +115,7 @@
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField layoutX="837.0" layoutY="58.0">
+                                                      <TextField fx:id="NGAYXP" layoutX="881.0" layoutY="57.0" prefHeight="30.0" prefWidth="197.0" promptText="yyyy-mm-dd">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -123,57 +125,67 @@
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField layoutX="837.0" layoutY="115.0">
+                                                      <TextField fx:id="GIOXP" layoutX="881.0" layoutY="114.0" prefHeight="30.0" prefWidth="197.0" promptText="00:00">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="366.0" layoutY="200.0">
+                                                      <TextField fx:id="SLGHEPT" layoutX="366.0" layoutY="244.0" prefHeight="30.0" prefWidth="203.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Label layoutX="171.0" layoutY="206.0" text="Nhập Số lượng ghế phổ thông : ">
+                                                      <Label layoutX="171.0" layoutY="250.0" text="Nhập Số lượng ghế phổ thông : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField layoutX="837.0" layoutY="200.0">
+                                                      <TextField fx:id="SLGHETG" layoutX="881.0" layoutY="243.0" prefHeight="30.0" prefWidth="198.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Label layoutX="626.0" layoutY="206.0" text="Nhập Số lượng ghế thương gia : ">
+                                                      <Label layoutX="626.0" layoutY="250.0" text="Nhập Số lượng ghế thương gia : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField layoutX="366.0" layoutY="280.0">
+                                                      <TextField fx:id="VEPT" layoutX="366.0" layoutY="324.0" prefHeight="30.0" prefWidth="203.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Label layoutX="171.0" layoutY="286.0" text="Nhập giá vé ghế phổ thông : ">
+                                                      <Label layoutX="171.0" layoutY="330.0" text="Nhập giá vé ghế phổ thông : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField layoutX="837.0" layoutY="280.0">
+                                                      <TextField fx:id="VETG" layoutX="881.0" layoutY="323.0" prefHeight="30.0" prefWidth="200.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Label layoutX="626.0" layoutY="286.0" text="Nhập giá vé ghế thương gia : ">
+                                                      <Label layoutX="626.0" layoutY="330.0" text="Nhập giá vé ghế thương gia : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label layoutX="626.0" layoutY="161.0" text="Chọn hãng hàng không :">
+                                                      <Label layoutX="171.0" layoutY="185.0" text="Chọn hãng hàng không :">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox layoutX="837.0" layoutY="158.0" prefWidth="150.0" />
+                                                      <ComboBox fx:id="HANGHK" layoutX="366.0" layoutY="181.0" prefHeight="25.0" prefWidth="204.0" />
+                                                      <Label layoutX="626.0" layoutY="186.0" text="Nhập Ngày tháng năm dự kiến đến : ">
+                                                         <font>
+                                                            <Font name="Cambria" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="NGAYDK" layoutX="881.0" layoutY="179.0" prefHeight="30.0" prefWidth="196.0" promptText="yyyy-mm-dd">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </TextField>
                                                    </children>
                                                 </Pane>
                                              </top>

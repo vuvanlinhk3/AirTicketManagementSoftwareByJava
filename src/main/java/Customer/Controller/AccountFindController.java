@@ -30,9 +30,9 @@ public class AccountFindController {
     @FXML
     private TableView<Account> account_find;
     @FXML
-    private TableColumn<Account, String> nameclColumn;
+    private TableColumn<Account, String> namecl;
     @FXML
-    private TableColumn<Account, String> confirmclColumn;
+    private TableColumn<Account, String> confirmcl;
     @FXML
     private Button back_button;
 
@@ -66,8 +66,8 @@ public class AccountFindController {
 
         // Thêm dữ liệu mới từ truy vấn vào TableView
         account_find.setItems(accountList);
-        nameclColumn.setCellValueFactory(new PropertyValueFactory<>("namecl"));
-        confirmclColumn.setCellValueFactory(new PropertyValueFactory<>("confirmcl"));
+        namecl.setCellValueFactory(new PropertyValueFactory<>("namecl"));
+        confirmcl.setCellValueFactory(new PropertyValueFactory<>("confirmcl"));
     }
 
     private boolean isNullText() {
@@ -83,8 +83,8 @@ public class AccountFindController {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     // Lấy thông tin khách hàng và thêm vào danh sách
-                    int passengerId = resultSet.getInt("passenger_id");
-                    String namecl = resultSet.getString("namecl");
+                  //  int passengerId = resultSet.getInt("passenger_id");
+                    String namecl = resultSet.getString("name");
                     // Thêm nhiều trường khác nếu cần
 
                     // Thêm thông tin vào danh sách

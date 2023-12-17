@@ -39,10 +39,6 @@ public class ChangePasswordController {
         ObservableList<String> genderOptions = FXCollections.observableArrayList("Email","Phone Number");
         select.setItems(genderOptions);
     }
-
-
-
-
     //biến cục bộ value
     private String email;
     private String number_phone;

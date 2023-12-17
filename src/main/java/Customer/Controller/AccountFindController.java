@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -29,8 +31,16 @@ public class AccountFindController {
     private TableView<Account> account_find;
     @FXML
     private TableColumn<Account, String> nameclColumn;
+    @FXML
+    private TableColumn<Account, String> confirmclColumn;
+    @FXML
+    private Button back_button;
 
     private String phone_find;
+    // chuyển form
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     private ObservableList<Account> accountList = FXCollections.observableArrayList();
 
@@ -56,7 +66,8 @@ public class AccountFindController {
 
         // Thêm dữ liệu mới từ truy vấn vào TableView
         account_find.setItems(accountList);
-        nameclColumn.setCellValueFactory(cellData -> cellData.getValue().nameclProperty());
+        nameclColumn.setCellValueFactory(new PropertyValueFactory<>("namecl"));
+        confirmclColumn.setCellValueFactory(new PropertyValueFactory<>("confirmcl"));
     }
 
     private boolean isNullText() {
@@ -77,7 +88,7 @@ public class AccountFindController {
                     // Thêm nhiều trường khác nếu cần
 
                     // Thêm thông tin vào danh sách
-                    accountList.add(new Account(namecl));
+                    accountList.add(new Account(namecl, "Bấm vào đây để xác nhận"));
                 }
                 return !accountList.isEmpty(); // Trả về true nếu có khách hàng
             }
@@ -97,27 +108,27 @@ public class AccountFindController {
 
     public static class Account {
         private final String namecl;
+        private final String confirmcl;
 
-        public Account(String namecl) {
+        public Account(String namecl, String confirmcl) {
             this.namecl = namecl;
+            this.confirmcl = confirmcl;
         }
 
         public String getNamecl() {
             return namecl;
         }
+
+        public String getConfirmcl() {
+            return confirmcl;
+        }
     }
 
     @FXML
     private void back_click(ActionEvent event) throws IOException {
-<<<<<<< HEAD
-        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-=======
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
->>>>>>> 20c94cddf4e5abdaec886d2233c67dd0baca9548
         stage.setScene(scene);
         stage.show();
     }

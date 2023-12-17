@@ -12,11 +12,11 @@ import java.io.IOException;
 public class MainCustomer extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+       launch(args);
     }
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainCustomer.class.getResource("CustomerView/Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainCustomer.class.getResource("CustomerView/AccountFindController.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load(), 1400, 650);
         // Set minimum width and height

@@ -1,15 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="Admin.Controller.LoginController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-</VBox>
+<BorderPane fx:controller="Admin.Controller.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="1259.0" stylesheets="@../AdminAccess/Base.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="500.0" style="-fx-background-color: #ddd;" styleClass="node-with-shadow" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="203.0" layoutY="95.0" text="ADMIN" textFill="#d7a150">
+                     <font>
+                        <Font name="Cambria" size="30.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tenDangNhap_txt" layoutX="26.0" layoutY="220.0" prefHeight="40.0" prefWidth="450.0" promptText="Tên đăng nhập">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </TextField>
+                  <Button layoutX="326.0" layoutY="403.0" mnemonicParsing="false" onAction="#login_click" prefHeight="40.0" prefWidth="150.0" text="Đăng nhập">
+                     <font>
+                        <Font name="Cambria" size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="background_hover" />
+                        <String fx:value="orange-text_hover" />
+                     </styleClass>
+                  </Button>
+                  <PasswordField fx:id="matKhau_txt" layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </PasswordField>
+                  <Label fx:id="label1" layoutX="26.0" layoutY="188.0" prefHeight="22.0" prefWidth="308.0" text="Tên đăng nhập">
+                     <font>
+                        <Font name="Cambria" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="label11" layoutX="25.0" layoutY="302.0" prefHeight="22.0" prefWidth="308.0" text="Mật khẩu">
+                     <font>
+                        <Font name="Cambria" size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="58.0" fitWidth="222.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Customer/CustomerAccess/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>

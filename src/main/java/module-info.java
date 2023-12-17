@@ -10,8 +10,8 @@ module planeapp.paneapp {
 //    requires java.activation;
 
 
-
-    opens Customer.Controller to javafx.fxml;
+    opens Customer.Controller to javafx.fxml, javafx.base;
+//    opens Customer.Controller to javafx.fxml;
     opens Admin.Controller to javafx.fxml;
 
     exports Database;

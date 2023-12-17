@@ -56,7 +56,7 @@ public class AccountFindController {
 
         // Thêm dữ liệu mới từ truy vấn vào TableView
         account_find.setItems(accountList);
-        nameclColumn.setCellValueFactory(cellData -> cellData.getValue().nameclProperty());
+//        nameclColumn.setCellValueFactory(cellData -> cellData.getValue().nameclProperty());
     }
 
     private boolean isNullText() {
@@ -107,17 +107,18 @@ public class AccountFindController {
         }
     }
 
+
+
+    // chuyển form
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     @FXML
     private void back_click(ActionEvent event) throws IOException {
-<<<<<<< HEAD
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-=======
-        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
->>>>>>> 20c94cddf4e5abdaec886d2233c67dd0baca9548
+
         stage.setScene(scene);
         stage.show();
     }

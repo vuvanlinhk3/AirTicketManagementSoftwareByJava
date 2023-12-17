@@ -44,46 +44,10 @@ public class HomeController  {
     // tạo biến chung
     private String sanbaydi;
     @FXML
-    private void initialize(){
-        ObservableList<String> airportList = DatabaseController.getAirports();
-        ObservableList<String> genderOptions = FXCollections.observableArrayList(airportList);
+    private void initialize() {
 
-        FilteredList<String> filteredFlights = new FilteredList<>(genderOptions, s -> true);
-        startpoin.textProperty().addListener((observable, oldValue, newValue) -> {
-            flightFind(newValue, filteredFlights);
-            // Check if the ComboBox has been opened, if not, open it
-            if (!comboBoxOpened) {
-                start_combo.show();
-                comboBoxOpened = true;
-            }
-        });
-        startpoin.setOnMouseClicked(event -> {
-            start_combo.show();
-        });
-        start_combo.setItems(filteredFlights);
-
-        // gọi hàm lấy value cho textfield;
-        getValueTextField(start_combo, startpoin);
-
-        try {
-            startpoin.textProperty().addListener((observable, oldValue, newValue) -> {
-
-                if (newValue != null) {
-                    StringValue = newValue.toString();
-                    // DatabaseController.getDestinationAirport(StringValue);
-                    ObservableList<String> DestinationList = DatabaseController.getDestinationAirport(StringValue);
-                    ObservableList<String> DestinationOptions = FXCollections.observableArrayList(DestinationList);
-                    end_combo.setItems(DestinationOptions);
-                    getValueTextField(end_combo, endpoint);
-                } else {
-                    return;
-                }
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
+
     private void flightFind(String searchText, FilteredList<String> filteredFlights) {
         // Thiết lập điều kiện lọc trong FilteredList
         filteredFlights.setPredicate(flight -> {
@@ -129,10 +93,6 @@ public class HomeController  {
 
 
 
-
-    public HomeController() {
-
-    }
 
     // chuyển form
     private Stage stage;

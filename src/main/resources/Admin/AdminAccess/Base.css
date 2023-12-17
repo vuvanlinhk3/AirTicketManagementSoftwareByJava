@@ -1,0 +1,69 @@
+
+.background_rgba_3{
+    -fx-background-color: rgba(0,0,0,0.3);
+}
+.background_rgba_5{
+    -fx-background-color: rgba(0,0,0,0.5);
+}
+.background_rgba_7{
+    -fx-background-color: rgba(0,0,0,0.7);
+}
+.background_green_rgba_3{
+    -fx-background-color: rgba(42,99,121,0.4);
+    /*-fx-border-color: rgba(0,128,0,0.4);*/
+}
+.background_lightOrange_rgba_3{
+    -fx-background-color: rgb(255, 253, 173);
+    /*-fx-border-color: rgba(0,128,0,0.4);*/
+}
+.transparent-button {
+    -fx-background-color: null;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.border_radius_top_left_right {
+    -fx-background-radius: 5 5 0 0;
+    -fx-border-radius: 5 5 0 0;/* Top-left, top-right, bottom-right, bottom-left */
+}
+.border_radius_bottom_left_right {
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-radius: 0 0 5 5;/* Top-left, top-right, bottom-right, bottom-left */
+}
+.background_hover:hover{ /*khi di chuột vào gì đó thì đổi màu*/
+    -fx-background-color: rgba(42,99,121,0.2);
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+.node-with-bottom-border {
+    -fx-border-color: transparent transparent green transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.border_Orange{
+    -fx-border-color: rgba(255, 253, 173,0.7);
+    -fx-border-width: 5;
+}
+.node-with-shadow {
+    -fx-effect: dropshadow(gaussian, #bbb, 7, 0, 2, 2);
+    -fx-z-index: 1; /* Đặt z-index lớn hơn 0 */
+}
+
+
+.orange-text_hover{
+    -fx-text-fill: #333; /* Màu chữ mặc định */
+}
+.orange-text_hover:hover {
+    -fx-text-fill: #ff9900;
+}
+.border_radius_20 {
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
+}
+.border_color_b7b0a5{
+    -fx-border-color: #b7b0a5;
+    -fx-border-width: 2 2 2 2;
+
+}
+.position_base{
+    -fx-background-position: fixed;
+}

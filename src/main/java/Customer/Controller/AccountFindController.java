@@ -68,6 +68,7 @@ public class AccountFindController {
         account_find.setItems(accountList);
         namecl.setCellValueFactory(new PropertyValueFactory<>("namecl"));
         confirmcl.setCellValueFactory(new PropertyValueFactory<>("confirmcl"));
+//        nameclColumn.setCellValueFactory(cellData -> cellData.getValue().nameclProperty());
     }
 
     private boolean isNullText() {
@@ -123,12 +124,11 @@ public class AccountFindController {
             return confirmcl;
         }
     }
-
     @FXML
     private void back_click(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

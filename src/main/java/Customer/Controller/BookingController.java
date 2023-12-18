@@ -83,17 +83,32 @@ public class BookingController  {
     }
 
 
-    @FXML
-    private void show_click(){
-        sbDi.setText(airportStartData);
-        sbDen.setText(airportEndData);
-        thoiGianDi.setText(flightTimeData);
-        diaDiemDi.setText(departureLocationData);
-        diaDiemDen.setText(destinationLocationData);
-        show.setVisible(false);
-    }
-    public void initialize() {
 
+
+
+    public static String TimeFlight;
+    public static String AirportStartForForm;
+    public static String AirportEndForForm;
+    private void show_click(){
+        String time = TimeFlight;
+        String airdi = AirportStartForForm;
+        String airden = AirportStartForForm;
+        FlightFindController frmflight = new FlightFindController();
+        frmflight.TimeFlight = time;
+        frmflight.AirportStartForForm = airdi;
+        frmflight.AirportEndForForm = airden;
+
+        sbDi.setText(airdi);
+        sbDen.setText(airden);
+        thoiGianDi.setText(time);
+//        diaDiemDi.setText(departureLocationData);
+//        diaDiemDen.setText(destinationLocationData);
+//        show.setVisible(false);
+    }
+
+    @FXML
+    public void initialize() {
+        show_click();
         ObservableList<String> genderOptions = FXCollections.observableArrayList("Thương Gia","Phổ Thông");
         hangKHoang.setItems(genderOptions);
 

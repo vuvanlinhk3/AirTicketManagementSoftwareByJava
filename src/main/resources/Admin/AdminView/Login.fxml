@@ -27,6 +27,11 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
+                  <PasswordField fx:id="matKhau_txt" layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </PasswordField>
                   <Button layoutX="326.0" layoutY="403.0" mnemonicParsing="false" onAction="#login_click" prefHeight="40.0" prefWidth="150.0" text="Đăng nhập">
                      <font>
                         <Font name="Cambria" size="18.0" />
@@ -36,11 +41,6 @@
                         <String fx:value="orange-text_hover" />
                      </styleClass>
                   </Button>
-                  <PasswordField fx:id="matKhau_txt" layoutX="25.0" layoutY="331.0" prefHeight="39.0" prefWidth="451.0" promptText="Mật khẩu">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
-                  </PasswordField>
                   <Label fx:id="label1" layoutX="26.0" layoutY="188.0" prefHeight="22.0" prefWidth="308.0" text="Tên đăng nhập">
                      <font>
                         <Font name="Cambria" size="16.0" />
@@ -59,6 +59,9 @@
                </children>
             </AnchorPane>
          </center>
+         <left>
+            <Button mnemonicParsing="false" onAction="#click" text="Button" BorderPane.alignment="CENTER" />
+         </left>
       </BorderPane>
    </center>
 </BorderPane>

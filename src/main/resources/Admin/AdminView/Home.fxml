@@ -86,22 +86,17 @@
                                                                         <String fx:value="node-with-bottom-border" />
                                                                      </styleClass>
                                                                      <children>
-                                                                        <Label fx:id="sbaydi" layoutX="264.0" layoutY="62.0" text="Tên sân bay đi">
-                                                                           <font>
-                                                                              <Font name="Cambria" size="16.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Button layoutX="856.0" layoutY="342.0" mnemonicParsing="false" text="Xóa chuyến bay">
+                                                                        <Button fx:id="DeleteFlight" layoutX="856.0" layoutY="342.0" mnemonicParsing="false" text="Xóa chuyến bay">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                         </Button>
-                                                                        <Label layoutX="87.0" layoutY="59.0" text="Sân bay đi : ">
+                                                                        <Label layoutX="79.0" layoutY="59.0" text="Sân bay đi : ">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="774.0" layoutY="62.0" text="Tên sân bay">
+                                                                        <Label fx:id="sanbayden" layoutX="774.0" layoutY="62.0" text="Tên sân bay">
                                                                            <font>
                                                                               <Font name="Cambria" size="16.0" />
                                                                            </font>
@@ -111,37 +106,22 @@
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="264.0" layoutY="134.0" text="Tên sân bay đi">
-                                                                           <font>
-                                                                              <Font name="Cambria" size="16.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Label layoutX="87.0" layoutY="131.0" text="Thời gian khởi hành">
+                                                                        <Label layoutX="79.0" layoutY="131.0" text="Thời gian khởi hành">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="264.0" layoutY="181.0" text="Tên sân bay đi">
-                                                                           <font>
-                                                                              <Font name="Cambria" size="16.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Label layoutX="87.0" layoutY="178.0" text="Địa điểm">
+                                                                        <Label layoutX="79.0" layoutY="178.0" text="Địa điểm">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="230.0" layoutY="274.0" text="Tên sân bay đi">
-                                                                           <font>
-                                                                              <Font name="Cambria" size="16.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Label layoutX="87.0" layoutY="271.0" text="Tổng chổ ngồi :">
+                                                                        <Label layoutX="80.0" layoutY="345.0" text="Tổng chổ ngồi :">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="774.0" layoutY="134.0" text="Tên sân bay đi">
+                                                                        <Label fx:id="thoigiandendukien" layoutX="774.0" layoutY="134.0" text="Tên sân bay đi">
                                                                            <font>
                                                                               <Font name="Cambria" size="16.0" />
                                                                            </font>
@@ -151,7 +131,7 @@
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="777.0" layoutY="181.0" text="Tên sân bay đi">
+                                                                        <Label fx:id="ddsbden" layoutX="774.0" layoutY="181.0" text="Tên sân bay đi">
                                                                            <font>
                                                                               <Font name="Cambria" size="16.0" />
                                                                            </font>
@@ -161,14 +141,9 @@
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="87.0" layoutY="335.0" text="Giá vé thương gia : ">
+                                                                        <Label layoutX="80.0" layoutY="271.0" text="Giá vé thương gia : ">
                                                                            <font>
                                                                               <Font name="System Bold" size="16.0" />
-                                                                           </font>
-                                                                        </Label>
-                                                                        <Label layoutX="249.0" layoutY="338.0" text="Tên sân bay đi">
-                                                                           <font>
-                                                                              <Font name="Cambria" size="16.0" />
                                                                            </font>
                                                                         </Label>
                                                                         <Label layoutX="606.0" layoutY="271.0" text="Giá vé phổ thông : ">
@@ -176,7 +151,7 @@
                                                                               <Font name="System Bold" size="16.0" />
                                                                            </font>
                                                                         </Label>
-                                                                        <Label layoutX="777.0" layoutY="274.0" text="Tên sân bay đi">
+                                                                        <Label fx:id="giavept" layoutX="777.0" layoutY="274.0" text="Tên sân bay đi">
                                                                            <font>
                                                                               <Font name="Cambria" size="16.0" />
                                                                            </font>
@@ -186,6 +161,31 @@
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                         </Button>
+                                                                        <Label fx:id="sbaydi" layoutX="320.0" layoutY="62.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="thoigiankhoihanh" layoutX="320.0" layoutY="134.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="ddsbdi" layoutX="320.0" layoutY="181.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="giavetg" layoutX="320.0" layoutY="274.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="cngoi" layoutX="320.0" layoutY="348.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
                                                                      </children>
                                                                   </Pane>
                                                                </graphic>

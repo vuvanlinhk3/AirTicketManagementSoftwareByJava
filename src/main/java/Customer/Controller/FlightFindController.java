@@ -152,11 +152,26 @@ public class FlightFindController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    public static String TimeFlight;
+    public static String AirportStartForForm;
+    public static String AirportEndForForm;
+
     private void viewDetailClick(ActionEvent event , int flightId , String time ,String airport_start , String airport_end) throws IOException {
+        TimeFlight = "heloo";
+
+        AirportStartForForm = airport_start;
+        AirportEndForForm = airport_end;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Booking.fxml"));
         root = loader.load();
         BookingController.getIdPassenderForFlight(IdPassenger);
         BookingController.setFlightId(flightId, time , airport_start , airport_end);// đây là dữ liệu cần lấy sang  <------
+
+        BookingController frmbooking = new BookingController();
+        frmbooking.TimeFlight = time;
+        frmbooking.AirportStartForForm = airport_start;
+        frmbooking.AirportEndForForm = airport_end;
+        System.out.println(TimeFlight);
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -208,6 +223,7 @@ public class FlightFindController {
     private VBox mainVBox;
 
     private void CreateInfoFlight(String sbDi, String sbDen , LocalDateTime Time,int flightId ) {
+
         Font labelFont = new Font(14);
         Font iconfont = new Font(30);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ' 'HH'h :' mm");

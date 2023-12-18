@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,15 +15,22 @@ import java.io.IOException;
 
 public class FlightInfoController  {
     @FXML
-    private TextField sbaydi;
+    private Label sbaydi;
     private static String timer;
-
+    public static String TenDangNhap;
 
     @FXML
     private void initialize(){
-        sbaydi.setText(timer);
-    }
 
+        Get();
+    }
+    private void Get(){
+        String ten =TenDangNhap;
+        LoginController login = new LoginController();
+        login.TenDangNhap = ten;
+        sbaydi.setText(ten);
+        System.out.println(ten);
+    }
 
 
     // chuyển form

@@ -22,20 +22,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HomeController  {
-    @FXML
-    private TextField startpoin;
-    @FXML
-    private TextField endpoint;
-    @FXML
-    private Button btnpupup;
-    @FXML
-    private ComboBox <String> start_combo;
-    @FXML
-    private ComboBox <String> end_combo;
-
-    private boolean comboBoxOpened;
-    private String StringValue;
-    private String selectedValue;
 
     public static int IdPassenger;
     public static void getIdPassenderHome(int Id){
@@ -47,52 +33,6 @@ public class HomeController  {
     private void initialize() {
 
     }
-
-    private void flightFind(String searchText, FilteredList<String> filteredFlights) {
-        // Thiết lập điều kiện lọc trong FilteredList
-        filteredFlights.setPredicate(flight -> {
-            // Nếu TextField trống, hiển thị tất cả các mục
-            if (searchText == null || searchText.trim().isEmpty()) {
-                return true;
-            }
-
-            String lowerCaseFlight = flight.toLowerCase();
-            String lowerCaseFilter = searchText.toLowerCase();
-
-            // Check if the flight name contains the search text
-            return lowerCaseFlight.contains(lowerCaseFilter);
-        });
-    }
-
-    private void getValueTextField(ComboBox<String> ComboboxPoint, TextField AddressPoints) {
-        try {
-
-            ComboboxPoint.setOnShown(event -> {
-                // Lấy giá trị đã chọn từ ComboBox
-                selectedValue = ComboboxPoint.getSelectionModel().getSelectedItem();
-                ComboboxPoint.setValue(selectedValue);
-
-            });
-            ComboboxPoint.valueProperty().addListener((observable, oldValue, newValue) -> {
-                try {
-                    if (newValue != null) {
-                        StringValue = newValue.toString();
-
-                        ComboboxPoint.setValue(newValue);
-                        AddressPoints.setText(StringValue);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-
 
     // chuyển form
     private Stage stage;

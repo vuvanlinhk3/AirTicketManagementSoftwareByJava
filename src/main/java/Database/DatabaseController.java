@@ -1,5 +1,6 @@
 package Database;
 
+import Admin.Controller.BaseController;
 import Customer.Controller.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -237,6 +238,7 @@ public class DatabaseController  {
                     String destinationLocation = resultSet.getString("destination_location");
                     // Hiển thị thông tin địa điểm của sân bay (Bạn có thể điều chỉnh phương thức này theo nhu cầu của bạn)
                     BookingController.displayLocation(departureLocation, destinationLocation);
+                    Admin.Controller.HomeController.GetLocation(departureLocation,destinationLocation);
                 } else {
                     // Không tìm thấy bản ghi khớp
                     // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
@@ -292,6 +294,35 @@ public class DatabaseController  {
                     String price = resultSet.getString("price");
                     // Hiển thị thông tin giá vé
                     BookingController.displayPrice(price);
+                    Admin.Controller.HomeController.GetPrice(price);
+                } else {
+                    // Không tìm thấy bản ghi khớp
+                    // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
+                    SignupPassController.showAlert("Lỗi", "Không có dữ liệu giá vé!");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // lấy giá vé dựa vào id chuyến bay và khoang hạng
+
+    // lấy giá vé dựa vào id chuyến bay và khoang hạng
+    public static void getPrices(int flightId, String typeSeat) {
+        String sql = "SELECT ticket_prices.price " +
+                "FROM ticket_prices " +
+                "INNER JOIN seat_types ON ticket_prices.seat_type_id = seat_types.seat_type_id " +
+                "WHERE ticket_prices.flight_id = ? AND seat_types.seat_type_name = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, flightId);
+            preparedStatement.setString(2, typeSeat);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Lấy thông tin giá vé
+                    String price = resultSet.getString("price");
+                    // Hiển thị thông tin giá vé
+                    Admin.Controller.HomeController.GetPrices(price);
                 } else {
                     // Không tìm thấy bản ghi khớp
                     // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp
@@ -625,4 +656,113 @@ public class DatabaseController  {
         }
     }
     // thêm chuyến bay
+
+    //xóa chuyến bay
+    public static int deleteFlight(int flid) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            // Kiểm tra ràng buộc khóa ngoại trong bảng Bookings
+            String bookingCheckSql = "SELECT COUNT(*) FROM Bookings WHERE flight_id = ?";
+            try (PreparedStatement bookingCheckStatement = connection.prepareStatement(bookingCheckSql)) {
+                bookingCheckStatement.setInt(1, flid);
+                try (ResultSet resultSet = bookingCheckStatement.executeQuery()) {
+                    if (resultSet.next() && resultSet.getInt(1) > 0) {
+                        return -1; // Ràng buộc khóa ngoại trong bảng Bookings
+                    }
+                }
+            }
+
+            // Kiểm tra ràng buộc khóa ngoại trong bảng SeatNumbers
+            String seatNumberCheckSql = "SELECT COUNT(*) FROM SeatNumbers WHERE flight_id = ?";
+            try (PreparedStatement seatNumberCheckStatement = connection.prepareStatement(seatNumberCheckSql)) {
+                seatNumberCheckStatement.setInt(1, flid);
+                try (ResultSet resultSet = seatNumberCheckStatement.executeQuery()) {
+                    if (resultSet.next() && resultSet.getInt(1) > 0) {
+                        return -2; // Ràng buộc khóa ngoại trong bảng SeatNumbers
+                    }
+                }
+            }
+
+            // Kiểm tra ràng buộc khóa ngoại trong bảng TicketPrices
+            String ticketPriceCheckSql = "SELECT COUNT(*) FROM TicketPrices WHERE flight_id = ?";
+            try (PreparedStatement ticketPriceCheckStatement = connection.prepareStatement(ticketPriceCheckSql)) {
+                ticketPriceCheckStatement.setInt(1, flid);
+                try (ResultSet resultSet = ticketPriceCheckStatement.executeQuery()) {
+                    if (resultSet.next() && resultSet.getInt(1) > 0) {
+                        return -3; // Ràng buộc khóa ngoại trong bảng TicketPrices
+                    }
+                }
+            }
+
+            // Nếu không có ràng buộc khóa ngoại, thực hiện xóa chuyến bay
+            String deleteSql = "DELETE FROM Flights WHERE flight_id = ?";
+            try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
+                deleteStatement.setInt(1, flid);
+                int rowsAffected = deleteStatement.executeUpdate();
+                return rowsAffected > 0 ? 1 : 0; // Trả về 1 nếu xóa thành công, ngược lại trả về 0
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -4; // Lỗi SQL
+        }
+    }
+
+    //xóa chuyến bay
+
+    //Xóa vé dựa vào id
+    public static boolean deleteTicketPricesByFlightId(int flightId) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String deleteSql = "DELETE FROM TicketPrices WHERE flight_id = ?";
+            try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
+                deleteStatement.setInt(1, flightId);
+                int rowsAffected = deleteStatement.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    //Xóa vé dựa vào id
+    //Xóa ghế
+    public static boolean deleteSeatNumbersByFlightId(int flightId) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String deleteSql = "DELETE FROM SeatNumbers WHERE flight_id = ?";
+            try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
+                deleteStatement.setInt(1, flightId);
+                int rowsAffected = deleteStatement.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    //Xóa ghế
+
+    // xóa đặt vé dựa vào id chuyến bay
+    public static boolean deleteBookingsByFlightId(int flightId) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String deleteSql = "DELETE FROM Bookings WHERE flight_id = ?";
+            try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
+                deleteStatement.setInt(1, flightId);
+                int rowsAffected = deleteStatement.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // xóa đặt vé dựa vào id chuyến bay
+
+    // lấy thời gian dự kiến dựa vào id chuyến bay
+    // lấy thời gian dự kiến dựa vào id chuyến bay
+
+    // lấy ra tổng chổ ngồi dựa vào id chuyến bay
+    // lấy ra tổng chổ ngồi dựa vào id chuyến bay
+
+
+
 }

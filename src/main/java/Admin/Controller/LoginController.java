@@ -18,7 +18,7 @@ public class LoginController  {
     private TextField tenDangNhap_txt;
     @FXML
     private TextField matKhau_txt;
-    private String TenDangNhap;
+    public static String TenDangNhap;
     private String passWord;
 
     // chuyển form
@@ -46,5 +46,18 @@ public class LoginController  {
         }else {
             BaseController.showAlert("Trống","Vui lòng nhập tên đăng nhập !");
         }
+    }
+
+    @FXML
+    private void click(ActionEvent event)throws IOException{
+        TenDangNhap = tenDangNhap_txt.getText();
+        FlightInfoController taomoi = new FlightInfoController();
+        taomoi.TenDangNhap =  TenDangNhap;
+        System.out.println("forrm 1 "+ TenDangNhap);
+        Parent root = FXMLLoader.load(getClass().getResource("/Admin/AdminView/FlightInfo.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

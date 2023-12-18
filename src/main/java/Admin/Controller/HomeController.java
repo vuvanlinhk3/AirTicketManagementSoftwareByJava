@@ -51,6 +51,24 @@ public class HomeController {
     private boolean comboBoxOpened;
     private String selectedValue;
     private String StringValue;
+    private void getRender(){
+        List<Integer> FlightsIdAll = DatabaseController.getFlightIDs();
+
+        for (Integer fl : FlightsIdAll){
+            List<LocalDateTime> TimeAll = DatabaseController.getTimesByFlightIds(fl);
+            List<String > Sbdis = DatabaseController.getSBDiByFlightIds(fl);
+            List<String > Sbdens = DatabaseController.getSBDenByFlightIds(fl);
+            for (LocalDateTime time : TimeAll){
+                for ( String sbdi : Sbdis){
+                    for ( String sbden : Sbdens){
+                        CreateInfoFlight(sbdi,sbden,time,fl);
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
 
     @FXML
     private void initialize() {
@@ -59,22 +77,7 @@ public class HomeController {
         panelinfo.setPrefHeight(0);
         dialogInfo.setPrefHeight(0);
 
-        List<Integer> FlightsIdAll = DatabaseController.getFlightIDs();
-
-        for (Integer fl : FlightsIdAll){
-            List<LocalDateTime> TimeAll = DatabaseController.getTimesByFlightIds(fl);
-            List<String > Sbdis = DatabaseController.getSBDiByFlightIds(fl);
-            List<String > Sbden = DatabaseController.getSBDenByFlightIds(fl);
-            for (LocalDateTime time : TimeAll){
-                for ( String sbdi : Sbdis){
-                    for ( String sbden : Sbdis){
-                        CreateInfoFlight(sbdi,sbden,time,fl);
-                        break;
-                    }
-                }
-            }
-
-        }
+        getRender();
 
 
         ObservableList<String> airportList = DatabaseController.getAirports();
@@ -181,36 +184,95 @@ public class HomeController {
         }
     }
 
+    // dia log
+    @FXML
+    private Label sbaydi;
+    @FXML
+    private Label sanbayden;
+    @FXML
+    private Label thoigiankhoihanh;
+    @FXML
+    private Label thoigiandendukien;
+    @FXML
+    private Label ddsbdi;
+    @FXML
+    private Label ddsbden;
+    @FXML
+    private Label cngoi;
+    @FXML
+    private Label giavept;
+    @FXML
+    private Label giavetg;
 
+    public static String ddsb_di;
+    public static String ddsb_den;
+    public static String giaTG;
+    public static String giaPT;
+    public static void GetLocation(String ddsbdi ,String ddsbden){
+        ddsb_di = ddsbdi;
+        ddsb_den = ddsbden;
+    }
+    public static void GetPrice(String gia){
+        giaPT =gia;
+    }
+    public static void GetPrices(String gia){
+        giaTG = gia;
+    }
+
+    @FXML
+    private Button DeleteFlight;
     private void viewDetailClick( int flightId , String time , String airport_start , String airport_end) throws IOException {
+        DatabaseController.getLocationAirport(flightId);
+        DatabaseController.getPriceTicket(flightId,"Phổ Thông");
+        DatabaseController.getPrices(flightId,"Thương Gia");
         mainVBox.getChildren().clear();
+        sbaydi.setText(airport_start);
+        System.out.println(airport_end);
+        sanbayden.setText(airport_end);
+        thoigiankhoihanh.setText(time);
+        ddsbdi.setText(ddsb_di);
+        ddsbden.setText(ddsb_den);
+        giavept.setText(giaPT);
+        giavetg.setText(giaTG);
+
         dialogInfo.setVisible(true);
         dialogInfo.setDisable(false);
         panelinfo.setPrefHeight(400);
         dialogInfo.setPrefHeight(400);
-
+        DeleteFlight.setOnAction(event -> {
+            DeleteFlightClick(flightId); // Truyền flightId khi click vào nút
+        });
     }
+    private void DeleteFlightClick(int flightid){
+
+       int IsDelete = DatabaseController.deleteFlight(flightid);
+       if(IsDelete == 1){
+           BaseController.showAlert("Thành công","Xóa chuyến bay thành công !");
+       }
+       if(IsDelete == -1) {
+           BaseController.ShowConfirmationDialog("Đặt vé");
+       }if(IsDelete == -2) {
+           BaseController.ShowConfirmationDialog("Bảng ghế");
+       }if(IsDelete == -3) {
+           BaseController.ShowConfirmationDialog("Bảng vé");
+       }if(IsDelete == -4) {
+           BaseController.showAlert("Lỗi","Lỗi không xác định, xóa thất bại !");
+       }
+    }
+
+
+
+
+
+
+
     @FXML
     private void thoatgialog(){
         dialogInfo.setVisible(false);
         dialogInfo.setDisable(true);
         panelinfo.setPrefHeight(0);
         dialogInfo.setPrefHeight(0);
-        List<Integer> FlightsIdAll = DatabaseController.getFlightIDs();
-        for (Integer fl : FlightsIdAll){
-            List<LocalDateTime> TimeAll = DatabaseController.getTimesByFlightIds(fl);
-            List<String > Sbdis = DatabaseController.getSBDiByFlightIds(fl);
-            List<String > Sbden = DatabaseController.getSBDenByFlightIds(fl);
-            for (LocalDateTime time : TimeAll){
-                for ( String sbdi : Sbdis){
-                    for ( String sbden : Sbdis){
-                        CreateInfoFlight(sbdi,sbden,time,fl);
-                        break;
-                    }
-                }
-            }
-
-        }
+        getRender();
 
     }
 
@@ -259,7 +321,7 @@ public class HomeController {
         Button viewDetailButton = new Button("Xem chi tiết");
         viewDetailButton.setOnAction(event -> {
             try {
-                viewDetailClick( flightId , time , airportStart, airportEnd); // Truyền flightId khi click vào nút
+                viewDetailClick( flightId , time , sbDi, sbDen); // Truyền flightId khi click vào nút
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -376,12 +438,11 @@ public class HomeController {
             String SbdenData = SBDEN.getText(); //2
             String NgayGioxuatphatData = NGAYXP.getText() +"T"+ GIOXP.getText();
 //            LocalDateTime localDateTimeXP = LocalDateTime.parse(NgayGioxuatphatData, DateTimeFormatter.ISO_DATE_TIME); //3
-
             String NGAYDKData = NGAYDK.getText();
 //        LocalDate localDateDuK = LocalDate.parse(NgayGioxuatphatData, DateTimeFormatter.ISO_DATE_TIME);//4
-            int SLGHEPTData = Integer.parseInt(SLGHEPT.getText());
-            int SLGHETGData =Integer.parseInt( SLGHETG.getText());
-            int SumDataGhe = SLGHEPTData + SLGHETGData; // 5
+
+
+
             String VEPTData = VEPT.getText();  //6
             String VETGData = VETG.getText();//7
             int idsbdi= DatabaseController.getAirportIdByName(SbdiData);
@@ -390,15 +451,20 @@ public class HomeController {
             if(
                     SbdenData !=null && SbdiData !=null
                     && NgayGioxuatphatData !=null && NGAYDKData !=null
-                    && SumDataGhe !=0 && VEPTData !=null && VETGData !=null
+                    && SLGHEPT.getText() !=null && SLGHETG.getText() !=null && VEPTData !=null && VETGData !=null
             ){
-               boolean IsAdd = DatabaseController.addFlight(1,idsbdi,idsbden,NgayGioxuatphatData,NGAYDKData,200,SumDataGhe);
-                if (IsAdd){
-                    BaseController.showAlert("Thành công","Thêm chuyến bay thành công !");
-                    Reset();
-                }
-                else {
-                    BaseController.showAlert("Lỗi","Lỗi thêm chuyến bay, Vui lòng kiểm tra lại thông tin đã nhập !");
+                int SLGHEPTData = Integer.parseInt(SLGHEPT.getText());
+                int SLGHETGData =Integer.parseInt( SLGHETG.getText());
+                int SumDataGhe = SLGHEPTData + SLGHETGData; // 5
+                if(SLGHEPTData != 0 && SLGHETGData != 0){
+                    boolean IsAdd = DatabaseController.addFlight(1,idsbdi,idsbden,NgayGioxuatphatData,NGAYDKData,200,SumDataGhe);
+                    if (IsAdd){
+                        BaseController.showAlert("Thành công","Thêm chuyến bay thành công !");
+                        Reset();
+                    }
+                    else {
+                        BaseController.showAlert("Lỗi","Lỗi thêm chuyến bay, Vui lòng kiểm tra lại thông tin đã nhập !");
+                    }
                 }
 
             }else {
@@ -417,4 +483,8 @@ public class HomeController {
         VEPT.setText("");
         VETG.setText("");
     }
+
+
+
+
 }

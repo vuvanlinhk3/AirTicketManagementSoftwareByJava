@@ -45,7 +45,7 @@
                         </Label>
                      </top>
                      <center>
-                        <TextField fx:id="phone_find_text" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="505.0" BorderPane.alignment="CENTER">
+                        <TextField fx:id="phone_find_text" prefHeight="25.0" prefWidth="505.0" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets left="50.0" right="50.0" />
                            </BorderPane.margin>
@@ -69,7 +69,7 @@
             <TableView fx:id="account_find" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="namecl" prefWidth="150.39996945858002" text="Tên tài khoản" />
-                <TableColumn fx:id="confirmcl" minWidth="0.0" prefWidth="206.4000244140625" text="xác nhận" />
+                <TableColumn fx:id="confirmcl" minWidth="0.0" prefWidth="206.4000244140625" text="Xác nhận" />
               </columns>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="50.0" right="50.0" top="5.0" />

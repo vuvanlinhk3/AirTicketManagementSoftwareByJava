@@ -115,6 +115,7 @@ public class HomeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        SelectSB(airportList);
     }
 
     private void getValueTextField(ComboBox<String> ComboboxPoint, TextField AddressPoints) {
@@ -307,6 +308,10 @@ public class HomeController {
 
     // scene 2 thêm chuyến bay
     @FXML
+    private ComboBox <String> COMBOSBDI;
+    @FXML
+    private ComboBox <String>COMBOSBDEN;
+    @FXML
     private TextField SBDI;
     @FXML
     private TextField SBDEN;
@@ -327,10 +332,47 @@ public class HomeController {
     @FXML
     private ComboBox <String> HANGHK;
 
+    private void SelectSB(ObservableList<String> airportList){
+        ObservableList<String> genderOptions = FXCollections.observableArrayList(airportList);
+
+        FilteredList<String> filteredFlights = new FilteredList<>(genderOptions, s -> true);
+        SBDI.textProperty().addListener((observable, oldValue, newValue) -> {
+            flightFind(newValue, filteredFlights);
+            // Check if the ComboBox has been opened, if not, open it
+            if (!comboBoxOpened) {
+                COMBOSBDI.show();
+                comboBoxOpened = true;
+            }
+        });
+        SBDI.setOnMouseClicked(event -> {
+            COMBOSBDI.show();
+        });
+        COMBOSBDI.setItems(filteredFlights);
+
+        // gọi hàm lấy value cho textfield;
+        getValueTextField(COMBOSBDI, SBDI);
+
+        FilteredList<String> filtered_Flights = new FilteredList<>(genderOptions, s -> true);
+        SBDEN.textProperty().addListener((observable, oldValue, newValue) -> {
+            flightFind(newValue, filtered_Flights);
+            // Check if the ComboBox has been opened, if not, open it
+            if (!comboBoxOpened) {
+                COMBOSBDEN.show();
+                comboBoxOpened = true;
+            }
+        });
+        SBDEN.setOnMouseClicked(event -> {
+            COMBOSBDEN.show();
+        });
+        COMBOSBDEN.setItems(filtered_Flights);
+
+        // gọi hàm lấy value cho textfield;
+        getValueTextField(COMBOSBDEN, SBDEN);
+    }
 
     @FXML
     private void AddCick(){
-            String SbdiData = start_TF.getText(); //1/
+            String SbdiData = SBDI.getText(); //1/
             String SbdenData = SBDEN.getText(); //2
             String NgayGioxuatphatData = NGAYXP.getText() +"T"+ GIOXP.getText();
 //            LocalDateTime localDateTimeXP = LocalDateTime.parse(NgayGioxuatphatData, DateTimeFormatter.ISO_DATE_TIME); //3
@@ -350,15 +392,29 @@ public class HomeController {
                     && NgayGioxuatphatData !=null && NGAYDKData !=null
                     && SumDataGhe !=0 && VEPTData !=null && VETGData !=null
             ){
-                DatabaseController.addFlight(1,idsbdi,idsbden,NgayGioxuatphatData,NGAYDKData,200,SumDataGhe);
-
+               boolean IsAdd = DatabaseController.addFlight(1,idsbdi,idsbden,NgayGioxuatphatData,NGAYDKData,200,SumDataGhe);
+                if (IsAdd){
+                    BaseController.showAlert("Thành công","Thêm chuyến bay thành công !");
+                    Reset();
+                }
+                else {
+                    BaseController.showAlert("Lỗi","Lỗi thêm chuyến bay, Vui lòng kiểm tra lại thông tin đã nhập !");
+                }
 
             }else {
                 BaseController.showAlert("Trống thông tin","Bạn đã bỏ trống 1 thông tin !");
             }
-
-
     }
 
-
+    private void Reset(){
+        SBDI.setText("");
+        SBDEN.setText("");
+        NGAYXP.setText("");
+        GIOXP.setText("");
+        NGAYDK.setText("");
+        SLGHEPT.setText("");
+        SLGHETG.setText("");
+        VEPT.setText("");
+        VETG.setText("");
+    }
 }

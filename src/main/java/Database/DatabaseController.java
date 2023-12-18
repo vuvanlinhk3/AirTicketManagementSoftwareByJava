@@ -15,12 +15,12 @@ public class DatabaseController  {
 
     // thêm thông tin khách hàng
     public static boolean addPassenger(String name, LocalDate birthday, String gender, String nationality,
-                                String address, String email, String phoneNumber, String password) {
+                                       String address, String email, String phoneNumber, String password) {
         String query = "INSERT INTO Passengers (name, birthday, gender, nationality, address, email, phone_number, password) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseContection.getConnettion();
-                     PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             Date sqlDate = Date.valueOf(birthday);
 
             preparedStatement.setString(1, name);
@@ -33,6 +33,15 @@ public class DatabaseController  {
             preparedStatement.setString(8, password);
 
             int rowsAffected = preparedStatement.executeUpdate();
+
+            // Lấy giá trị tự tăng của passenger_id
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int generatedId = generatedKeys.getInt(1);
+                    System.out.println("Generated Passenger ID: " + generatedId);
+                }
+            }
+
             return rowsAffected > 0;
 
         } catch (SQLException e) {
@@ -40,6 +49,7 @@ public class DatabaseController  {
             return false;
         }
     }
+
     // thêm thông tin khách hàng ////
 
     // hiển thị sân bay .
@@ -578,7 +588,7 @@ public class DatabaseController  {
 
 
     // thêm chuyến bay
-    public static void addFlight(int airlineId, int departureAirportId, int destinationAirportId,
+    public static boolean addFlight(int airlineId, int departureAirportId, int destinationAirportId,
                                  String departureDatetime, String arrivalDatetime,
                                  int availableSeats, int totalSeats) {
         try (Connection connection = DatabaseContection.getConnettion()) {
@@ -594,16 +604,24 @@ public class DatabaseController  {
                 LocalDateTime departureDateTime = LocalDateTime.parse(departureDatetime, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
                 preparedStatement.setTimestamp(4, Timestamp.valueOf(departureDateTime));
 
-                LocalDateTime arrivalDateTime = LocalDateTime.parse(arrivalDatetime, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
-                preparedStatement.setTimestamp(5, Timestamp.valueOf(arrivalDateTime));
+                LocalDate arrivalDate = LocalDate.parse(arrivalDatetime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                Date date = Date.valueOf(arrivalDate);
+                preparedStatement.setDate(5, date);
 
                 preparedStatement.setInt(6, availableSeats);
                 preparedStatement.setInt(7, totalSeats);
                 preparedStatement.executeUpdate();
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Xử lý các ngoại lệ SQL nếu có
+            return false;
         }
     }
     // thêm chuyến bay

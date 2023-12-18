@@ -1,5 +1,7 @@
 package Customer.Controller;
 
+import Database.DatabaseContection;
+import Database.DatabaseController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,17 +11,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
+import java.sql.*;
 import java.util.Properties;
 import java.util.Random;
+
+import static Customer.Controller.SignupController.validateField;
 
 public class ChangePasswordController {
     @FXML
@@ -59,6 +62,7 @@ public class ChangePasswordController {
 
                 // Hiển thị thông báo khi gửi mã thành công
                 showAlert("Success", "Mã của bạn đã được gửi !");
+                System.out.print(verificationCode);
 
             } catch (MessagingException e) {
                 e.printStackTrace();
@@ -128,6 +132,110 @@ public class ChangePasswordController {
         stage.show();
     }
 
+    @FXML
+    private TextField code_mail;
+
+    private String code ;
+    private Boolean cofirmed = false;
+    @FXML
+    private void confirm_click (){
+         String code = code_mail.getText();
+        if( code.equals(verificationCode) ){
+            System.out.println ("\nmã đã nhập :"+ code);
+            cofirmed=true;
+            showAlert("Thành Công ","Nhập mã xác nhận thành công!");
+        }else{
+            System.out.println ("\nmã đã nhập :"+ code);
+            showAlert("Error", "Mã không chính xác");
+        }
+    }
+    @FXML
+    private PasswordField pass_new;
+    @FXML
+    private PasswordField pass_new_cofirm;
+
+    @FXML
+    private Label warning_label;
+
+    @FXML
+    private void cofirm_pass_click(){
+        String newpass =pass_new.getText();
+        String passcofirm= pass_new_cofirm.getText();
+        if(newpass.equals(passcofirm)){
+            warning_label.setVisible(false);
+            showAlert("Thành công ","Đổi mật khẩu thành công!");
+            // Update mật khẩu trong cơ sở dữ liệu
+            updatePasswordInDatabase(newpass);
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Login.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) pass_new.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            warning_label.setVisible(true);
+        }
+    }
+    //hàm lấy dữ liệu PassengerID khi ô email = email trong cldl
+    private int getPassengerIdFromEmail(String email) {
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT passenger_id FROM Passengers WHERE email = ?")) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("passenger_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1; // Trả về giá trị không hợp lệ nếu không tìm thấy email
+    }
+    private void updatePasswordInDatabase(String newPassword) {
+        String emailToUpdate = load_email.getText();
+        int passengerIdToUpdate = getPassengerIdFromEmail(emailToUpdate);// Thay thế bằng ID thực tế của hành khách
+        if (passengerIdToUpdate != -1) {
+            try (Connection connection = DatabaseContection.getConnettion();
+                 PreparedStatement preparedStatement = connection.prepareStatement(
+                         "UPDATE Passengers SET password = ? WHERE passenger_id = ?")) {
+                preparedStatement.setString(1, newPassword);
+                preparedStatement.setInt(2, passengerIdToUpdate);
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Cập nhật mật khẩu vào cơ sở dữ liệu thành công!");
+                } else {
+                    System.out.println("Không tìm thấy hành khách để cập nhật mật khẩu.");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Không tìm thấy hành khách với email: " + emailToUpdate);
+        }
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "UPDATE Passengers SET password = ? WHERE passenger_id = ?")) {
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, passengerIdToUpdate);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Cập nhật mật khẩu vào cơ sở dữ liệu thành công!");
+            } else {
+                System.out.println("Không tìm thấy hành khách để cập nhật mật khẩu.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -136,4 +244,5 @@ public class ChangePasswordController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

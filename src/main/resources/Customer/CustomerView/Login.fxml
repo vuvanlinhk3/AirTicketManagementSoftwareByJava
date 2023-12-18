@@ -17,12 +17,12 @@
          <center>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="500.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="181.0" layoutY="129.0" text="Đăng nhập" textFill="#d7a150">
+                  <Label layoutX="168.0" layoutY="128.0" text="Đăng nhập" textFill="#d7a150">
                      <font>
-                        <Font name="Cambria" size="30.0" />
+                        <Font name="Cambria" size="36.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tendangnhap_text" layoutX="25.0" layoutY="219.0" prefHeight="40.0" prefWidth="450.0" promptText="Số thẻ Hội viên/ Email/ Số điện thoại">
+                  <TextField fx:id="tendangnhap_text" layoutX="25.0" layoutY="244.0" prefHeight="40.0" prefWidth="450.0" promptText="Số thẻ Hội viên/ Email/ Số điện thoại">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -72,6 +72,16 @@
                   </Button>
                   <Label fx:id="label1" layoutX="25.0" layoutY="198.0" prefHeight="22.0" prefWidth="308.0" />
                   <Label fx:id="label2" layoutX="25.0" layoutY="310.0" prefHeight="20.0" prefWidth="308.0" />
+                  <Label layoutX="25.0" layoutY="202.0" prefHeight="27.0" prefWidth="296.0" text="Nhập số thẻ Hội viên/Email/Số điện thoại:">
+                     <font>
+                        <Font name="Cambria Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="25.0" layoutY="297.0" prefHeight="27.0" prefWidth="296.0" text="Nhập mật khẩu:">
+                     <font>
+                        <Font name="Cambria Italic" size="16.0" />
+                     </font>
+                  </Label>
                </children>
                <styleClass>
                   <String fx:value="node-with-shadow" />

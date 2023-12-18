@@ -3,6 +3,7 @@ package Customer.Controller;
 import Database.DatabaseContection;
 import Database.DatabaseController;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,6 +22,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class BookingController  {
     @FXML
@@ -79,6 +82,7 @@ public class BookingController  {
         idSeat = id;
     }
 
+
     @FXML
     private void show_click(){
         sbDi.setText(airportStartData);
@@ -87,7 +91,6 @@ public class BookingController  {
         diaDiemDi.setText(departureLocationData);
         diaDiemDen.setText(destinationLocationData);
         show.setVisible(false);
-
     }
     public void initialize() {
 
@@ -111,7 +114,6 @@ public class BookingController  {
                 chonMaGhe.setValue(newValue);
                 maGhe = chonMaGhe.getValue();
             });
-
     }
     @FXML
     private void bookingClick(ActionEvent event)throws IOException{

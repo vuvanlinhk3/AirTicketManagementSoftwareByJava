@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -68,9 +71,127 @@
                                                 </Pane>
                                              </top>
                                              <center>
-                                                <ScrollPane fx:id="pane_ngoai" maxWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                                <ScrollPane fx:id="pane_ngoai" hbarPolicy="NEVER" maxWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                                                    <content>
-                                                      <VBox fx:id="mainVBox" prefHeight="335.0" prefWidth="1000.0" />
+                                                      <VBox prefHeight="335.0" prefWidth="1000.0">
+                                                         <children>
+                                                            <DialogPane fx:id="dialogInfo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="412.0" prefWidth="1001.0">
+                                                                <expandableContent>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+                                                                </expandableContent>
+                                                               <graphic>
+                                                                  <Pane fx:id="panelinfo" maxWidth="-Infinity" prefHeight="397.0" prefWidth="1000.0" style="-fx-background-color: #ddd;">
+                                                                     <styleClass>
+                                                                        <String fx:value="node-with-shadow" />
+                                                                        <String fx:value="node-with-bottom-border" />
+                                                                     </styleClass>
+                                                                     <children>
+                                                                        <Label fx:id="sbaydi" layoutX="264.0" layoutY="62.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Button layoutX="856.0" layoutY="342.0" mnemonicParsing="false" text="Xóa chuyến bay">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Label layoutX="87.0" layoutY="59.0" text="Sân bay đi : ">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="774.0" layoutY="62.0" text="Tên sân bay">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="606.0" layoutY="59.0" text="Sân bay đến : ">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="264.0" layoutY="134.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="87.0" layoutY="131.0" text="Thời gian khởi hành">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="264.0" layoutY="181.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="87.0" layoutY="178.0" text="Địa điểm">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="230.0" layoutY="274.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="87.0" layoutY="271.0" text="Tổng chổ ngồi :">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="774.0" layoutY="134.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="606.0" layoutY="131.0" text="Thời gian dự kiến :">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="777.0" layoutY="181.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="609.0" layoutY="178.0" text="Địa điểm">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="87.0" layoutY="335.0" text="Giá vé thương gia : ">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="249.0" layoutY="338.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="606.0" layoutY="271.0" text="Giá vé phổ thông : ">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="777.0" layoutY="274.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#thoatgialog" text="Thoát">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                     </children>
+                                                                  </Pane>
+                                                               </graphic>
+                                                            </DialogPane>
+                                                            <VBox fx:id="mainVBox" prefHeight="335.0" prefWidth="1000.0" />
+                                                         </children></VBox>
                                                    </content>
                                                 </ScrollPane>
                                              </center>
@@ -83,8 +204,8 @@
                                              <top>
                                                 <Pane prefHeight="387.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
                                                    <children>
-                                                      <ComboBox fx:id="airport_start_combo" layoutX="366.0" layoutY="58.0" prefHeight="30.0" prefWidth="205.0" />
-                                                      <ComboBox layoutX="366.0" layoutY="115.0" prefHeight="30.0" prefWidth="204.0" />
+                                                      <ComboBox fx:id="COMBOSBDI" layoutX="366.0" layoutY="58.0" prefHeight="30.0" prefWidth="203.0" />
+                                                      <ComboBox fx:id="COMBOSBDEN" layoutX="366.0" layoutY="115.0" prefHeight="30.0" prefWidth="204.0" />
                                                       <Label layoutX="171.0" layoutY="64.0" text="Nhập Sân bay đi : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
@@ -95,7 +216,7 @@
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Button>
-                                                      <TextField fx:id="start_TF" layoutX="366.0" layoutY="58.0">
+                                                      <TextField fx:id="SBDI" layoutX="366.0" layoutY="58.0" prefHeight="30.0" prefWidth="172.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -202,6 +323,8 @@
                                  <top>
                                     <Pane prefHeight="150.0" prefWidth="1295.0" styleClass="background_green_rgba_3" BorderPane.alignment="CENTER">
                                        <children>
+                                          <ComboBox fx:id="airport_start_combo1" layoutX="301.0" layoutY="30.0" prefHeight="30.0" prefWidth="201.0" />
+                                          <ComboBox fx:id="airport_start_combo11" layoutX="828.0" layoutY="30.0" prefHeight="30.0" prefWidth="201.0" />
                                           <TextField layoutX="301.0" layoutY="30.0">
                                              <font>
                                                 <Font size="14.0" />

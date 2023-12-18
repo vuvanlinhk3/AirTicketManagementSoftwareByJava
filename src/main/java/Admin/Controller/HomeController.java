@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -31,6 +32,10 @@ import java.util.List;
 public class HomeController {
     @FXML
     private TextField start_TF;
+    @FXML
+    private DialogPane dialogInfo;
+    @FXML
+    private Pane panelinfo;
     @FXML
     private ComboBox<String> airport_start_combo;
     @FXML
@@ -49,6 +54,11 @@ public class HomeController {
 
     @FXML
     private void initialize() {
+        dialogInfo.setVisible(false);
+        dialogInfo.setDisable(true);
+        panelinfo.setPrefHeight(0);
+        dialogInfo.setPrefHeight(0);
+
         List<Integer> FlightsIdAll = DatabaseController.getFlightIDs();
 
         for (Integer fl : FlightsIdAll){
@@ -65,8 +75,6 @@ public class HomeController {
             }
 
         }
-
-
 
 
         ObservableList<String> airportList = DatabaseController.getAirports();
@@ -138,7 +146,6 @@ public class HomeController {
 
     @FXML
     private void findClick() {
-        mainVBox.getChildren().clear();
         airportStart = start_TF.getText();
         airportEnd = end_TF.getText();
 
@@ -156,6 +163,7 @@ public class HomeController {
             SignupPassController.showAlert("Not Fount","Không có chuyến bay nào từ " + airportStart + " đến " + airportEnd);
             return;
         } else {
+            mainVBox.getChildren().clear();
             System.out.println("Danh sách flightIds:");
             for (Integer flightId : flightIds) {
                 System.out.println(flightId);
@@ -173,20 +181,39 @@ public class HomeController {
     }
 
 
-    // chuyển form
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-    private void viewDetailClick(ActionEvent event , int flightId , String time , String airport_start , String airport_end) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Admin/AdminView/FlightInfo.fxml"));
-        root = loader.load();
-        BookingController.setFlightId(flightId, time , airport_start , airport_end);// đây là dữ liệu cần lấy sang  <------
+    private void viewDetailClick( int flightId , String time , String airport_start , String airport_end) throws IOException {
+        mainVBox.getChildren().clear();
+        dialogInfo.setVisible(true);
+        dialogInfo.setDisable(false);
+        panelinfo.setPrefHeight(400);
+        dialogInfo.setPrefHeight(400);
 
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
+    @FXML
+    private void thoatgialog(){
+        dialogInfo.setVisible(false);
+        dialogInfo.setDisable(true);
+        panelinfo.setPrefHeight(0);
+        dialogInfo.setPrefHeight(0);
+        List<Integer> FlightsIdAll = DatabaseController.getFlightIDs();
+        for (Integer fl : FlightsIdAll){
+            List<LocalDateTime> TimeAll = DatabaseController.getTimesByFlightIds(fl);
+            List<String > Sbdis = DatabaseController.getSBDiByFlightIds(fl);
+            List<String > Sbden = DatabaseController.getSBDenByFlightIds(fl);
+            for (LocalDateTime time : TimeAll){
+                for ( String sbdi : Sbdis){
+                    for ( String sbden : Sbdis){
+                        CreateInfoFlight(sbdi,sbden,time,fl);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
     private void flightFind(String searchText, FilteredList<String> filteredFlights) {
         // Thiết lập điều kiện lọc trong FilteredList
         filteredFlights.setPredicate(flight -> {
@@ -231,7 +258,7 @@ public class HomeController {
         Button viewDetailButton = new Button("Xem chi tiết");
         viewDetailButton.setOnAction(event -> {
             try {
-                viewDetailClick(event, flightId , time , airportStart, airportEnd); // Truyền flightId khi click vào nút
+                viewDetailClick( flightId , time , airportStart, airportEnd); // Truyền flightId khi click vào nút
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -280,6 +307,8 @@ public class HomeController {
 
     // scene 2 thêm chuyến bay
     @FXML
+    private TextField SBDI;
+    @FXML
     private TextField SBDEN;
     @FXML
     private TextField NGAYXP;
@@ -301,7 +330,7 @@ public class HomeController {
 
     @FXML
     private void AddCick(){
-            String SbdiData = start_TF.getText(); //1
+            String SbdiData = start_TF.getText(); //1/
             String SbdenData = SBDEN.getText(); //2
             String NgayGioxuatphatData = NGAYXP.getText() +"T"+ GIOXP.getText();
 //            LocalDateTime localDateTimeXP = LocalDateTime.parse(NgayGioxuatphatData, DateTimeFormatter.ISO_DATE_TIME); //3

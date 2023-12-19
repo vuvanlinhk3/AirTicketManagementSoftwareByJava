@@ -4,6 +4,7 @@ import Customer.Controller.BookingController;
 import Customer.Controller.SignupPassController;
 import Database.DatabaseContection;
 import Database.DatabaseController;
+import com.sun.mail.imap.protocol.ID;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -70,6 +71,13 @@ public class HomeController {
         }
     }
 
+
+    @FXML
+    private TextField airportName;
+    @FXML
+    private ComboBox <String> airportCobo;
+    @FXML
+    private TextField locationAirport;
     @FXML
     private void initialize() {
         dialogInfo.setVisible(false);
@@ -78,7 +86,7 @@ public class HomeController {
         dialogInfo.setPrefHeight(0);
 
         getRender();
-
+        classCompartment();
 
         ObservableList<String> airportList = DatabaseController.getAirports();
         ObservableList<String> genderOptions = FXCollections.observableArrayList(airportList);
@@ -119,7 +127,34 @@ public class HomeController {
             e.printStackTrace();
         }
         SelectSB(airportList);
+        SelectComboAirport(airportName,airportCobo);
     }
+
+
+    // chung
+    private void SelectComboAirport( TextField airportTextField , ComboBox <String> Comboboxx){
+        ObservableList<String> airportList = DatabaseController.getAirports();
+        ObservableList<String> genderOptions = FXCollections.observableArrayList(airportList);
+        FilteredList<String> filteredFlights = new FilteredList<>(genderOptions, s -> true);
+        airportTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            flightFind(newValue, filteredFlights);
+            // Check if the ComboBox has been opened, if not, open it
+            if (!comboBoxOpened) {
+                Comboboxx.show();
+                comboBoxOpened = true;
+            }
+        });
+        airportTextField.setOnMouseClicked(event -> {
+            Comboboxx.show();
+        });
+        Comboboxx.setItems(filteredFlights);
+
+        // gọi hàm lấy value cho textfield;
+        getValueTextField(Comboboxx, airportTextField);
+    }
+    // chung
+
+
 
     private void getValueTextField(ComboBox<String> ComboboxPoint, TextField AddressPoints) {
         try {
@@ -334,13 +369,14 @@ public class HomeController {
         Font iconfont = new Font(30);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ' 'HH'h :' mm");
         String time = Time.format(formatter).toString();
+        String idflight = Integer.toString(flightId);
         // Tạo các Label
         Label departureAirportLabel = new Label(sbDi);
         Label destinationAirportLabel = new Label(sbDen);
         Label flightIconLabel = new Label("🛫");
         Label timeLabel = new Label("Time: ");
         Label departureTimeLabel = new Label(time);
-        Label bayThangLabel = new Label("Bay thẳng");
+        Label bayThangLabel = new Label("ID : " +idflight);
 
         // Đặt Font cho các Label
         departureAirportLabel.setFont(labelFont);
@@ -518,7 +554,104 @@ public class HomeController {
     }
 
 
+    // Sân bay
+    // thêm sân bay
+    private String newAirport;
+    private String newLocation;
+    @FXML
+    private TextField airport_ID;
+    private int IDAir;
+    @FXML
+    private void addAriportClick(){
+         newAirport = airportName.getText();
+         newLocation = locationAirport.getText();
+        if(newAirport != null && newLocation != null){
+            boolean isAddAirport = DatabaseController.addAirport(newAirport,newLocation);
+            if(isAddAirport){
+                BaseController.showAlert("Thành công","Thêm sân bay thành công !");
+            }else {
+                BaseController.showAlert("Lỗi","Lỗi Thêm sân bay,Hãy kiếm tra lại !");
+            }
+        }
+        else {
+            BaseController.showAlert("Trống","Vui lòng nhập đầy đủ thông tin !");
+        }
+    }
 
+    // xóa sân bay
+
+
+    private ButtonType warning;
+    private void ShowWarning(){
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.setTitle("Xác nhận");
+        confirmationDialog.setHeaderText("Bạn đang bị ràng buộc khóa ngoại ");
+        confirmationDialog.setContentText("Khi xóa sẽ xóa luôn các thông tin của các bạn liên quan, Bạn có chắc chắn");
+        confirmationDialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+        warning = confirmationDialog.showAndWait().orElse(ButtonType.NO);
+    }
+
+
+    @FXML
+    private void deleteAirport(){
+        newAirport = airportName.getText();
+        newLocation = locationAirport.getText();
+        IDAir = Integer.parseInt(airport_ID.getText());
+        if (true){
+            ShowWarning();
+                if(warning == ButtonType.YES){
+                    if(newAirport.isEmpty() || newAirport != null && IDAir !=0){
+                        boolean isDeleteAirport = DatabaseController.deleteAirport(IDAir);
+                        if(isDeleteAirport){
+                            BaseController.showAlert("Thành công","Xóa thành công sân bay !");
+                        }else {
+                            BaseController.showAlert("Lỗi","ID chuyến bay không tồn tại");
+                        }
+                    }
+                    if (newAirport != null  && IDAir ==0){
+                        boolean isDeleteAirport = DatabaseController.deleteAirportForName(newAirport);
+                        if(isDeleteAirport){
+                            BaseController.showAlert("Thành công","Xóa thành công sân bay !");
+                        }else {
+                            BaseController.showAlert("Lỗi","ID chuyến bay không tồn tại");
+                        }
+                    }
+                }else {
+                    return;
+                }
+        }
+    }
+    // Sân bay
+
+    // Ghế
+    @FXML
+    private TextField chair_name;
+    @FXML
+    private TextField FL_id;
+    @FXML
+    private ComboBox <String> select_chair;
+    @FXML
+    private void addChairsClick(){
+        String chairName = chair_name.getText();
+        int FLId = Integer.parseInt(FL_id.getText());
+        String Compart = select_chair.getValue();
+        int IDCompart = DatabaseController.getSeatType(Compart);
+
+        if(chairName !=null && FLId != 0 && Compart != null){
+            boolean isAddSeat = DatabaseController.addSeatNumber(FLId,chairName,"0",IDCompart);
+            if(isAddSeat){
+                BaseController.showAlert("Thành công","Thêm thành công");
+            }else {
+                BaseController.showAlert("Lỗi","Thêm Thất bại");
+            }
+        }
+    }
+
+    // Ghế cobobox
+    private void classCompartment(){
+        ObservableList<String> Compart = FXCollections.observableArrayList("Phổ Thông","Thương Gia");
+        select_chair.setItems(Compart);
+    }
 
 
 

@@ -757,6 +757,222 @@ public class DatabaseController  {
 
     // xóa đặt vé dựa vào id chuyến bay
 
+    // thêm sân bay
+    public static boolean addAirport(String nameAirport, String location) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String sql = "INSERT INTO Airports (airport_name, location) VALUES (?, ?)";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, nameAirport);
+                preparedStatement.setString(2, location);
+
+                // Thực hiện truy vấn INSERT
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                // Kiểm tra xem có bản ghi nào bị ảnh hưởng không
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // thêm sân bay
+
+
+    // xóa sân bay dựa vào tên
+    public static boolean deleteAirportForName(String nameAirport) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            deleteSeatNumbersAndTicketPricesAndBookingByAirportName(connection,nameAirport);
+            deleteFlightsByAirportName(connection,nameAirport);
+
+            String sql = "DELETE FROM Airports WHERE airport_name = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, nameAirport);
+                preparedStatement.executeUpdate();
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Hàm xóa chuyến bay có sân bay xuất phát hoặc đến
+    private static void deleteFlightsByAirportName(Connection connection, String Name) throws SQLException {
+        String deleteFlightsSql = "DELETE FROM Flights WHERE departure_airport_id = ? OR destination_airport_id = ?";
+        try (PreparedStatement deleteFlightsStatement = connection.prepareStatement(deleteFlightsSql)) {
+            deleteFlightsStatement.setString(1, Name);
+            deleteFlightsStatement.setString(2, Name);
+            deleteFlightsStatement.executeUpdate();
+        }
+    }
+
+    // Hàm xóa mã số ghế và giá vé liên quan đến chuyến bay có sân bay xuất phát hoặc đến
+    private static void deleteSeatNumbersAndTicketPricesAndBookingByAirportName(Connection connection, String airportName) throws SQLException {
+        String deleteTicketPricesSql = "DELETE FROM ticket_prices WHERE flight_id IN (SELECT flight_id FROM Flights WHERE departure_airport_id IN (SELECT airport_id FROM Airports WHERE airport_name = ?) OR destination_airport_id IN (SELECT airport_id FROM Airports WHERE airport_name = ?))";
+        try (PreparedStatement deleteTicketPricesStatement = connection.prepareStatement(deleteTicketPricesSql)) {
+            deleteTicketPricesStatement.setString(1, airportName);
+            deleteTicketPricesStatement.setString(2, airportName);
+            deleteTicketPricesStatement.executeUpdate();
+        }
+            String deleteBookingsSql = "DELETE FROM bookings WHERE flight_id IN (SELECT flight_id FROM Flights WHERE departure_airport_id IN (SELECT airport_id FROM Airports WHERE airport_name = ?) OR destination_airport_id IN (SELECT airport_id FROM Airports WHERE airport_name = ?))";
+            try (PreparedStatement deleteBookingsStatement = connection.prepareStatement(deleteBookingsSql)) {
+                deleteBookingsStatement.setString(1, airportName);
+                deleteBookingsStatement.setString(2, airportName);
+                deleteBookingsStatement.executeUpdate();
+            }
+            String deleteSeatNumbersSql = "DELETE FROM seat_numbers WHERE flight_id IN (SELECT flight_id FROM Flights WHERE departure_airport_id IN (SELECT airport_id FROM Airports WHERE airport_name = ?) OR destination_airport_id IN (SELECT airport_id FROM Airports WHERE airport_name = ?))";
+            try (PreparedStatement deleteSeatNumbersStatement = connection.prepareStatement(deleteSeatNumbersSql)) {
+                deleteSeatNumbersStatement.setString(1, airportName);
+                deleteSeatNumbersStatement.setString(2, airportName);
+                deleteSeatNumbersStatement.executeUpdate();
+            }
+        }
+
+    // xóa sân bay dựa vào tên và địa điểm sân bay
+
+
+
+
+    // xóa sân bay dựa vào id
+    public static boolean deleteAirport(int airportId) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            // Xóa chuyến bay có sân bay xuất phát hoặc đến
+            deleteSeatNumbersAndTicketPricesAndBookingByAirportId(connection, airportId);
+            deleteFlightsByAirportId(connection, airportId);
+
+            // Xóa mã số ghế và giá vé liên quan đến chuyến bay có sân bay xuất phát hoặc đến
+
+            // Xóa sân bay
+            String deleteAirportSql = "DELETE FROM Airports WHERE airport_id = ?";
+            try (PreparedStatement deleteAirportStatement = connection.prepareStatement(deleteAirportSql)) {
+                deleteAirportStatement.setInt(1, airportId);
+                int rowsAffected = deleteAirportStatement.executeUpdate();
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Hàm xóa chuyến bay có sân bay xuất phát hoặc đến
+    private static void deleteFlightsByAirportId(Connection connection, int airportId) throws SQLException {
+        String deleteFlightsSql = "DELETE FROM Flights WHERE departure_airport_id = ? OR destination_airport_id = ?";
+        try (PreparedStatement deleteFlightsStatement = connection.prepareStatement(deleteFlightsSql)) {
+            deleteFlightsStatement.setInt(1, airportId);
+            deleteFlightsStatement.setInt(2, airportId);
+            deleteFlightsStatement.executeUpdate();
+        }
+    }
+
+    // Hàm xóa mã số ghế và giá vé liên quan đến chuyến bay có sân bay xuất phát hoặc đến
+    private static void deleteSeatNumbersAndTicketPricesAndBookingByAirportId(Connection connection, int airportId) throws SQLException {
+        String deleteTicketPricesSql = "DELETE FROM ticket_prices WHERE flight_id IN (SELECT flight_id FROM Flights WHERE departure_airport_id = ? OR destination_airport_id = ?)";
+        try (PreparedStatement deleteTicketPricesStatement = connection.prepareStatement(deleteTicketPricesSql)) {
+            deleteTicketPricesStatement.setInt(1, airportId);
+            deleteTicketPricesStatement.setInt(2, airportId);
+            deleteTicketPricesStatement.executeUpdate();
+        }
+
+        String deleteBookingsSql = "DELETE FROM bookings WHERE flight_id IN (SELECT flight_id FROM Flights WHERE departure_airport_id = ? OR destination_airport_id = ?)";
+        try (PreparedStatement deleteBookingsStatement = connection.prepareStatement(deleteBookingsSql)) {
+            deleteBookingsStatement.setInt(1, airportId);
+            deleteBookingsStatement.setInt(2, airportId);
+            deleteBookingsStatement.executeUpdate();
+        }
+        String deleteSeatNumbersSql = "DELETE FROM seat_numbers WHERE flight_id IN (SELECT flight_id FROM Flights WHERE departure_airport_id = ? OR destination_airport_id = ?)";
+        try (PreparedStatement deleteSeatNumbersStatement = connection.prepareStatement(deleteSeatNumbersSql)) {
+            deleteSeatNumbersStatement.setInt(1, airportId);
+            deleteSeatNumbersStatement.setInt(2, airportId);
+            deleteSeatNumbersStatement.executeUpdate();
+        }
+
+
+    }
+
+    // thêm ghế
+    public static boolean addSeatNumber(int flightId, String seatNumber, String seatStatus, int seatTypeId) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            // Kiểm tra xem flight_id đã tồn tại trong bảng Flights hay chưa
+            if (!isFlightExists(connection, flightId)) {
+                BaseController.showAlert("Lỗi","ID chuyến bay không tồn tại !");
+                return false;
+            }
+
+            // Nếu flight_id tồn tại, thêm mã số ghế vào bảng seat_numbers
+            String sql = "INSERT INTO seat_numbers (flight_id, seat_number, seat_status, seat_type_id) VALUES (?, ?, ?, ?)";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, flightId);
+                preparedStatement.setString(2, seatNumber);
+                preparedStatement.setString(3, seatStatus);
+                preparedStatement.setInt(4, seatTypeId);
+
+                // Thực hiện truy vấn INSERT
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                // Kiểm tra xem có bản ghi nào bị ảnh hưởng không
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Phương thức kiểm tra xem flight_id có tồn tại trong bảng Flights hay không
+    private static boolean isFlightExists(Connection connection, int flightId) throws SQLException {
+        String sql = "SELECT 1 FROM Flights WHERE flight_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, flightId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next();
+            }
+        }
+    }
+
+
+    // thêm ghế
+    // lấy id dựa vào hạng khoang
+    public static int getSeatType(String seatTypeName) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String sql = "SELECT seat_type_id FROM seat_types WHERE seat_type_name = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, seatTypeName);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt("seat_type_id");
+                    } else {
+                        // Nếu không tìm thấy loại ghế, có thể xử lý bằng cách in ra một thông báo hoặc trả về một giá trị đặc biệt.
+                        System.out.println("Seat type with name " + seatTypeName + " not found.");
+                        return -1; // Hoặc giá trị đặc biệt khác tùy theo yêu cầu của bạn.
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // Xử lý lỗi nếu cần thiết.
+        }
+    }
+
+
+
+
+
+
+
+
     // lấy thời gian dự kiến dựa vào id chuyến bay
     // lấy thời gian dự kiến dựa vào id chuyến bay
 

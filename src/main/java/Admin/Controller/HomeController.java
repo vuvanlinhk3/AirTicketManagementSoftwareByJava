@@ -245,19 +245,52 @@ public class HomeController {
     }
     private void DeleteFlightClick(int flightid){
 
-       int IsDelete = DatabaseController.deleteFlight(flightid);
-       if(IsDelete == 1){
-           BaseController.showAlert("Thành công","Xóa chuyến bay thành công !");
-       }
-       if(IsDelete == -1) {
-           BaseController.ShowConfirmationDialog("Đặt vé");
-       }if(IsDelete == -2) {
-           BaseController.ShowConfirmationDialog("Bảng ghế");
-       }if(IsDelete == -3) {
-           BaseController.ShowConfirmationDialog("Bảng vé");
-       }if(IsDelete == -4) {
-           BaseController.showAlert("Lỗi","Lỗi không xác định, xóa thất bại !");
-       }
+        int deleteStatus = -1;
+        boolean continueDeletion = true;
+
+        while (continueDeletion) {
+            deleteStatus = DatabaseController.deleteFlight(flightid);
+
+            if (deleteStatus == 1) {
+                BaseController.showAlert("Thành công", "Xóa chuyến bay thành công !");
+                continueDeletion = false;
+            } else if (deleteStatus == -1) {
+                ShowConfirmationDialog("Đặt vé");
+                if (result == ButtonType.YES) {
+                    DatabaseController.deleteBookingsByFlightId(flightid);
+                } else {
+                    continueDeletion = false;
+                }
+            } else if (deleteStatus == -2) {
+                ShowConfirmationDialog("Bảng ghế");
+                if (result == ButtonType.YES) {
+                    DatabaseController.deleteSeatNumbersByFlightId(flightid);
+                } else {
+                    continueDeletion = false;
+                }
+            } else if (deleteStatus == -3) {
+                ShowConfirmationDialog("Bảng vé");
+                if (result == ButtonType.YES) {
+                    DatabaseController.deleteTicketPricesByFlightId(flightid);
+                } else {
+                    continueDeletion = false;
+                }
+            } else if (deleteStatus == -4) {
+                BaseController.showAlert("Lỗi", "Lỗi không xác định, xóa thất bại !");
+                continueDeletion = false;
+            }
+        }
+    }
+        public static ButtonType result;
+        public static void ShowConfirmationDialog(String khoaNgoai){
+            Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationDialog.setTitle("Xác nhận");
+            confirmationDialog.setHeaderText("Bạn đang bị ràng buộc khóa ngoại " + khoaNgoai);
+            confirmationDialog.setContentText("Có muốn xóa thông tin ID chuyến bay của Bảng " + khoaNgoai);
+            confirmationDialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+            result = confirmationDialog.showAndWait().orElse(ButtonType.NO);
+            System.out.println(result);
+
     }
 
 
@@ -483,6 +516,9 @@ public class HomeController {
         VEPT.setText("");
         VETG.setText("");
     }
+
+
+
 
 
 

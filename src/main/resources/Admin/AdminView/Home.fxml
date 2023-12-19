@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -9,6 +12,8 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -34,35 +39,35 @@
                                              <top>
                                                 <Pane prefHeight="135.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
                                                    <children>
-                                                      <Label layoutX="69.0" layoutY="30.0" text="Nhập Sân bay đi : ">
+                                                      <Label layoutX="147.0" layoutY="31.0" text="Nhập Sân bay đi : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="816.0" layoutY="82.0" mnemonicParsing="false" onAction="#findClick" prefHeight="30.0" prefWidth="82.0" text="Tìm kiếm">
+                                                      <Button layoutX="1063.0" layoutY="93.0" mnemonicParsing="false" onAction="#findClick" prefHeight="30.0" prefWidth="82.0" text="Tìm kiếm">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Button>
-                                                      <ComboBox fx:id="airport_start_combo" layoutX="225.0" layoutY="21.0" prefHeight="30.0" prefWidth="201.0" />
-                                                      <TextField fx:id="start_TF" layoutX="225.0" layoutY="21.0">
+                                                      <ComboBox fx:id="airport_start_combo" layoutX="303.0" layoutY="23.0" prefHeight="30.0" prefWidth="201.0" />
+                                                      <TextField fx:id="start_TF" layoutX="303.0" layoutY="23.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <ComboBox fx:id="airport_end_combo" layoutX="225.0" layoutY="81.0" prefHeight="30.0" prefWidth="201.0" />
-                                                      <Label layoutX="61.0" layoutY="90.0" text="Nhập Sân bay đến : ">
+                                                      <ComboBox fx:id="airport_end_combo" layoutX="303.0" layoutY="83.0" prefHeight="30.0" prefWidth="201.0" />
+                                                      <Label layoutX="147.0" layoutY="89.0" text="Nhập Sân bay đến : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField fx:id="end_TF" layoutX="225.0" layoutY="81.0">
+                                                      <TextField fx:id="end_TF" layoutX="303.0" layoutY="83.0">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </TextField>
-                                                      <DatePicker layoutX="522.0" layoutY="81.0" prefHeight="30.0" prefWidth="239.0" />
-                                                      <Label layoutX="522.0" layoutY="59.0" text="Nhập thời gian khởi hành : ">
+                                                      <DatePicker layoutX="769.0" layoutY="92.0" prefHeight="30.0" prefWidth="239.0" />
+                                                      <Label layoutX="769.0" layoutY="70.0" text="Nhập thời gian khởi hành : ">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
@@ -202,7 +207,7 @@
                                        <content>
                                           <BorderPane prefHeight="200.0" prefWidth="200.0">
                                              <top>
-                                                <Pane prefHeight="387.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
+                                                <Pane prefHeight="467.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
                                                    <children>
                                                       <ComboBox fx:id="COMBOSBDI" layoutX="366.0" layoutY="58.0" prefHeight="30.0" prefWidth="203.0" />
                                                       <ComboBox fx:id="COMBOSBDEN" layoutX="366.0" layoutY="115.0" prefHeight="30.0" prefWidth="204.0" />
@@ -211,7 +216,7 @@
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="1106.0" layoutY="335.0" mnemonicParsing="false" onAction="#AddCick" prefHeight="39.0" prefWidth="145.0" text="Thêm">
+                                                      <Button layoutX="1124.0" layoutY="414.0" mnemonicParsing="false" onAction="#AddCick" prefHeight="39.0" prefWidth="145.0" text="Thêm">
                                                          <font>
                                                             <Font name="Cambria" size="14.0" />
                                                          </font>
@@ -323,6 +328,53 @@
                                           </BorderPane>
                                        </content>
                                   </Tab>
+                                    <Tab text="Quản lý giá vé">
+                                       <content>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                             <center>
+                                                <Pane prefHeight="274.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <Button layoutX="953.0" layoutY="188.0" mnemonicParsing="false" text="Lưu">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <TextField layoutX="397.0" layoutY="104.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Label layoutX="250.0" layoutY="74.0" text="Nhập ID Chuyến bay :">
+                                                         <font>
+                                                            <Font name="Cambria" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField layoutX="676.0" layoutY="104.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Label layoutX="676.0" layoutY="74.0" text="Giá vé thương gia">
+                                                         <font>
+                                                            <Font name="Cambria" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField layoutX="676.0" layoutY="188.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Label layoutX="676.0" layoutY="161.0" text="Giá vé phổ thông">
+                                                         <font>
+                                                            <Font name="Cambria" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </center>
+                                          </BorderPane>
+                                       </content>
+                                    </Tab>
                                 </tabs>
                               </TabPane>
                            </content>
@@ -333,9 +385,8 @@
                                  <top>
                                     <Pane prefHeight="150.0" prefWidth="1295.0" styleClass="background_green_rgba_3" BorderPane.alignment="CENTER">
                                        <children>
-                                          <ComboBox fx:id="airport_start_combo1" layoutX="301.0" layoutY="30.0" prefHeight="30.0" prefWidth="201.0" />
-                                          <ComboBox fx:id="airport_start_combo11" layoutX="828.0" layoutY="30.0" prefHeight="30.0" prefWidth="201.0" />
-                                          <TextField layoutX="301.0" layoutY="30.0">
+                                          <ComboBox fx:id="airport_start_combo1" layoutX="330.0" layoutY="30.0" prefHeight="30.0" prefWidth="201.0" />
+                                          <TextField layoutX="330.0" layoutY="30.0">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -350,17 +401,17 @@
                                                 <Font name="Cambria" size="14.0" />
                                              </font>
                                           </Button>
-                                          <Label layoutX="121.0" layoutY="35.0" text="Nhập tên sân bay : ">
+                                          <Label layoutX="150.0" layoutY="35.0" text="Nhập tên sân bay : ">
                                              <font>
                                                 <Font name="Cambria" size="16.0" />
                                              </font>
                                           </Label>
-                                          <TextField layoutX="828.0" layoutY="30.0">
+                                          <TextField layoutX="962.0" layoutY="30.0">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="648.0" layoutY="35.0" text="Nhập địa điểm sân bay : ">
+                                          <Label layoutX="782.0" layoutY="35.0" text="Nhập địa điểm sân bay : ">
                                              <font>
                                                 <Font name="Cambria" size="16.0" />
                                              </font>
@@ -373,82 +424,445 @@
                                        </children>
                                     </Pane>
                                  </top>
+                                 <center>
+                                    <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                       <content>
+                                          <VBox prefHeight="432.0" prefWidth="1000.0" />
+                                       </content>
+                                    </ScrollPane>
+                                 </center>
                               </BorderPane>
                            </content>
                         </Tab>
-                        <Tab text="Quản lý giá vé">
-                           <content>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                 <top>
-                                    <Pane prefHeight="135.0" prefWidth="1295.0" BorderPane.alignment="CENTER" />
-                                 </top>
-                              </BorderPane>
-                           </content></Tab>
                         <Tab text="Quản lý số ghế">
                            <content>
-                              <BorderPane prefHeight="200.0" prefWidth="200.0" />
-                           </content></Tab>
-                        <Tab text="Quản lý Vé">
-                           <content>
                               <BorderPane prefHeight="200.0" prefWidth="200.0">
                                  <top>
-                                    <Pane prefHeight="135.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
+                                    <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Label layoutX="34.0" layoutY="59.0" text="Nhập Tên khách hàng: ">
+                                          <ComboBox layoutX="855.0" layoutY="79.0" prefHeight="30.0" prefWidth="199.0" />
+                                          <Button layoutX="393.0" layoutY="150.0" mnemonicParsing="false" text="Thêm ghế">
                                              <font>
-                                                <Font name="Cambria" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Button layoutX="358.0" layoutY="54.0" mnemonicParsing="false" text="Tìm kiếm">
-                                             <font>
-                                                <Font name="Cambria" size="14.0" />
+                                                <Font size="14.0" />
                                              </font>
                                           </Button>
-                                          <TextField layoutX="168.0" layoutY="53.0">
+                                          <TextField layoutX="145.0" layoutY="76.0">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="12.0" layoutY="14.0" text="Tìm kiếm theo tên khách hàng">
+                                          <Label layoutX="145.0" layoutY="39.0" text="Nhập tên ghế">
                                              <font>
-                                                <Font name="Cambria" size="14.0" />
+                                                <Font name="Cambria" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="593.0" layoutY="59.0" text="Nhập Tên khách hàng: ">
+                                          <Button layoutX="1080.0" layoutY="79.0" mnemonicParsing="false" text="Xóa ghế">
                                              <font>
-                                                <Font name="Cambria" size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Button layoutX="926.0" layoutY="54.0" mnemonicParsing="false" text="Tìm kiếm">
-                                             <font>
-                                                <Font name="Cambria" size="14.0" />
+                                                <Font size="14.0" />
                                              </font>
                                           </Button>
-                                          <TextField layoutX="736.0" layoutY="53.0">
+                                          <TextField layoutX="855.0" layoutY="79.0">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="570.0" layoutY="23.0" text="Tìm kiếm theo tên thời gian đặt">
+                                          <Label layoutX="855.0" layoutY="42.0" text="Nhập tên ghế">
                                              <font>
-                                                <Font name="Cambria" size="14.0" />
+                                                <Font name="Cambria" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutX="145.0" layoutY="150.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="145.0" layoutY="126.0" text="Nhập ID Chuyến bay">
+                                             <font>
+                                                <Font name="Cambria" size="16.0" />
                                              </font>
                                           </Label>
                                        </children>
                                     </Pane>
                                  </top>
                                  <center>
-                                    <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                    <TableView maxWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                    </TableView>
+                                 </center></BorderPane>
+                           </content></Tab>
+                        <Tab text="Quản lý Vé">
+                           <content>
+                              <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Tìm kiếm theo khách hàng">
                                        <content>
-                                          <VBox prefHeight="443.0" prefWidth="1275.0" />
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                             <top>
+                                                <Pane prefHeight="135.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <Label layoutX="146.0" layoutY="64.0" text="Nhập Tên khách hàng: ">
+                                                         <font>
+                                                            <Font name="Cambria" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField layoutX="289.0" layoutY="58.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Label layoutX="133.0" layoutY="19.0" text="Tìm kiếm theo tên khách hàng">
+                                                         <font>
+                                                            <Font name="Cambria" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="744.0" layoutY="64.0" text="Chọn thời gian : ">
+                                                         <font>
+                                                            <Font name="Cambria" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Button layoutX="1069.0" layoutY="58.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" text="Tìm kiếm">
+                                                         <font>
+                                                            <Font name="Cambria" size="14.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <Label layoutX="720.0" layoutY="28.0" text="Tìm kiếm theo tên thời gian đặt">
+                                                         <font>
+                                                            <Font name="Cambria" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <DatePicker layoutX="856.0" layoutY="58.0" prefHeight="30.0" />
+                                                      <Button layoutX="516.0" layoutY="58.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" text="Tìm kiếm">
+                                                         <font>
+                                                            <Font name="Cambria" size="14.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </Pane>
+                                             </top>
+                                             <center>
+                                                <ScrollPane hbarPolicy="NEVER" maxWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                                                   <content>
+                                                      <VBox prefHeight="403.0" prefWidth="1000.0">
+                                                         <children>
+                                                            <DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="999.0">
+                                                                <expandableContent>
+                                                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+                                                                </expandableContent>
+                                                               <graphic>
+                                                                  <Pane fx:id="panelinfo1" maxWidth="-Infinity" prefHeight="397.0" prefWidth="1000.0" style="-fx-background-color: #ddd;">
+                                                                     <styleClass>
+                                                                        <String fx:value="node-with-shadow" />
+                                                                        <String fx:value="node-with-bottom-border" />
+                                                                     </styleClass>
+                                                                     <children>
+                                                                        <Button fx:id="DeleteFlight1" layoutX="856.0" layoutY="342.0" mnemonicParsing="false" text="Xóa chuyến bay">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Label layoutX="79.0" layoutY="59.0" text="Sân bay đi : ">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="sanbayden1" layoutX="774.0" layoutY="62.0" text="Tên sân bay">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="606.0" layoutY="59.0" text="Sân bay đến : ">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="79.0" layoutY="131.0" text="Thời gian khởi hành">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="79.0" layoutY="178.0" text="Địa điểm">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="80.0" layoutY="345.0" text="Tổng chổ ngồi :">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="thoigiandendukien1" layoutX="774.0" layoutY="134.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="606.0" layoutY="131.0" text="Thời gian dự kiến :">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="ddsbden1" layoutX="774.0" layoutY="181.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="609.0" layoutY="178.0" text="Địa điểm">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="80.0" layoutY="271.0" text="Giá vé thương gia : ">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label layoutX="606.0" layoutY="271.0" text="Giá vé phổ thông : ">
+                                                                           <font>
+                                                                              <Font name="System Bold" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="giavept1" layoutX="777.0" layoutY="274.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#thoatgialog" text="Thoát">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </Button>
+                                                                        <Label fx:id="sbaydi1" layoutX="320.0" layoutY="62.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="thoigiankhoihanh1" layoutX="320.0" layoutY="134.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="ddsbdi1" layoutX="320.0" layoutY="181.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="giavetg1" layoutX="320.0" layoutY="274.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="cngoi1" layoutX="320.0" layoutY="348.0" text="Tên sân bay đi">
+                                                                           <font>
+                                                                              <Font name="Cambria" size="16.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </Pane>
+                                                               </graphic>
+                                                            </DialogPane>
+                                                            <VBox prefHeight="200.0" prefWidth="100.0" />
+                                                         </children></VBox>
+                                                   </content>
+                                                </ScrollPane>
+                                             </center>
+                                          </BorderPane>
                                        </content>
-                                    </ScrollPane>
+                                  </Tab>
+                                  <Tab text="Untitled Tab 2">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </content></Tab>
+                        <Tab text="Quản lý Hành khách">
+                           <content>
+                              <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="30.0">
+                                <tabs>
+                                  <Tab text="Tìm kiếm khách hàng">
+                                       <content>
+                                          <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                             <top>
+                                                <Pane prefHeight="100.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
+                                                   <children>
+                                                      <Button layoutX="977.0" layoutY="39.0" mnemonicParsing="false" text="Tìm kiếm">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <TextField layoutX="125.0" layoutY="39.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Label layoutX="38.0" layoutY="44.0" text="Nhập tên :">
+                                                         <font>
+                                                            <Font name="Cambria" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField layoutX="502.0" layoutY="39.0">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Label layoutX="355.0" layoutY="44.0" text="Nhập số điện thoại">
+                                                         <font>
+                                                            <Font name="Cambria" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </top>
+                                          </BorderPane>
+                                       </content>
+                                  </Tab>
+                                  <Tab text="Untitled Tab 2">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                           </content></Tab>
+                        <Tab text="Quản lý Hãng hàng không">
+                           <content>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <top>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Button layoutX="1063.0" layoutY="132.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" text="Thêm">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <ComboBox layoutX="145.0" layoutY="60.0" prefHeight="30.0" prefWidth="203.0" />
+                                          <TextField layoutX="146.0" layoutY="60.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <Label layoutX="146.0" layoutY="25.0" text="Tìm kiếm">
+                                             <font>
+                                                <Font name="Cambria" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="761.0" layoutY="25.0" text="Hãng hàng không">
+                                             <font>
+                                                <Font name="Cambria" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField layoutX="761.0" layoutY="60.0" prefHeight="30.0" prefWidth="384.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <Button layoutX="405.0" layoutY="60.0" mnemonicParsing="false" text="Tìm Kiếm">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <Button layoutX="761.0" layoutY="132.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" text="Xóa">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </Pane>
+                                 </top>
+                                 <center>
+                                    <ScrollPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="1000.0" BorderPane.alignment="CENTER" />
                                  </center>
                               </BorderPane>
                            </content></Tab>
-                        <Tab text="Quản lý Hành khách" />
-                        <Tab text="Quản lý Hãng hàng không" />
-                        <Tab text="Quản lý doanh thu" />
+                        <Tab text="Quản lý doanh thu">
+                           <content>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <center>
+                                    <Pane prefHeight="279.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label layoutX="127.0" layoutY="76.0" text="Doanh thu hôm nay :">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Button layoutX="1234.0" layoutY="253.0" mnemonicParsing="false" text="Chỉnh" />
+                                          <Label layoutX="314.0" layoutY="76.0" text="0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="334.0" layoutY="76.0" text="VNĐ">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="918.0" layoutY="255.0" text="Tổng doanh thu tháng :">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="1119.0" layoutY="255.0" text="0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="1139.0" layoutY="255.0" text="VNĐ">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="127.0" layoutY="176.0" text="Doanh thu tuần này:">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="314.0" layoutY="176.0" text="0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="334.0" layoutY="176.0" text="VNĐ">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="881.0" layoutY="76.0" text="Doanh thu hôm nay :">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="1068.0" layoutY="76.0" text="0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="1088.0" layoutY="76.0" text="VNĐ">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </center>
+                                 <top>
+                                    <BorderPane prefHeight="294.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
+                                       <center>
+                                          <AreaChart prefHeight="319.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
+                                            <xAxis>
+                                              <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                          </AreaChart>
+                                       </center>
+                                    </BorderPane>
+                                 </top>
+                              </BorderPane>
+                           </content></Tab>
                     </tabs>
                   </TabPane>
                </center>

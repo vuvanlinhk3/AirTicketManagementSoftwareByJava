@@ -672,7 +672,7 @@ public class DatabaseController  {
             }
 
             // Kiểm tra ràng buộc khóa ngoại trong bảng SeatNumbers
-            String seatNumberCheckSql = "SELECT COUNT(*) FROM SeatNumbers WHERE flight_id = ?";
+            String seatNumberCheckSql = "SELECT COUNT(*) FROM seat_numbers WHERE flight_id = ?";
             try (PreparedStatement seatNumberCheckStatement = connection.prepareStatement(seatNumberCheckSql)) {
                 seatNumberCheckStatement.setInt(1, flid);
                 try (ResultSet resultSet = seatNumberCheckStatement.executeQuery()) {
@@ -683,7 +683,7 @@ public class DatabaseController  {
             }
 
             // Kiểm tra ràng buộc khóa ngoại trong bảng TicketPrices
-            String ticketPriceCheckSql = "SELECT COUNT(*) FROM TicketPrices WHERE flight_id = ?";
+            String ticketPriceCheckSql = "SELECT COUNT(*) FROM ticket_prices WHERE flight_id = ?";
             try (PreparedStatement ticketPriceCheckStatement = connection.prepareStatement(ticketPriceCheckSql)) {
                 ticketPriceCheckStatement.setInt(1, flid);
                 try (ResultSet resultSet = ticketPriceCheckStatement.executeQuery()) {
@@ -711,7 +711,7 @@ public class DatabaseController  {
     //Xóa vé dựa vào id
     public static boolean deleteTicketPricesByFlightId(int flightId) {
         try (Connection connection = DatabaseContection.getConnettion()) {
-            String deleteSql = "DELETE FROM TicketPrices WHERE flight_id = ?";
+            String deleteSql = "DELETE FROM ticket_prices WHERE flight_id = ?";
             try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
                 deleteStatement.setInt(1, flightId);
                 int rowsAffected = deleteStatement.executeUpdate();
@@ -726,7 +726,7 @@ public class DatabaseController  {
     //Xóa ghế
     public static boolean deleteSeatNumbersByFlightId(int flightId) {
         try (Connection connection = DatabaseContection.getConnettion()) {
-            String deleteSql = "DELETE FROM SeatNumbers WHERE flight_id = ?";
+            String deleteSql = "DELETE FROM seat_numbers WHERE flight_id = ?";
             try (PreparedStatement deleteStatement = connection.prepareStatement(deleteSql)) {
                 deleteStatement.setInt(1, flightId);
                 int rowsAffected = deleteStatement.executeUpdate();

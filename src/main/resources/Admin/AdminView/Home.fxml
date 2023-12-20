@@ -355,22 +355,23 @@
                                                 <Font name="Cambria" size="14.0" />
                                              </font>
                                           </Button>
+                                          <ComboBox fx:id="AirportList" layoutX="1092.0" layoutY="30.0" prefHeight="30.0" prefWidth="199.0" />
                                           <Label layoutX="306.0" layoutY="20.0" text="Nhập tên sân bay : ">
                                              <font>
                                                 <Font name="Cambria" size="16.0" />
                                              </font>
                                           </Label>
-                                          <TextField fx:id="airport_ID" layoutX="1117.0" layoutY="29.0">
+                                          <TextField fx:id="airport_ID" layoutX="1092.0" layoutY="30.0">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="1021.0" layoutY="36.0" text="ID sân bay">
+                                          <Label layoutX="995.0" layoutY="35.0" text="ID sân bay">
                                              <font>
                                                 <Font name="Cambria" size="16.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="1203.0" layoutY="108.0" mnemonicParsing="false" text="Tìm sân bay">
+                                          <Button layoutX="1203.0" layoutY="108.0" mnemonicParsing="false" onAction="#FindAirportClick" text="Tìm sân bay">
                                              <font>
                                                 <Font name="Cambria" size="14.0" />
                                              </font>

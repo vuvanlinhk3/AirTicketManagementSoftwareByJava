@@ -77,22 +77,11 @@
                      <top>
                         <Pane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="510.0" layoutY="11.0" text="Vũ Văn Linh">
+                              <Button layoutX="602.0" layoutY="6.0" mnemonicParsing="false" onAction="#logout_click" style="-fx-background-color: #ddd;" styleClass="transparent-button" text="Đăng xuất">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Cambria" size="14.0" />
                                  </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                              <Label layoutX="616.0" layoutY="11.0" text="Đăng Xuất">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
+                              </Button>
                            </children>
                         </Pane>
                      </top>
@@ -120,7 +109,7 @@
                <center>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <left>
-                        <BorderPane prefHeight="508.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+                        <BorderPane prefHeight="520.0" prefWidth="829.0" BorderPane.alignment="CENTER">
                            <top>
                               <Pane prefHeight="50.0" prefWidth="700.0" styleClass="background_lightOrange_rgba_3" BorderPane.alignment="CENTER">
                                  <children>
@@ -137,8 +126,12 @@
                                  <center>
                                     <TableView fx:id="flightTableView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c6d5c8;" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                                       <columns>
-                                        <TableColumn fx:id="flightIdColumn" prefWidth="210.0" text="Sân bay đi" />
-                                        <TableColumn minWidth="0.0" prefWidth="228.0" text="Sân bay đến" />
+                                        <TableColumn fx:id="flightIdColumn" prefWidth="129.0" text="Sân bay đi" />
+                                        <TableColumn minWidth="0.0" prefWidth="128.0" text="Sân bay đến" />
+                                          <TableColumn minWidth="0.0" prefWidth="161.0" text="Thời gian khởi hành" />
+                                          <TableColumn minWidth="0.0" prefWidth="139.0" text="Hạng khoang" />
+                                          <TableColumn minWidth="0.0" prefWidth="122.0" text="Mã số ghế" />
+                                          <TableColumn minWidth="0.0" prefWidth="150.0" text="Giá vé" />
                                       </columns>
                                     </TableView>
                                  </center>
@@ -151,7 +144,7 @@
                            <center>
                               <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #ddd;" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Pane layoutX="29.0" layoutY="18.0" prefHeight="473.0" prefWidth="457.0" style="-fx-background-color: #e8f8eb;" styleClass="border_Orange">
+                                    <Pane layoutX="29.0" layoutY="18.0" prefHeight="473.0" prefWidth="322.0" style="-fx-background-color: #e8f8eb;" styleClass="border_Orange">
                                        <children>
                                           <Label layoutX="24.0" layoutY="14.0" text="Chọn chuyến bay muốn hủy">
                                              <font>
@@ -180,7 +173,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="264.0" layoutY="290.0" mnemonicParsing="false" text="Hủy vé" textFill="WHITE">
+                                          <Button layoutX="233.0" layoutY="293.0" mnemonicParsing="false" text="Hủy vé" textFill="WHITE">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -192,8 +185,8 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <ComboBox layoutX="24.0" layoutY="237.0" prefHeight="28.0" prefWidth="311.0" />
-                                          <TextField layoutX="24.0" layoutY="237.0" prefHeight="28.0" prefWidth="282.0">
+                                          <ComboBox layoutX="24.0" layoutY="237.0" prefHeight="28.0" prefWidth="277.0" />
+                                          <TextField layoutX="24.0" layoutY="237.0" prefHeight="28.0" prefWidth="244.0">
                                              <font>
                                                 <Font name="Cambria" size="14.0" />
                                              </font>

@@ -22,8 +22,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HomeController  {
-
+    @FXML
+    private Button nameProfile;
     public static int IdPassenger;
+    public static String tendangnhap;
     public static void getIdPassenderHome(int Id){
         IdPassenger = Id;
     }
@@ -31,6 +33,10 @@ public class HomeController  {
     private String sanbaydi;
     @FXML
     private void initialize() {
+        String namePas = tendangnhap;
+        LoginController getName = new LoginController();
+        getName.tendangnhap = namePas;
+        nameProfile.setText(namePas);
 
     }
 
@@ -40,13 +46,14 @@ public class HomeController  {
     private Parent root;
     @FXML
     public void Bookedclick(ActionEvent event) throws IOException{
+        BookedController.getIdPassender(IdPassenger);
+        System.out.println(IdPassenger);
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Booked.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        BookedController.getIdPassender(IdPassenger);
-        System.out.println(IdPassenger);
+
     }
     @FXML
     public void assessclick(ActionEvent event) throws IOException{
@@ -80,6 +87,11 @@ public class HomeController  {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void VIPClick(){
+        SignupPassController.showAlert("None","Chức năng này chưa được hỗ trợ!");
     }
 
 }

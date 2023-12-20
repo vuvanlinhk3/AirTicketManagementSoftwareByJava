@@ -53,8 +53,7 @@ public class BookingController  {
     public static String  flightTimeData;
     public static String  airportStartData;
     public static String  airportEndData;
-    public static String  departureLocationData;
-    public static String  destinationLocationData;
+
     public static String  priceData;
     // Constructor nhận tham số flightId
     public static void setFlightId(int flightId , String  time , String airport_start, String airport_end) {
@@ -62,15 +61,9 @@ public class BookingController  {
         flightTimeData = time;
         airportStartData = airport_start;
         airportEndData = airport_end;
-        DatabaseController.getLocationAirport(flightIdData);
 
     }
 
-    public static void displayLocation(String departureLocation,String destinationLocation){
-        departureLocationData =departureLocation;
-        destinationLocationData = destinationLocation;
-
-    }
 
     public static void displayPrice(String Price){
         priceData = Price;
@@ -89,20 +82,26 @@ public class BookingController  {
     public static String TimeFlight;
     public static String AirportStartForForm;
     public static String AirportEndForForm;
+    public static String LocationPar;
+    public static String LocationDes;
     private void show_click(){
         String time = TimeFlight;
         String airdi = AirportStartForForm;
-        String airden = AirportStartForForm;
+        String airden = AirportEndForForm;
+        String locadi = LocationPar;
+        String locaden = LocationDes;
         FlightFindController frmflight = new FlightFindController();
         frmflight.TimeFlight = time;
         frmflight.AirportStartForForm = airdi;
         frmflight.AirportEndForForm = airden;
+        frmflight.LocationPar = locadi;
+        frmflight.LocationDes = locaden;
 
         sbDi.setText(airdi);
         sbDen.setText(airden);
         thoiGianDi.setText(time);
-//        diaDiemDi.setText(departureLocationData);
-//        diaDiemDen.setText(destinationLocationData);
+        diaDiemDi.setText(locadi);
+        diaDiemDen.setText(locaden);
 //        show.setVisible(false);
     }
 

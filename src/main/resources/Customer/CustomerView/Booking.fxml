@@ -160,7 +160,6 @@
                                     <Font size="14.0" />
                                  </font>
                                  <styleClass>
-                                    <String fx:value="transparent-button" />
                                     <String fx:value="background_hover" />
                                     <String fx:value="orange-text_hover" />
                                     <String fx:value="node-with-shadow" />
@@ -171,7 +170,7 @@
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="diaDiemDi" layoutX="611.0" layoutY="55.0">
+                              <Label fx:id="diaDiemDi" layoutX="611.0" layoutY="55.0" prefHeight="18.0" prefWidth="176.0">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
@@ -181,7 +180,7 @@
                                     <Font name="Cambria" size="18.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="diaDiemDen" layoutX="616.0" layoutY="181.0">
+                              <Label fx:id="diaDiemDen" layoutX="616.0" layoutY="181.0" prefHeight="18.0" prefWidth="174.0">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>

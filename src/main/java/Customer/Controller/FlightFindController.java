@@ -143,7 +143,8 @@ public class FlightFindController {
 //            System.out.println(flightId);
             LocalDateTime flightTime = flightTimes.get(i);
 //            System.out.println("Flight departure time: " + flightTime);
-            CreateInfoFlight(airportStart,airportEnd ,flightTime, flightId);
+            DatabaseController.getLocationAirport(flightId);
+            CreateInfoFlight(airportStart,airportEnd ,flightTime, flightId,departureLocationData,destinationLocationData);
         }
     }
 
@@ -156,28 +157,45 @@ public class FlightFindController {
     public static String TimeFlight;
     public static String AirportStartForForm;
     public static String AirportEndForForm;
+    public static String LocationPar;
+    public static String LocationDes;
 
-    private void viewDetailClick(ActionEvent event , int flightId , String time ,String airport_start , String airport_end) throws IOException {
-        TimeFlight = "heloo";
-
-        AirportStartForForm = airport_start;
-        AirportEndForForm = airport_end;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Booking.fxml"));
-        root = loader.load();
+    private void viewDetailClick(ActionEvent event , int flightId , String time ,String airport_start , String airport_end , String loctiondi, String locationden) throws IOException {
         BookingController.getIdPassenderForFlight(IdPassenger);
         BookingController.setFlightId(flightId, time , airport_start , airport_end);// đây là dữ liệu cần lấy sang  <------
-
+        TimeFlight = time;
+        LocationPar = loctiondi;
+        LocationDes = locationden;
+        AirportStartForForm = airport_start;
+        AirportEndForForm = airport_end;
         BookingController frmbooking = new BookingController();
         frmbooking.TimeFlight = time;
         frmbooking.AirportStartForForm = airport_start;
         frmbooking.AirportEndForForm = airport_end;
-        System.out.println(TimeFlight);
+        frmbooking.LocationPar = loctiondi;
+        frmbooking.LocationDes = locationden;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Booking.fxml"));
+        root = loader.load();
+
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+    public static String  departureLocationData;
+    public static String  destinationLocationData;
+    public static void displayLocation(String departureLocation,String destinationLocation){
+        departureLocationData =departureLocation;
+        destinationLocationData = destinationLocation;
+
+    }
+
+
+
+
+
     @FXML
     private void back_click(ActionEvent event) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
@@ -188,7 +206,7 @@ public class FlightFindController {
     }
     @FXML
     private void logout_click(ActionEvent event) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/FlightFind.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -222,7 +240,7 @@ public class FlightFindController {
     @FXML
     private VBox mainVBox;
 
-    private void CreateInfoFlight(String sbDi, String sbDen , LocalDateTime Time,int flightId ) {
+    private void CreateInfoFlight(String sbDi, String sbDen , LocalDateTime Time,int flightId , String loctiondi,String locationden ) {
 
         Font labelFont = new Font(14);
         Font iconfont = new Font(30);
@@ -248,7 +266,7 @@ public class FlightFindController {
         Button viewDetailButton = new Button("Xem chi tiết");
         viewDetailButton.setOnAction(event -> {
             try {
-                viewDetailClick(event, flightId , time , airportStart, airportEnd); // Truyền flightId khi click vào nút
+                viewDetailClick(event, flightId , time , airportStart, airportEnd , loctiondi,locationden); // Truyền flightId khi click vào nút
             } catch (IOException e) {
                 e.printStackTrace();
             }

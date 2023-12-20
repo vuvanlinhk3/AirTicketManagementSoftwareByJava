@@ -87,7 +87,8 @@ public class HomeController {
 
         getRender();
         classCompartment();
-
+        getAirlines();
+        SelectIDAirport(airport_ID,AirportList);
         ObservableList<String> airportList = DatabaseController.getAirports();
         ObservableList<String> genderOptions = FXCollections.observableArrayList(airportList);
 
@@ -541,6 +542,22 @@ public class HomeController {
             }
     }
 
+    public static int IDAirlineForm;
+    private int IDAirline;
+    private void getAirlines(){
+
+        ObservableList<String> AirlinesDATA =  DatabaseController.getAirlinesName();
+        ObservableList<String> Airline = FXCollections.observableArrayList(AirlinesDATA);
+        HANGHK.setItems(Airline);
+
+        if(HANGHK.getValue() !=null){
+            DatabaseController.GetAirlineID(HANGHK.getValue());
+            IDAirline = IDAirlineForm;
+            DatabaseController data = new DatabaseController();
+            data.IDAirlineForm = IDAirline;
+        }
+    }
+
     private void Reset(){
         SBDI.setText("");
         SBDEN.setText("");
@@ -560,6 +577,8 @@ public class HomeController {
     private String newLocation;
     @FXML
     private TextField airport_ID;
+    @FXML
+    private ComboBox<String> AirportList;
     private int IDAir;
     @FXML
     private void addAriportClick(){
@@ -621,6 +640,39 @@ public class HomeController {
                 }
         }
     }
+
+
+
+
+
+    @FXML
+    private void FindAirportClick(){
+    }
+
+    private void SelectIDAirport( TextField airportTextField , ComboBox <String> Comboboxx){
+        ObservableList<String> airportList = DatabaseController.getIDAirport();
+        ObservableList<String> genderOptions = FXCollections.observableArrayList(airportList);
+        FilteredList<String> filteredFlights = new FilteredList<>(genderOptions, s -> true);
+        airportTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            flightFind(newValue, filteredFlights);
+            // Check if the ComboBox has been opened, if not, open it
+            if (!comboBoxOpened) {
+                Comboboxx.show();
+                comboBoxOpened = true;
+            }
+        });
+        airportTextField.setOnMouseClicked(event -> {
+            Comboboxx.show();
+        });
+        Comboboxx.setItems(filteredFlights);
+
+        // gọi hàm lấy value cho textfield;
+        getValueTextField(Comboboxx, airportTextField);
+    }
+
+
+
+
     // Sân bay
 
     // Ghế
@@ -652,6 +704,10 @@ public class HomeController {
         ObservableList<String> Compart = FXCollections.observableArrayList("Phổ Thông","Thương Gia");
         select_chair.setItems(Compart);
     }
+
+
+
+    //ghế
 
 
 

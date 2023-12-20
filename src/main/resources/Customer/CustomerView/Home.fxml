@@ -84,7 +84,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="VIP">
+                                          <Button mnemonicParsing="false" onAction="#VIPClick" prefHeight="50.0" prefWidth="100.0" text="VIP">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -111,7 +111,7 @@
                                                 <Font name="Cambria" size="14.0" />
                                              </font>
                                           </Button>
-                                          <Button layoutX="482.0" layoutY="6.0" mnemonicParsing="false" onAction="#profile_click" text="Vũ Văn Linh">
+                                          <Button fx:id="nameProfile" layoutX="482.0" layoutY="6.0" mnemonicParsing="false" onAction="#profile_click" text="Vũ Văn Linh">
                                              <font>
                                                 <Font name="Cambria" size="14.0" />
                                              </font>

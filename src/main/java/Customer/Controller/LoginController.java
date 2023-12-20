@@ -25,7 +25,7 @@ public class LoginController {
    @FXML
     private TextField matkhau_text;
 
-   private String tendangnhap;
+   public static String tendangnhap;
    private String matkhau;
 
    @FXML
@@ -45,16 +45,20 @@ public class LoginController {
                boolean successForEmail = DatabaseController.getPassengerForEmail(tendangnhap,matkhau);
                if(successForEmail){
                    SignupPassController.showAlert("Thành công" ,"Đăng nhập thành công !");
-
+                   tendangnhap = nameData;
+                   HomeController getNamePas = new HomeController();
+                   getNamePas.tendangnhap = nameData;
                     //chuyển forrm
                    Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                    scene = new Scene(root);
                    stage.setScene(scene);
                    stage.show();
+
                }
                else {
                    SignupPassController.showAlert("Thất bại" ,"Tài khoản hoặc mật khẩu không đúng !");
+                   return;
                }
            }
            if(isValidANumber(tendangnhap)){
@@ -67,7 +71,9 @@ public class LoginController {
                    SignupPassController.showAlert("Thành công" ,"Đăng nhập thành công !");
                    HomeController.getIdPassenderHome(passengerIdData);
 
-
+                   tendangnhap = nameData;
+                   HomeController getNamePas = new HomeController();
+                   getNamePas.tendangnhap = nameData;
 
                    //chuyển forrm
                    Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
@@ -75,13 +81,14 @@ public class LoginController {
                    scene = new Scene(root);
                    stage.setScene(scene);
                    stage.show();
+
                }else {
                    SignupPassController.showAlert("Thất bại" ,"Tài khoản hoặc mật khẩu không đúng !");
+                   return;
                }
 
            }
 
-           return;
        }
    }
    private static int passengerIdData; // home lấy id từ đây  <------
@@ -90,6 +97,7 @@ public class LoginController {
         passengerIdData = passengerId;
         nameData = name;
     }
+
 
    private boolean isValidANumber(String Num){
        try {

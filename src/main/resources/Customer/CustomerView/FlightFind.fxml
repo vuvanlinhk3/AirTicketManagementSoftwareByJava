@@ -47,12 +47,12 @@
                      <top>
                         <Pane prefHeight="40.0" prefWidth="427.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button layoutX="269.0" layoutY="6.0" mnemonicParsing="false" onAction="#profile_click" styleClass="transparent-button" text="Vũ Văn Linh">
+                              <Button layoutX="269.0" layoutY="6.0" mnemonicParsing="false" onAction="#profile_click" style="-fx-background-color: #ddd;" styleClass="transparent-button" text="Vũ Văn Linh">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="385.0" layoutY="6.0" mnemonicParsing="false" onAction="#logout_click" styleClass="transparent-button" text="Đăng xuất">
+                              <Button layoutX="385.0" layoutY="6.0" mnemonicParsing="false" onAction="#logout_click" style="-fx-background-color: #ddd;" styleClass="transparent-button" text="Đăng xuất">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>

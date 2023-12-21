@@ -241,6 +241,7 @@ public class DatabaseController {
                     // này theo nhu cầu của bạn)
                     FlightFindController.displayLocation(departureLocation, destinationLocation);
                     Admin.Controller.HomeController.GetLocation(departureLocation, destinationLocation);
+                    AllFlightController.GetLocation(departureLocation, destinationLocation);
                 } else {
                     // Không tìm thấy bản ghi khớp
                     // Hiển thị cảnh báo hoặc thực hiện hành động phù hợp

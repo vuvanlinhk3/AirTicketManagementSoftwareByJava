@@ -679,7 +679,6 @@
                                                 <Font name="Cambria Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="1234.0" layoutY="175.0" mnemonicParsing="false" text="Chỉnh" />
                                           <Label layoutX="291.0" layoutY="37.0" text="0">
                                              <font>
                                                 <Font name="Cambria" size="18.0" />
@@ -690,17 +689,17 @@
                                                 <Font name="Cambria" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="918.0" layoutY="177.0" text="Tổng doanh thu tháng :">
+                                          <Label layoutX="1046.0" layoutY="260.0" text="Tổng doanh thu theo quý :">
                                              <font>
                                                 <Font name="Cambria Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="1119.0" layoutY="177.0" text="0">
+                                          <Label layoutX="1304.0" layoutY="260.0" text="0">
                                              <font>
                                                 <Font name="Cambria" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="1139.0" layoutY="177.0" text="VNĐ">
+                                          <Label layoutX="1324.0" layoutY="260.0" text="VNĐ">
                                              <font>
                                                 <Font name="Cambria" size="18.0" />
                                              </font>
@@ -720,17 +719,37 @@
                                                 <Font name="Cambria" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="675.0" layoutY="37.0" text="Doanh thu hôm nay :">
+                                          <Label layoutX="1046.0" layoutY="37.0" text="Số chuyến bay hôm nay :">
                                              <font>
                                                 <Font name="Cambria Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="862.0" layoutY="37.0" text="0">
+                                          <Label layoutX="1309.0" layoutY="37.0" text="0">
                                              <font>
                                                 <Font name="Cambria" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="882.0" layoutY="37.0" text="VNĐ">
+                                          <Label layoutX="1314.0" layoutY="115.0" text="0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="1046.0" layoutY="115.0" text="Số vé đã được đặt trong năm : ">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="104.0" layoutY="260.0" text="Tổng doanh thu tháng :">
+                                             <font>
+                                                <Font name="Cambria Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="305.0" layoutY="260.0" text="0">
+                                             <font>
+                                                <Font name="Cambria" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="325.0" layoutY="260.0" text="VNĐ">
                                              <font>
                                                 <Font name="Cambria" size="18.0" />
                                              </font>

@@ -39,7 +39,15 @@ public class HomeController  {
         nameProfile.setText(namePas);
 
     }
-
+    @FXML
+    private void ListAllFlightClick(ActionEvent event) throws IOException{
+        AllFlightController.getIdPassender(IdPassenger);
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/ListAllFlight.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     // chuyển form
     private Stage stage;
     private Scene scene;

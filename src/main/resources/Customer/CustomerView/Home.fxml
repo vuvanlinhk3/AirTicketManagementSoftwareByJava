@@ -36,23 +36,7 @@
                                  <bottom>
                                     <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Lên kế hoạch">
-                                             <HBox.margin>
-                                                <Insets />
-                                             </HBox.margin>
-                                             <font>
-                                                <Font name="Cambria" size="14.0" />
-                                             </font>
-                                             <styleClass>
-                                                <String fx:value="transparent-button" />
-                                                <String fx:value="background_hover" />
-                                                <String fx:value="border_radius_top_left_fight" />
-                                             </styleClass>
-                                             <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                             </cursor>
-                                          </Button>
-                                          <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="172.0" text="Thông tin hành trình">
+                                          <Button mnemonicParsing="false" onAction="#ListAllFlightClick" prefHeight="35.0" prefWidth="172.0" text="Thông tin hành trình">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>

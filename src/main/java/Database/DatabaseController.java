@@ -348,7 +348,8 @@ public class DatabaseController {
     public static String SeatNumberForm;
     public static String PriceForm;
 
-    public static void getBooked(int passengerId) {
+    public static List<Integer> getBooked(int passengerId) {
+        List<Integer> flightIds = new ArrayList<>();
         String sql = "SELECT F.flight_id, A1.airport_name AS departure_airport, A2.airport_name AS destination_airport, "
                 +
                 "F.departure_datetime, ST.seat_type_name, SN.seat_number, TP.price " +
@@ -373,6 +374,7 @@ public class DatabaseController {
                     String seat_type_name = resultSet.getString("seat_type_name");
                     String seat_number = resultSet.getString("seat_number");
                     String price = resultSet.getString("price");
+                    flightIds.add(flightID);
                     FlightIDForm = flightID;
                     ParAirportForm = departure_airport;
                     DesAirportForm = destination_airport;
@@ -393,6 +395,7 @@ public class DatabaseController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return flightIds;
     }
     // lấy ra chuyến bay dựa vào id khách hàng
 
@@ -428,16 +431,17 @@ public class DatabaseController {
     // lấy ra id mã ghế dựa vào flightid và mã số ghế và khoang hạng
 
     // đặt vé
-    public static boolean addBooking(int passengerId, int flightId, LocalDate bookingDate, int seatId,
+    public static boolean addBooking(int passengerId, int flightId, LocalDate bookingDate,int Hk, int seatId,
             String bookingStatus) {
-        String sql = "INSERT INTO Bookings (passenger_id, flight_id, booking_date, seat_id, booking_status) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Bookings (passenger_id, flight_id, booking_date, seat_id,seat_type_id, booking_status) VALUES (?, ?, ?, ?,?, ?)";
         try (Connection connection = DatabaseContection.getConnettion();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, passengerId);
             preparedStatement.setInt(2, flightId);
             preparedStatement.setObject(3, bookingDate);
+            preparedStatement.setInt(5, Hk);
             preparedStatement.setInt(4, seatId);
-            preparedStatement.setString(5, bookingStatus);
+            preparedStatement.setString(6, bookingStatus);
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
@@ -448,6 +452,8 @@ public class DatabaseController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
+
         }
         return true;
     }
@@ -1043,10 +1049,232 @@ public class DatabaseController {
     }
     // lấy toàn bộ id sân bay
 
+    // lấy id chuyến bay dựa và id khách hàng
+    public static List<Integer> getFlightForIDPass(int passengerId) {
+        List<Integer> flightIds = new ArrayList<>();
+        String sql = "SELECT F.flight_id " +
+                "FROM Flights F " +
+                "JOIN Bookings B ON F.flight_id = B.flight_id " +
+                "WHERE B.passenger_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, passengerId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int flightID = resultSet.getInt("flight_id");
+                    flightIds.add(flightID);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flightIds;
+    }
+
+    // lấy id chuyến bay dựa và id khách hàng
+
+
+    // thêm airline
+    public static boolean addAirline(String Name) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+
+            String sql = "INSERT INTO airlines (airline_name) VALUES (?)";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, Name);
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // thêm airline
+
+    // xóa airline
+    public static boolean deleteAirline(String airlineName) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String sql = "DELETE FROM airlines WHERE airline_name = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, airlineName);
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                return rowsAffected > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // xóa airline
     // lấy thời gian dự kiến dựa vào id chuyến bay
     // lấy thời gian dự kiến dựa vào id chuyến bay
 
     // lấy ra tổng chổ ngồi dựa vào id chuyến bay
     // lấy ra tổng chổ ngồi dựa vào id chuyến bay
 
+
+
+    // doanh thu hôm nay
+
+    public static double getRevenueToDay() {
+        try (Connection connection = DatabaseContection.getConnettion()){
+            String query = "SELECT SUM(tp.price) AS total_price " +
+                    "FROM Bookings b " +
+                    "JOIN Ticket_Prices tp ON b.flight_id = tp.flight_id AND b.seat_type_id = tp.seat_type_id " +
+                    "WHERE DATE(b.booking_date) = CURDATE()";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    double totalPrice = resultSet.getDouble("total_price");
+                    System.out.println("Total Price of Bookings Today: " + totalPrice);
+                    return totalPrice;
+                } else {
+                    // No result found for today
+                    System.out.println("No bookings today.");
+                    return 0.0; // or throw a specific exception
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return 0.0; // or throw a specific exception
+        }
+    }
+
+    // doanh thu hôm nay
+
+    // doanh thu tuần này
+    public static double getRevenueBetween() {
+        try (Connection connection = DatabaseContection.getConnettion()){
+            String query = "SELECT SUM(tp.price) AS total_price " +
+                    "FROM Bookings b " +
+                    "JOIN Ticket_Prices tp ON b.flight_id = tp.flight_id AND b.seat_type_id = tp.seat_type_id " +
+                    "WHERE b.booking_date BETWEEN CURDATE() - INTERVAL 6 DAY AND CURDATE()";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    double totalPrice = resultSet.getDouble("total_price");
+                    System.out.println("Total Price of Bookings in the Last 7 Days: " + totalPrice);
+                    return totalPrice;
+                } else {
+                    // No result found for the last 7 days
+                    System.out.println("No bookings in the last 7 days.");
+                    return 0.0; // or throw a specific exception
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return 0.0; // or throw a specific exception
+        }
+    }
+    // doanh thu tuần này
+
+    // chuyến bay đã đặt trong ngày
+    public static int getBookedFlights() {
+        try (Connection connection = DatabaseContection.getConnettion()){
+            String query = "SELECT COUNT(DISTINCT flight_id) AS total_booked_flights\n" +
+                    "FROM bookings\n" +
+                    "WHERE DATE(booking_date) = CURDATE();\n";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int totalBK = resultSet.getInt("total_booked_flights"); // Corrected column name
+                    return totalBK;
+                } else {
+                    // No result found for the current date
+                    return 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return 0;
+        }
+    }
+
+    // chuyến bay đã đặt trong ngày
+
+    // tống số vé được đặt trong năm
+    public static int getTiketsFlights() {
+        try (Connection connection = DatabaseContection.getConnettion()){
+            String query = "SELECT COUNT(*) AS total_booked_tickets\n" +
+                    "FROM bookings\n" +
+                    "WHERE YEAR(booking_date) = YEAR(CURDATE());";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int total = resultSet.getInt("total_booked_tickets");
+                    return total;
+                } else {
+                    // No result found for the last 7 days
+                    return 0; // or throw a specific exception
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return 0; // or throw a specific exception
+        }
+    }
+    // tống số vé được đặt trong năm
+
+    // doanh thu tháng này
+    public static double getTotalPriceForCurrentMonth() {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String query = "SELECT SUM(tp.price) AS total_price\n" +
+                    "FROM bookings b\n" +
+                    "JOIN ticket_prices tp ON b.flight_id = tp.flight_id AND b.seat_type_id = tp.seat_type_id\n" +
+                    "WHERE MONTH(b.booking_date) = MONTH(CURDATE()) AND YEAR(b.booking_date) = YEAR(CURDATE())";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getDouble("total_price");
+                } else {
+                    // No bookings found for the current month
+                    return 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return 0;
+        }
+    }
+    // doanh thu tháng này
+
+    // theo quý này
+    public static double getTotalRevenueForCurrentQuarter() {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String query = "SELECT SUM(tp.price) AS total_revenue\n" +
+                    "FROM bookings b\n" +
+                    "JOIN ticket_prices tp ON b.flight_id = tp.flight_id AND b.seat_type_id = tp.seat_type_id\n" +
+                    "WHERE QUARTER(b.booking_date) = QUARTER(CURDATE()) AND YEAR(b.booking_date) = YEAR(CURDATE())";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getDouble("total_revenue");
+                } else {
+                    // No bookings found for the current quarter
+                    return 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return 0;
+        }
+    }
+    // theo quý này
 }

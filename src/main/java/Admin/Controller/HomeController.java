@@ -89,6 +89,7 @@ public class HomeController {
         classCompartment();
         getAirlines();
         SelectIDAirport(airport_ID,AirportList);
+        initRevenue();
         ObservableList<String> airportList = DatabaseController.getAirports();
         ObservableList<String> genderOptions = FXCollections.observableArrayList(airportList);
 
@@ -710,6 +711,195 @@ public class HomeController {
     //ghế
 
 
+    // vé
+    @FXML
+    private TextField IDKH;
+    @FXML
+    private void FindClick(){
+        int ID_KH = Integer.parseInt(IDKH.getText());
+
+        if(IDKH.getText() != null){
+            List <Integer> IdFls = DatabaseController.getFlightForIDPass(ID_KH);
+            for (Integer fl : IdFls){
+                List<String> sbdis = DatabaseController.getSBDiByFlightIds(fl);
+                List<String> sbdens = DatabaseController.getSBDenByFlightIds(fl);
+                List<LocalDateTime> times = DatabaseController.getTimesByFlightIds(fl);
+                for (String sbdi : sbdis){
+                    for (String sbden : sbdens){
+                        for (LocalDateTime time : times){
+                            CreatFindAirport(sbdi,sbden,time,fl);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            BaseController.showAlert("Trống thông tin","Vui lòng nhập ID khách hàng !");
+        }
+
+    }
+    @FXML
+    private Tab InforSelect;
+    @FXML
+    private TabPane tabPane;
+    private void ShowAirport(int fl, String time , String SBdi , String Sbden){
+        tabPane.getSelectionModel().select(InforSelect);
+    }
+
+    @FXML
+    private VBox VBoxAirport;
+
+    private void CreatFindAirport(String sbDi, String sbDen , LocalDateTime Time,int flightId) {
+        Font labelFont = new Font(14);
+        Font iconfont = new Font(30);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd ' 'HH'h :' mm");
+        String time = Time.format(formatter).toString();
+        String idflight = Integer.toString(flightId);
+        // Tạo các Label
+        Label departureAirportLabel = new Label(sbDi);
+        Label destinationAirportLabel = new Label(sbDen);
+        Label flightIconLabel = new Label("🛫");
+        Label timeLabel = new Label("Time: ");
+        Label departureTimeLabel = new Label(time);
+        Label bayThangLabel = new Label("ID : " +idflight);
+
+        // Đặt Font cho các Label
+        departureAirportLabel.setFont(labelFont);
+        destinationAirportLabel.setFont(labelFont);
+        destinationAirportLabel.setPadding(new Insets(0, 0, 10, 0));
+        ;
+        flightIconLabel.setFont(iconfont);
+        timeLabel.setFont(labelFont);
+        departureTimeLabel.setFont(labelFont);
+        bayThangLabel.setFont(labelFont);
+        Button viewDetailButton = new Button("Xem chi tiết");
+        viewDetailButton.setOnAction(event -> {
+            ShowAirport( flightId , time , sbDi, sbDen); // Truyền flightId khi click vào nút
+        });
+
+        // Tạo các container
+        BorderPane mainPane = new BorderPane();
+        BorderPane flightDetailsPane = new BorderPane();
+        flightDetailsPane.minWidth(200);
+        flightDetailsPane.setPrefWidth(200);
+        // BorderPane timePane = new BorderPane();
+        BorderPane buttonPane = new BorderPane();
+        buttonPane.minWidth(200);
+        buttonPane.setPrefWidth(200);
+        VBox vBox = new VBox(flightDetailsPane, bayThangLabel);
+        vBox.setSpacing(50);
+        BorderPane Topbr = new BorderPane();
+        BorderPane Bottombr = new BorderPane();
+        flightDetailsPane.setTop(Topbr);
+        // Thêm các thành phần vào các container
+        Bottombr.setLeft(timeLabel);
+        Bottombr.setCenter(departureTimeLabel);
+
+        Topbr.setLeft(departureAirportLabel);
+        Topbr.setCenter(flightIconLabel);
+        Topbr.setRight(destinationAirportLabel);
+        flightDetailsPane.setBottom(Bottombr);
+        buttonPane.setCenter(viewDetailButton);
+
+        // Đặt background cho BorderPane chứa toàn bộ nội dung
+        mainPane.setStyle("-fx-background-color: #fff;");
+        mainPane.setStyle(" -fx-border-color: transparent transparent Black transparent;");
+
+        // Đặt style cho mainPane
+        mainPane.getStyleClass().add("node-with-shadow");
+        mainPane.setPadding(new Insets(10));
+
+        // Thêm các container vào mainPane
+        mainPane.setLeft(vBox);
+        mainPane.setCenter(bayThangLabel);
+        mainPane.setRight(buttonPane);
+        mainPane.getStylesheets().add(getClass().getResource("/Customer/CustomerAccess/Base.css").toExternalForm());
+        VBoxAirport.getChildren().add(mainPane);
+    }
+
+    // vé
 
 
+    // sân bay
+    @FXML
+    private TextField TxtNameAirline;
+    @FXML
+    private void AddAirlineClick(){
+        String NewNameAirline = TxtNameAirline.getText();
+        if(NewNameAirline != null){
+            boolean IsAddAirline = DatabaseController.addAirline(NewNameAirline);
+            if(IsAddAirline){
+                BaseController.showAlert("Thành công","Thêm thành công !");
+            }
+            else {
+                BaseController.showAlert("Lỗi","Thêm thất bại !");
+
+            }
+        }else {
+            BaseController.showAlert("Trống","Vui lòng nhập !");
+        }
+    }
+
+    @FXML
+    private void DeleteAirlineClick(){
+        String NewNameAirline = TxtNameAirline.getText();
+        if(NewNameAirline != null){
+            boolean IsAddAirline = DatabaseController.deleteAirline(NewNameAirline);
+            if(IsAddAirline){
+                BaseController.showAlert("Thành công","xóa thành công !");
+            }
+            else {
+                BaseController.showAlert("Lỗi","xóa thất bại !");
+
+            }
+        }else {
+            BaseController.showAlert("Trống","Vui lòng nhập !");
+        }
+    }
+    // sân bay
+
+
+
+
+
+    // doannh thu
+    @FXML
+    private Label RevenueToDay;
+    @FXML
+    private Label revenbetween;
+    @FXML
+    private Label flightbookedtoday;
+    @FXML
+    private Label ticketsforyear;
+        @FXML
+    private Label month;
+                @FXML
+    private Label QUY;
+
+
+    @FXML
+    private void initRevenue(){
+    double RevenToday = DatabaseController.getRevenueToDay();
+    double RevenBetween = DatabaseController.getRevenueBetween();
+    double RevenMonth = DatabaseController.getTotalPriceForCurrentMonth();
+    double RevenQuater = DatabaseController.getTotalRevenueForCurrentQuarter();
+    int FlightsBooked = DatabaseController.getBookedFlights();
+    int TicketsForYear = DatabaseController.getTiketsFlights();
+        String RVTD = Double.toString(RevenToday);
+        String RVBT = Double.toString(RevenBetween);
+        String RVM = Double.toString(RevenMonth);
+        String VRQ = Double.toString(RevenQuater);
+        String FLBed = Integer.toString(FlightsBooked);
+        String TKFY = Integer.toString(TicketsForYear);
+
+        RevenueToDay.setText(RVTD + " VNĐ");
+        revenbetween.setText(RVBT + " VNĐ");
+        month.setText(RVM + " VNĐ");
+        QUY.setText(VRQ + " VNĐ");
+        flightbookedtoday.setText(FLBed);
+        ticketsforyear.setText(TKFY);
+
+    }
+    // doannh thu
 }

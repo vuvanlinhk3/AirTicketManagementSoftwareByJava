@@ -140,9 +140,9 @@ public class BookingController  {
             return;
         }
         DatabaseController.getSeatNumberId(flightIdData,Hang_Khoang,maGhe);
-
+        int IDAirline = DatabaseController.getSeatType(Hang_Khoang);
         LocalDate currentDate = LocalDate.now();
-        boolean BookingSuccess = DatabaseController.addBooking(idPassenger,flightIdData,currentDate,idSeat,"0");
+        boolean BookingSuccess = DatabaseController.addBooking(idPassenger,flightIdData,currentDate,IDAirline,idSeat,"0");
         if(BookingSuccess){
             SignupPassController.showAlert("Thành công","Đặt vé thành công !");
             Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/FlightFind.fxml"));

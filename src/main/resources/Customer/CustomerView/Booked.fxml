@@ -55,7 +55,7 @@
                      <bottom>
                         <HBox alignment="BOTTOM_LEFT" prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#booking_click" prefHeight="35.0" prefWidth="203.0" text="Đặt Chuyến Bay">
+                              <Button mnemonicParsing="false" onAction="#booking_click" prefHeight="35.0" prefWidth="203.0" text="Tìm kiếm chuyến bay">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -126,12 +126,13 @@
                                  <center>
                                     <TableView fx:id="flightTableView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c6d5c8;" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                                       <columns>
-                                        <TableColumn fx:id="flightIdColumn" prefWidth="129.0" text="Sân bay đi" />
-                                        <TableColumn minWidth="0.0" prefWidth="128.0" text="Sân bay đến" />
-                                          <TableColumn minWidth="0.0" prefWidth="161.0" text="Thời gian khởi hành" />
-                                          <TableColumn minWidth="0.0" prefWidth="139.0" text="Hạng khoang" />
-                                          <TableColumn minWidth="0.0" prefWidth="122.0" text="Mã số ghế" />
-                                          <TableColumn minWidth="0.0" prefWidth="150.0" text="Giá vé" />
+                                          <TableColumn fx:id="flightIdColumn" prefWidth="45.0" text="ID" />
+                                        <TableColumn fx:id="flightDestionColumn" prefWidth="108.0" text="Sân bay đi" />
+                                        <TableColumn fx:id="flightDestinationColumn" minWidth="0.0" prefWidth="135.0" text="Sân bay đến" />
+                                          <TableColumn fx:id="flightDepartureTimeColumn" minWidth="0.0" prefWidth="138.0" text="Thời gian khởi hành" />
+                                          <TableColumn fx:id="flightSeatTypeColumn" minWidth="0.0" prefWidth="124.0" text="Hạng khoang" />
+                                          <TableColumn fx:id="flightSeatNumberColumn" minWidth="0.0" prefWidth="120.0" text="Mã số ghế" />
+                                          <TableColumn fx:id="flightPriceColumn" minWidth="0.0" prefWidth="144.0" text="Giá vé" />
                                       </columns>
                                     </TableView>
                                  </center>
@@ -173,7 +174,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="233.0" layoutY="293.0" mnemonicParsing="false" text="Hủy vé" textFill="WHITE">
+                                          <Button layoutX="233.0" layoutY="293.0" mnemonicParsing="false" onAction="#HuyVeClick" text="Hủy vé" textFill="WHITE">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -185,13 +186,13 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <ComboBox layoutX="24.0" layoutY="237.0" prefHeight="28.0" prefWidth="277.0" />
-                                          <TextField layoutX="24.0" layoutY="237.0" prefHeight="28.0" prefWidth="244.0">
+                                          <ComboBox fx:id="IDBook" layoutX="24.0" layoutY="237.0" prefHeight="28.0" prefWidth="277.0" />
+                                          <TextField fx:id="TxtD" layoutX="24.0" layoutY="237.0" prefHeight="28.0" prefWidth="244.0">
                                              <font>
                                                 <Font name="Cambria" size="14.0" />
                                              </font>
                                           </TextField>
-                                          <Label layoutX="24.0" layoutY="204.0" text="*Chọn Mã chuyến bay">
+                                          <Label layoutX="24.0" layoutY="204.0" text="*Chọn Mã đặt vé">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>

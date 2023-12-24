@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseController {
 
@@ -340,16 +342,8 @@ public class DatabaseController {
 
     // lấy ra chuyến bay dựa vào id khách hàng
 
-    public static int FlightIDForm;
-    public static String ParAirportForm;
-    public static String DesAirportForm;
-    public static String TimeParForm;
-    public static String typeSeatForm;
-    public static String SeatNumberForm;
-    public static String PriceForm;
-
-    public static List<Integer> getBooked(int passengerId) {
-        List<Integer> flightIds = new ArrayList<>();
+    public static ObservableList<Map<String, Object>> getBooked(int passengerId) {
+        ObservableList<Map<String, Object>> flights = FXCollections.observableArrayList();
         String sql = "SELECT F.flight_id, A1.airport_name AS departure_airport, A2.airport_name AS destination_airport, "
                 +
                 "F.departure_datetime, ST.seat_type_name, SN.seat_number, TP.price " +
@@ -362,41 +356,27 @@ public class DatabaseController {
                 "JOIN Bookings B ON F.flight_id = B.flight_id " +
                 "WHERE B.passenger_id = ?";
         try (Connection connection = DatabaseContection.getConnettion();
-                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, passengerId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    // Lấy thông tin giá vé
-                    int flightID = resultSet.getInt("flight_id");
-                    String departure_airport = resultSet.getString("departure_airport");
-                    String destination_airport = resultSet.getString("destination_airport");
-                    String departure_datetime = resultSet.getString("departure_datetime");
-                    String seat_type_name = resultSet.getString("seat_type_name");
-                    String seat_number = resultSet.getString("seat_number");
-                    String price = resultSet.getString("price");
-                    flightIds.add(flightID);
-                    FlightIDForm = flightID;
-                    ParAirportForm = departure_airport;
-                    DesAirportForm = destination_airport;
-                    TimeParForm = departure_datetime;
-                    typeSeatForm = seat_type_name;
-                    SeatNumberForm = seat_number;
-                    PriceForm = price;
-                    BookedController frmBooked = new BookedController();
-                    frmBooked.FlightIDForm = flightID;
-                    frmBooked.ParAirportForm = departure_airport;
-                    frmBooked.DesAirportForm = destination_airport;
-                    frmBooked.TimeParForm = departure_datetime;
-                    frmBooked.typeSeatForm = seat_type_name;
-                    frmBooked.SeatNumberForm = seat_number;
-                    frmBooked.PriceForm = price;
+                    Map<String, Object> flight = new HashMap<>();
+                    flight.put("flight_id", String.valueOf(resultSet.getInt("flight_id")));
+                    flight.put("departure_airport", resultSet.getString("departure_airport"));
+                    flight.put("destination_airport", resultSet.getString("destination_airport"));
+                    flight.put("departure_datetime", resultSet.getString("departure_datetime"));
+                    flight.put("seat_type_name", resultSet.getString("seat_type_name"));
+                    flight.put("seat_number", resultSet.getString("seat_number"));
+                    flight.put("price", resultSet.getString("price"));
+                    flights.add(flight);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return flightIds;
+        return flights;
     }
+
     // lấy ra chuyến bay dựa vào id khách hàng
 
     // lấy ra id mã ghế dựa vào flightid và mã số ghế và khoang hạng
@@ -568,6 +548,55 @@ public class DatabaseController {
         }
     }
     // xóa tài khoản
+
+    // lấy ra id đặt vé toàn bộ
+// lấy ra id đặt vé toàn bộ
+    public static ObservableList<String> getIDBook() {
+        ObservableList<String> ID = FXCollections.observableArrayList();
+
+        String sql = "SELECT booking_id FROM bookings";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String Id = resultSet.getString("booking_id");
+                    ID.add(Id);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ID;
+    }
+
+    // lấy ra id đặt vé toàn bộ
+
+    // xóa đặt vé
+    public static boolean DeleteBook(int ID) {
+        String sql = "DELETE FROM bookings\n" +
+                "WHERE booking_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, ID);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // xóa đặt vé
+
+
+
+
+
+
+
+
+
+
 
     // Admin Login
     public static boolean LoginAdmin(String user, String password) {

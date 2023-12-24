@@ -53,8 +53,8 @@ public class HomeController  {
     private Parent root;
     @FXML
     public void Bookedclick(ActionEvent event) throws IOException{
-        BookedController.getIdPassender(IdPassenger);
-        System.out.println(IdPassenger);
+        BookedController frm = new BookedController();
+        frm.IdPassenger = IdPassenger;
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Booked.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -93,11 +93,12 @@
                                     <Font name="Cambria" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="1125.0" layoutY="57.0" styleClass="orange-text_hover" text="Đăng xuất">
-                                 <font>
-                                    <Font name="Cambria" size="14.0" />
-                                 </font>
-                              </Label>
+                              <Button layoutX="1115.0" layoutY="45.0" mnemonicParsing="false" onAction="#LogoutClick" text="Đăng xuất">
+                                 <styleClass>
+                                    <String fx:value="transparent-button" />
+                                    <String fx:value="background_hover" />
+                                 </styleClass>
+                              </Button>
                            </children>
                         </Pane>
                      </center>
@@ -121,27 +122,27 @@
                            <top>
                               <Pane prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <TextField layoutX="56.0" layoutY="29.0" text="Vũ Văn Linh">
+                                    <TextField fx:id="name_main_txt" editable="false" layoutX="56.0" layoutY="29.0" text="Vũ Văn Linh">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </TextField>
-                                    <TextField editable="false" layoutX="56.0" layoutY="96.0" text="Vũ Văn Linh">
+                                    <TextField fx:id="birthday_txt" editable="false" layoutX="56.0" layoutY="96.0" text="30/12/2003">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </TextField>
-                                    <TextField editable="false" layoutX="56.0" layoutY="166.0" text="0365556145">
+                                    <TextField fx:id="number_txt" editable="false" layoutX="56.0" layoutY="166.0" text="0365556145">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </TextField>
-                                    <Label layoutX="10.0" layoutY="68.0" text="Họ tên đầy đủ">
+                                    <Label layoutX="10.0" layoutY="68.0" text="Ngày tháng năn sinh">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="12.0" layoutY="4.0" text="Tên thường gọi">
+                                    <Label layoutX="12.0" layoutY="4.0" text="Họ tên đầy đủ">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -151,7 +152,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="373.0" layoutY="28.0" text="***********">
+                                    <TextField fx:id="password_txt" editable="false" layoutX="373.0" layoutY="28.0" promptText="***********">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -166,27 +167,42 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutX="546.0" layoutY="28.0" mnemonicParsing="false" text="✍">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
                                     <Label layoutX="329.0" layoutY="68.0" text="Số lượt đánh giá">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutX="229.0" layoutY="28.0" mnemonicParsing="false" text="✍">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                    <TextField editable="false" layoutX="373.0" layoutY="166.0" text="5e32m">
+                                    <TextField fx:id="id_pass_txt" editable="false" layoutX="373.0" layoutY="166.0" text="5e32m">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </TextField>
                                     <Label layoutX="329.0" layoutY="141.0" text="Mã khách hàng">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="546.0" layoutY="166.0" mnemonicParsing="false" onAction="#ShowIDClick" prefHeight="30.0" prefWidth="47.0" text="Xem">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="EditPassword" layoutX="546.0" layoutY="29.0" mnemonicParsing="false" onAction="#EditPasswordClick" text="✍">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <TextField fx:id="password_txt1" layoutX="578.0" layoutY="29.0" promptText="***********" visible="false">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <Button fx:id="Save" layoutX="751.0" layoutY="29.0" mnemonicParsing="false" onAction="#SaveClick" text="Lưu" visible="false">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="label1" layoutX="580.0" layoutY="4.0" prefHeight="20.0" prefWidth="169.0" text="Comfirm Password" visible="false">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -240,7 +256,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Button layoutX="1128.0" layoutY="65.0" mnemonicParsing="false" text="Delete">
+                                          <Button layoutX="1128.0" layoutY="65.0" mnemonicParsing="false" onAction="#DeleteAcountClick" text="Delete">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>

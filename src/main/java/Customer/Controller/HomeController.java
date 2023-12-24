@@ -37,7 +37,6 @@ public class HomeController  {
         LoginController getName = new LoginController();
         getName.tendangnhap = namePas;
         nameProfile.setText(namePas);
-
     }
     @FXML
     private void ListAllFlightClick(ActionEvent event) throws IOException{
@@ -90,6 +89,7 @@ public class HomeController  {
     }
     @FXML
     private void profile_click(ActionEvent event) throws IOException{
+        ProfilesController.getIdPassender(IdPassenger);
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Profiles.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -459,6 +459,116 @@ public class DatabaseController {
     }
     // đặt vé
 
+    // lấy ra ngày sinh dựa vào id khách hàng
+    public static String getBir(int passengerId) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String query = "SELECT * FROM passengers WHERE passenger_id = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, passengerId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getString("birthday");
+                    } else {
+                        // No passenger found with the given ID
+                        return ""; // Return an appropriate default value (e.g., empty string)
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return ""; // Return an appropriate default value (e.g., empty string)
+        }
+    }
+    // lấy ra ngày sinh dựa vào id khách hàng
+
+    // lấy ra số điện thoại
+    public static String getPhonePhone(int passengerId) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String query = "SELECT * FROM passengers WHERE passenger_id = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, passengerId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getString("phone_number");
+                    } else {
+                        // No passenger found with the given ID
+                        return ""; // Return an appropriate default value (e.g., empty string)
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return ""; // Return an appropriate default value (e.g., empty string)
+        }
+    }
+    // lấy ra số điện thoại
+
+    // lấy tên
+    public static String getNamePassanger(int passengerId) {
+        try (Connection connection = DatabaseContection.getConnettion()) {
+            String query = "SELECT * FROM passengers WHERE passenger_id = ?";
+
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, passengerId);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getString("name");
+                    } else {
+                        // No passenger found with the given ID
+                        return "lỗi"; // Return an appropriate default value (e.g., empty string)
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception, maybe throw a custom exception or return a default value
+            return "lỗi"; // Return an appropriate default value (e.g., empty string)
+        }
+    }
+    // lấy tên
+
+    //đổi mật khẩu
+    public static boolean updatePassword(int passengerId, String newPassword) {
+        String sql = "UPDATE passengers\n" +
+                "SET password = ?\n" +
+                "WHERE passenger_id = ?;\n";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setInt(2, passengerId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    //đổi mật khẩu
+
+    // xóa tài khoản
+    public static boolean DeleteAcount(int passengerId) {
+        String sql = "DELETE FROM passengers\n" +
+                "WHERE passenger_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, passengerId);
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // xóa tài khoản
+
     // Admin Login
     public static boolean LoginAdmin(String user, String password) {
         String sql = "SELECT * FROM admin WHERE ad_user = ? AND ad_password = ?";

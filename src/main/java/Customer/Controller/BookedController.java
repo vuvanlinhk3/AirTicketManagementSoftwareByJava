@@ -1,8 +1,8 @@
 package Customer.Controller;
 
+import Database.DatabaseContection;
 import Database.DatabaseController;
-import com.sun.mail.imap.protocol.ID;
-import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,61 +12,64 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class BookedController {
     @FXML
-    private TableView<Map<String, Object>> flightTableView;
+    private TableView<Book> flightTableView;
     @FXML
-    private TableColumn<DatabaseController, String> flightIdColumn;
+    private TableColumn<Book, String> flightIdColumn;
 
     @FXML
-    private TableColumn<DatabaseController, String> flightDestionColumn;
-    @FXML
-    private TableColumn<DatabaseController, String> flightDestinationColumn;
+    private TableColumn<Book, String> flightDestinationColumn;
 
     @FXML
-    private TableColumn<DatabaseController, String> flightDepartureTimeColumn;
+    private TableColumn<Book, String> flightDepartureTimeColumn;
 
     @FXML
-    private TableColumn<DatabaseController, String> flightSeatTypeColumn;
+    private TableColumn<Book, String> flightSeatTypeColumn;
 
     @FXML
-    private TableColumn<DatabaseController, String> flightSeatNumberColumn;
+    private TableColumn<Book, String> flightSeatNumberColumn;
 
     @FXML
-    private TableColumn<DatabaseController, String> flightPriceColumn;
+    private TableColumn<Book, String> flightPriceColumn;
 
     public static int IdPassenger;
+
+    public static ObservableList<Book> ListBook = FXCollections.observableArrayList();
+
 
     @FXML
     private void initialize() {
         int IDpas = IdPassenger;
-        HomeController frm = new HomeController();
-        frm.IdPassenger = IDpas;
-        showCombo();
+        System.out.println(IDpas);
 
-//        flightIdColumn.setCellValueFactory(new PropertyValueFactory<>("flight_id"));
-//        flightDestionColumn.setCellValueFactory(new PropertyValueFactory<>("departure_airport"));
-//        flightDestinationColumn.setCellValueFactory(new PropertyValueFactory<>("destination_airport"));
-//        flightDepartureTimeColumn.setCellValueFactory(new PropertyValueFactory<>("departure_datetime"));
-//        flightSeatTypeColumn.setCellValueFactory(new PropertyValueFactory<>("seat_type_name"));
-//        flightSeatNumberColumn.setCellValueFactory(new PropertyValueFactory<>("seat_number"));
-//        flightPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//
-//        ObservableList<Map<String, Object>> flights = DatabaseController.getBooked(IDpas);
-//
-//        flightTableView.setItems(flights);
+        if (DatabaseController.getBooked(IDpas)) {
+            // Assuming showCombo() is another method in your controller
+            showCombo();
+
+            // Assuming ListBook is a class variable
+            flightTableView.setItems(ListBook);
+            flightIdColumn.setCellValueFactory(new PropertyValueFactory<>("booking_id"));
+            flightDestinationColumn.setCellValueFactory(new PropertyValueFactory<>("departure_airport"));
+            flightDepartureTimeColumn.setCellValueFactory(new PropertyValueFactory<>("departure_datetime"));
+            flightSeatTypeColumn.setCellValueFactory(new PropertyValueFactory<>("seat_type_name"));
+            flightSeatNumberColumn.setCellValueFactory(new PropertyValueFactory<>("seat_number"));
+            flightPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        }
+
     }
+
+
 
     @FXML
     private ComboBox<String> IDBook;
@@ -75,7 +78,8 @@ public class BookedController {
     private String StringValue;
     @FXML
     private TextField TxtD;
-    private void showCombo(){
+
+    private void showCombo() {
         ObservableList<String> ID = DatabaseController.getIDBook();
         ObservableList<String> genderOptions = FXCollections.observableArrayList(ID);
         FilteredList<String> filteredFlights = new FilteredList<>(genderOptions, s -> true);
@@ -98,7 +102,7 @@ public class BookedController {
 
                 if (newValue != null) {
                     StringValue = newValue.toString();
-                    // DatabaseController.getDestinationAirport(StringValue);
+                    // DatabaseController.getdestination_airport(StringValue);
                     ObservableList<String> DestinationList = DatabaseController.getDestinationAirport(StringValue);
                     ObservableList<String> DestinationOptions = FXCollections.observableArrayList(DestinationList);
                     IDBook.setItems(DestinationOptions);
@@ -111,6 +115,7 @@ public class BookedController {
             e.printStackTrace();
         }
     }
+
     private void getValueTextField(ComboBox<String> ComboboxPoint, TextField AddressPoints) {
         try {
 
@@ -139,19 +144,21 @@ public class BookedController {
     }
 
     @FXML
-    private void HuyVeClick(){
-        int SelecID = Integer.getInteger(TxtD.getText());
-        Boolean IsDelete = DatabaseController.DeleteBook(SelecID);
-        if (IsDelete){
-            SignupPassController.showAlert("Thành công","Hủy vé thành công !");
-        }else {
-            SignupPassController.showAlert("Lỗi","Hủy vé thất bại !");
+    private void HuyVeClick() {
+        if (TxtD.getText().isEmpty()) {
+            SignupPassController.showAlert("Trống", "");
+        } else {
+            System.out.println(TxtD.getText());
+            int SelecID = Integer.parseInt(TxtD.getText());
+            Boolean IsDelete = DatabaseController.DeleteBook(SelecID);
+            if (IsDelete) {
+                SignupPassController.showAlert("Thành công", "Hủy vé thành công !");
+            } else {
+                SignupPassController.showAlert("Lỗi", "Hủy vé thất bại !");
+            }
         }
+
     }
-
-
-
-
 
     // chuyển form
     private Stage stage;
@@ -184,4 +191,55 @@ public class BookedController {
         stage.setScene(scene);
         stage.show();
     }
+
+
+    public static class Book {
+        private final String booking_id;
+        private final String departure_airport;
+        private final String destination_airport;
+        private final String departure_datetime;
+        private final String seat_type_name;
+        private final String seat_number;
+        private final String price;
+
+        public Book(String booking_id, String departure_airport, String destination_airport,
+                    String departure_datetime, String seat_type_name, String seat_number, String price) {
+            this.booking_id = booking_id;
+            this.departure_airport = departure_airport;
+            this.destination_airport = destination_airport;
+            this.departure_datetime = departure_datetime;
+            this.seat_type_name = seat_type_name;
+            this.seat_number = seat_number;
+            this.price = price;
+        }
+
+        public String getBooking_id() {
+            return booking_id;
+        }
+
+        public String getDeparture_airport() {
+            return departure_airport;
+        }
+
+        public String getDestination_airport() {
+            return destination_airport;
+        }
+
+        public String getDeparture_datetime() {
+            return departure_datetime;
+        }
+
+        public String getSeat_type_name() {
+            return seat_type_name;
+        }
+
+        public String getSeat_number() {
+            return seat_number;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+    }
+
 }

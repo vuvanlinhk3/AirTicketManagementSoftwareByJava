@@ -12,7 +12,7 @@ module planeapp.paneapp {
 
     opens Customer.Controller to javafx.fxml, javafx.base;
 //    opens Customer.Controller to javafx.fxml;
-    opens Admin.Controller to javafx.fxml;
+    opens Admin.Controller to javafx.fxml ,javafx.base;
 
     exports Database;
     exports Admin;

@@ -94,3 +94,8 @@
 .position_base{
     -fx-background-position: fixed;
 }
+.backgroundflight{
+    -fx-background-image: url("Hinh-nen-may-bay-dep-full-hd-Ohaylam.com-14.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}

@@ -342,41 +342,97 @@ public class DatabaseController {
 
     // lấy ra chuyến bay dựa vào id khách hàng
 
-    public static ObservableList<Map<String, Object>> getBooked(int passengerId) {
-        ObservableList<Map<String, Object>> flights = FXCollections.observableArrayList();
-        String sql = "SELECT F.flight_id, A1.airport_name AS departure_airport, A2.airport_name AS destination_airport, "
-                +
-                "F.departure_datetime, ST.seat_type_name, SN.seat_number, TP.price " +
-                "FROM Flights F " +
-                "JOIN Airports A1 ON F.departure_airport_id = A1.airport_id " +
-                "JOIN Airports A2 ON F.destination_airport_id = A2.airport_id " +
-                "JOIN seat_numbers SN ON F.flight_id = SN.flight_id " +
-                "JOIN seat_types ST ON SN.seat_type_id = ST.seat_type_id " +
-                "JOIN ticket_prices TP ON F.flight_id = TP.flight_id AND ST.seat_type_id = TP.seat_type_id " +
-                "JOIN Bookings B ON F.flight_id = B.flight_id " +
-                "WHERE B.passenger_id = ?";
+//    public static ObservableList<Map<String, Object>> getBooked(int passengerId) {
+//        ObservableList<Map<String, Object>> flights = FXCollections.observableArrayList();
+//        String sql = "SELECT\n" +
+//                "    b.booking_id,\n" +
+//                "    departure_airport.airport_name AS departure_airport,\n" +
+//                "    destination_airport.airport_name AS destination_airport,\n" +
+//                "    f.departure_datetime,\n" +
+//                "    st.seat_type_name,\n" +
+//                "    sn.seat_number,\n" +
+//                "    tp.price\n" +
+//                "FROM\n" +
+//                "    Bookings b\n" +
+//                "JOIN Flights f ON b.flight_id = f.flight_id\n" +
+//                "JOIN Seat_Numbers sn ON b.seat_id = sn.seat_id\n" +
+//                "JOIN Seat_Types st ON b.seat_type_id = st.seat_type_id\n" +
+//                "JOIN Ticket_Prices tp ON f.flight_id = tp.flight_id AND st.seat_type_id = tp.seat_type_id\n" +
+//                "JOIN Airports departure_airport ON f.departure_airport_id = departure_airport.airport_id\n" +
+//                "JOIN Airports destination_airport ON f.destination_airport_id = destination_airport.airport_id\n" +
+//                "WHERE\n" +
+//                "    b.passenger_id = ?;\n";
+//        try (Connection connection = DatabaseContection.getConnettion();
+//             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+//            preparedStatement.setInt(1, passengerId);
+//            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+//                while (resultSet.next()) {
+//                    Map<String, Object> flight = new HashMap<>();
+//                    flight.put("booking_id", String.valueOf(resultSet.getInt("booking_id")));
+//                    flight.put("departure_airport", resultSet.getString("departure_airport"));
+//                    flight.put("destination_airport", resultSet.getString("destination_airport"));
+//                    flight.put("departure_datetime", resultSet.getString("departure_datetime"));
+//                    flight.put("seat_type_name", resultSet.getString("seat_type_name"));
+//                    flight.put("seat_number", resultSet.getString("seat_number"));
+//                    flight.put("price", resultSet.getString("price"));
+//                    flights.add(flight);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return flights;
+//    }
+
+    // - ------------------
+    public static boolean getBooked(int passengerId) {
+
+        String sql = "SELECT\n" +
+                "    b.booking_id,\n" +
+                "    departure_airport.airport_name AS departure_airport,\n" +
+                "    destination_airport.airport_name AS destination_airport,\n" +
+                "    f.departure_datetime,\n" +
+                "    st.seat_type_name,\n" +
+                "    sn.seat_number,\n" +
+                "    tp.price\n" +
+                "FROM\n" +
+                "    Bookings b\n" +
+                "JOIN Flights f ON b.flight_id = f.flight_id\n" +
+                "JOIN Seat_Numbers sn ON b.seat_id = sn.seat_id\n" +
+                "JOIN Seat_Types st ON b.seat_type_id = st.seat_type_id\n" +
+                "JOIN Ticket_Prices tp ON f.flight_id = tp.flight_id AND st.seat_type_id = tp.seat_type_id\n" +
+                "JOIN Airports departure_airport ON f.departure_airport_id = departure_airport.airport_id\n" +
+                "JOIN Airports destination_airport ON f.destination_airport_id = destination_airport.airport_id\n" +
+                "WHERE\n" +
+                "    b.passenger_id = ?;\n";
+
         try (Connection connection = DatabaseContection.getConnettion();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, passengerId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    Map<String, Object> flight = new HashMap<>();
-                    flight.put("flight_id", String.valueOf(resultSet.getInt("flight_id")));
-                    flight.put("departure_airport", resultSet.getString("departure_airport"));
-                    flight.put("destination_airport", resultSet.getString("destination_airport"));
-                    flight.put("departure_datetime", resultSet.getString("departure_datetime"));
-                    flight.put("seat_type_name", resultSet.getString("seat_type_name"));
-                    flight.put("seat_number", resultSet.getString("seat_number"));
-                    flight.put("price", resultSet.getString("price"));
-                    flights.add(flight);
+                    String booking_id = resultSet.getString("booking_id");
+                    String departure_airport = resultSet.getString("departure_airport");
+                    String destination_airport = resultSet.getString("destination_airport");
+                    String departure_datetime = resultSet.getString("departure_datetime");
+                    String seat_type_name = resultSet.getString("seat_type_name");
+                    String seat_number = resultSet.getString("seat_number");
+                    String price = resultSet.getString("price");
+                    System.out.println(booking_id + departure_airport + destination_airport + departure_datetime
+                            + seat_type_name + seat_number + price);
+                    BookedController.ListBook.add(new BookedController.Book(booking_id, departure_airport, destination_airport, departure_datetime,
+                            seat_type_name, seat_number, price));
                 }
+                return !BookedController.ListBook.isEmpty();
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return flights;
+
     }
 
+    // - ------------------
     // lấy ra chuyến bay dựa vào id khách hàng
 
     // lấy ra id mã ghế dựa vào flightid và mã số ghế và khoang hạng
@@ -1188,6 +1244,251 @@ public class DatabaseController {
     }
     // lấy toàn bộ id sân bay
 
+
+    // Lấy ra toàn bộ danh sách sân bay
+    public static boolean getAirportName() {
+        String sql = "SELECT airport_id, airport_name,location FROM airports";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String ID1 = resultSet.getString("airport_id");
+                String ID2 = resultSet.getString("airport_name");
+                String ID3 = resultSet.getString("location");
+                Admin.Controller.HomeController.ListAirport.add(new Admin.Controller.HomeController.Airport(ID1,ID2,ID3));
+            }
+            return !Admin.Controller.HomeController.ListAirport.isEmpty();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // Lấy ra toàn bộ danh sách sân bay
+
+    // laays ra san bay dựa vào id
+    public static boolean getAirportByID(int ID) {
+        String sql = "SELECT airport_id, airport_name, location FROM airports WHERE airport_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, ID);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String ID1 = resultSet.getString("airport_id");
+                    String ID2 = resultSet.getString("airport_name");
+                    String ID3 = resultSet.getString("location");
+                    Admin.Controller.HomeController.ListAirport.add(new Admin.Controller.HomeController.Airport(ID1, ID2, ID3));
+                }
+                return !Admin.Controller.HomeController.ListAirport.isEmpty();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // laays ra san bay dựa vào id
+
+    // xóa ghế dựa vào id
+    // laays ra san bay dựa vào id
+    public static boolean DeleteChair(int ID) {
+        String sql = "DELETE FROM seat_numbers WHERE seat_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, ID); // Đặt giá trị cho tham số 1
+            int rowsAffected = preparedStatement.executeUpdate(); // Thực hiện xóa và trả về số hàng bị ảnh hưởng
+            return rowsAffected > 0; // Trả về true nếu có ít nhất một hàng bị xóa
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // xóa ghế dựa vào id
+
+
+    // tìm kiếm kahcsh hangd dựa vào số điện thoại và tên
+    public static boolean getPassByID(int ID) {
+        String sql = "SELECT passenger_id, name, birthday, gender, address, phone_number, email FROM passengers WHERE passenger_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, ID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String passengerID = resultSet.getString("passenger_id");
+                    String name = resultSet.getString("name");
+                    String birthday = resultSet.getString("birthday");
+                    String gender = resultSet.getString("gender");
+                    String address = resultSet.getString("address");
+                    String phoneNumber = resultSet.getString("phone_number");
+                    String email = resultSet.getString("email");
+
+                    Admin.Controller.HomeController.ListPassenger.add(new Admin.Controller.HomeController.Passenger(passengerID, name, birthday, gender, address, phoneNumber, email));
+                }
+                return !Admin.Controller.HomeController.ListPassenger.isEmpty();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // tìm kiếm kahcsh hangd dựa vào số điện thoại và tên
+
+    // Trạng thái thanh toán
+    public static String GetStatusPay(int passengerID, int flightID) {
+        String sql = "SELECT booking_status FROM bookings WHERE passenger_id = ? AND flight_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, passengerID);
+            preparedStatement.setInt(2, flightID);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("booking_status");
+                } else {
+                    // Không tìm thấy bản ghi phù hợp
+                    return null; // Hoặc có thể trả về một giá trị khác để biểu thị trạng thái không tìm thấy
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null; // Hoặc xử lý theo cách khác tùy thuộc vào yêu cầu của bạn
+        }
+    }
+
+    // Trạng thái thanh toán
+
+    // cập nhật thanh toán
+    public static boolean UpdateStatusPay(int passengerID, int flightID, String status) {
+        String sql = "UPDATE bookings SET booking_status = ? WHERE passenger_id = ? AND flight_id = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, status);
+            preparedStatement.setInt(2, passengerID);
+            preparedStatement.setInt(3, flightID);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // cập nhật thanh toán
+
+
+
+    //tìm khách hàng dựa vào id
+    public static boolean getPassByNameAndPhone(String named , String phone) {
+        String sql = "SELECT passenger_id, name, birthday, gender, address, phone_number, email FROM passengers WHERE name = ? AND phone_number =?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, named);
+            preparedStatement.setString(2, phone);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String passengerID = resultSet.getString("passenger_id");
+                    String name = resultSet.getString("name");
+                    String birthday = resultSet.getString("birthday");
+                    String gender = resultSet.getString("gender");
+                    String address = resultSet.getString("address");
+                    String phoneNumber = resultSet.getString("phone_number");
+                    String email = resultSet.getString("email");
+
+                    Admin.Controller.HomeController.ListPassenger.add(new Admin.Controller.HomeController.Passenger(passengerID, name, birthday, gender, address, phoneNumber, email));
+                }
+                return !Admin.Controller.HomeController.ListPassenger.isEmpty();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    //tìm khách hàng dựa vào id
+
+
+    // laays ra san bay dựa vào id
+    public static boolean getAirportByName(String Name) {
+        String sql = "SELECT airport_id, airport_name, location FROM airports WHERE airport_name = ?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, Name); // Đặt giá trị cho tham số 1
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String ID1 = resultSet.getString("airport_id");
+                    String ID2 = resultSet.getString("airport_name");
+                    String ID3 = resultSet.getString("location");
+                    Admin.Controller.HomeController.ListAirport.add(new Admin.Controller.HomeController.Airport(ID1, ID2, ID3));
+                }
+                return !Admin.Controller.HomeController.ListAirport.isEmpty();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // laays ra san bay dựa vào id
+
+    // lấy ra toàn bộ danh sách ghế
+    public static boolean getSeatNumber() {
+        String sql = "SELECT * FROM seat_numbers";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String ID1 = resultSet.getString("seat_id");
+                String ID2 = resultSet.getString("flight_id");
+                String ID4 = resultSet.getString("seat_number");
+                String ID5 = resultSet.getString("seat_type_id");
+                String ID6 = resultSet.getString("seat_status");
+                Admin.Controller.HomeController.ListSeat.add(new Admin.Controller.HomeController.Seats(ID1,ID2,ID4,ID5,ID6));
+            }
+            return !Admin.Controller.HomeController.ListSeat.isEmpty();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // lấy ra toàn bộ danh sách ghế
+
+    // lấy ra toàn bộ thông tin khách hàng
+    public static boolean getPassengers() {
+        String sql = "SELECT passenger_id , name ,birthday,gender,address,phone_number,email FROM passengers";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String ID1 = resultSet.getString("passenger_id");
+                String ID2 = resultSet.getString("name");
+                String ID4 = resultSet.getString("birthday");
+                String ID5 = resultSet.getString("gender");
+                String ID6 = resultSet.getString("address");
+                String ID7 = resultSet.getString("phone_number");
+                String ID8 = resultSet.getString("email");
+                Admin.Controller.HomeController.ListPassenger.add(new Admin.Controller.HomeController.Passenger(ID1,ID2,ID4,ID5,ID6,ID7,ID8));
+            }
+            return !Admin.Controller.HomeController.ListAirport.isEmpty();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // lấy ra toàn bộ thông tin khách hàng
+
+
+
+
+
+
+
+
     // lấy id chuyến bay dựa và id khách hàng
     public static List<Integer> getFlightForIDPass(int passengerId) {
         List<Integer> flightIds = new ArrayList<>();
@@ -1248,8 +1549,30 @@ public class DatabaseController {
             return false;
         }
     }
-
     // xóa airline
+
+    // lấy ra toàn bộ airline
+    public static boolean getAirlines() {
+        String sql = "SELECT airline_id , airline_name FROM airlines";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String ID1 = resultSet.getString("airline_id");
+                String ID2 = resultSet.getString("airline_name");
+                Admin.Controller.HomeController.ListAirlines.add(new Admin.Controller.HomeController.Airlines(ID1,ID2));
+            }
+            return !Admin.Controller.HomeController.ListAirport.isEmpty();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // lấy ra toàn bộ airline
+
+
+
     // lấy thời gian dự kiến dựa vào id chuyến bay
     // lấy thời gian dự kiến dựa vào id chuyến bay
 
@@ -1339,7 +1662,6 @@ public class DatabaseController {
             return 0;
         }
     }
-
     // chuyến bay đã đặt trong ngày
 
     // tống số vé được đặt trong năm

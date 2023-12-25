@@ -2,6 +2,7 @@ package Customer.Controller;
 import Database.DatabaseController;
 import Database.DatabaseContection;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,6 +27,7 @@ public class HomeController  {
     private Button nameProfile;
     public static int IdPassenger;
     public static String tendangnhap;
+    private String namePas;
     public static void getIdPassenderHome(int Id){
         IdPassenger = Id;
     }
@@ -33,7 +35,7 @@ public class HomeController  {
     private String sanbaydi;
     @FXML
     private void initialize() {
-        String namePas = tendangnhap;
+        namePas = tendangnhap;
         LoginController getName = new LoginController();
         getName.tendangnhap = namePas;
         nameProfile.setText(namePas);
@@ -53,14 +55,21 @@ public class HomeController  {
     private Parent root;
     @FXML
     public void Bookedclick(ActionEvent event) throws IOException{
-        BookedController frm = new BookedController();
-        frm.IdPassenger = IdPassenger;
-        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Booked.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Platform.runLater(() -> {
+            try {
+                BookedController frm = new BookedController();
+                frm.IdPassenger = IdPassenger;
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Booked.fxml"));
+                Parent root = loader.load();
 
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
     @FXML
     public void assessclick(ActionEvent event) throws IOException{

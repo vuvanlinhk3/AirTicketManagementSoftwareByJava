@@ -79,22 +79,18 @@
                      <top>
                         <Pane prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="510.0" layoutY="11.0" styleClass="orange-text_hover" text="Vũ Văn Linh">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                              <Label layoutX="616.0" layoutY="11.0" styleClass="orange-text_hover" text="Đăng Xuất">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
+                              <Button layoutX="466.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="128.0" text="Khách hàng ...">
+                                 <styleClass>
+                                    <String fx:value="transparent-button" />
+                                    <String fx:value="orange-text_hover" />
+                                 </styleClass>
+                              </Button>
+                              <Button layoutX="606.0" layoutY="9.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Đăng xuất">
+                                 <styleClass>
+                                    <String fx:value="transparent-button" />
+                                    <String fx:value="orange-text_hover" />
+                                 </styleClass>
+                              </Button>
                            </children>
                         </Pane>
                      </top>

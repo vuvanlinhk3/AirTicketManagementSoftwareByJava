@@ -1073,11 +1073,6 @@ public class HomeController {
         }
     }
 
-    @FXML
-    private void FindAirlineClick(){
-
-    }
-
 
     @FXML
     private TableView<Airlines> TableViewAirline;
@@ -1100,7 +1095,30 @@ public class HomeController {
         }
 
     }
+    @FXML
+    private TextField AirlineText;
+    @FXML
+    private void FindAirlineClick(){
+        String tx = AirlineText.getText();
+        if(tx != null){
+            boolean is = DatabaseController.FindAirline(tx);
+                if(is){
 
+                    ListAirlines.clear();
+                    DatabaseController.FindAirline(tx);
+                    FindAirline();
+                }else {
+                    BaseController.showAlert("Null","");
+                }
+
+        }
+    }
+
+    private void FindAirline(){
+        AirlineID.setCellValueFactory(new PropertyValueFactory<>("airline_id"));
+        NameAirline.setCellValueFactory(new PropertyValueFactory<>("airline_name"));
+        TableViewAirline.setItems(ListAirlines);
+    }
     public static class Airlines {
         private final String airline_id;
         private final String airline_name;

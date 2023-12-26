@@ -1571,6 +1571,26 @@ public class DatabaseController {
     }
     // lấy ra toàn bộ airline
 
+    // tim airline dua vao ten
+    public static boolean FindAirline(String name) {
+        String sql = "SELECT airline_id , airline_name FROM airlines WHERE airline_name =?";
+        try (Connection connection = DatabaseContection.getConnettion();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    String ID1 = resultSet.getString("airline_id");
+                    String ID2 = resultSet.getString("airline_name");
+                    Admin.Controller.HomeController.ListAirlines.add(new Admin.Controller.HomeController.Airlines(ID1,ID2));
+                }
+                return !Admin.Controller.HomeController.ListAirport.isEmpty();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+        }
+    }
+    // tim airline dua vao ten
 
 
     // lấy thời gian dự kiến dựa vào id chuyến bay

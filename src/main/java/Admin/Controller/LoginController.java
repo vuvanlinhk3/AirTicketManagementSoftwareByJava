@@ -48,16 +48,5 @@ public class LoginController  {
         }
     }
 
-    @FXML
-    private void click(ActionEvent event)throws IOException{
-        TenDangNhap = tenDangNhap_txt.getText();
-        FlightInfoController taomoi = new FlightInfoController();
-        taomoi.TenDangNhap =  TenDangNhap;
-        System.out.println("forrm 1 "+ TenDangNhap);
-        Parent root = FXMLLoader.load(getClass().getResource("/Admin/AdminView/FlightInfo.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 }

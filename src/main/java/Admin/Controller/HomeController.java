@@ -80,9 +80,16 @@ public class HomeController {
     private ComboBox<String> airportCobo;
     @FXML
     private TextField locationAirport;
-
+    @FXML
+    private Label nameAdmin;
+    public static String ADMINNAME;
+    private void nameadmin(){
+        String AdminName = ADMINNAME;
+        nameAdmin.setText(AdminName);
+    }
     @FXML
     private void initialize() {
+        nameadmin();
         dialogInfo.setVisible(false);
         dialogInfo.setDisable(true);
         panelinfo.setPrefHeight(0);

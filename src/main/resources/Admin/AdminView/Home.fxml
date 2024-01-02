@@ -874,7 +874,7 @@
                         </TabPane>
                         <Pane layoutX="1400.0" prefHeight="94.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="14.0" layoutY="16.0" text="Vũ Văn Linh">
+                              <Label fx:id="nameAdmin" layoutX="14.0" layoutY="16.0" text="Vũ Văn Linh">
                                  <font>
                                     <Font name="Cambria" size="20.0" />
                                  </font>

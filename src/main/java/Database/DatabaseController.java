@@ -655,6 +655,7 @@ public class DatabaseController {
 
 
     // Admin Login
+    public static String ADMINNAME;
     public static boolean LoginAdmin(String user, String password) {
         String sql = "SELECT * FROM admin WHERE ad_user = ? AND ad_password = ?";
         try (Connection connection = DatabaseContection.getConnettion();
@@ -663,7 +664,9 @@ public class DatabaseController {
             preparedStatement.setString(2, password);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    String passengerId = resultSet.getString("ad_user");
+                    String ADMINNAME = resultSet.getString("ad_name");
+                    Admin.Controller.HomeController frmhome = new Admin.Controller.HomeController();
+                    frmhome.ADMINNAME = ADMINNAME;
                     System.out.println("successfully.");
                 } else {
                     System.out.println("Failed");

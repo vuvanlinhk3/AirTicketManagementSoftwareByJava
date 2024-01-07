@@ -570,6 +570,31 @@ public class DatabaseController {
     }
     // lấy tên
 
+//    lấy email khách hàng
+public static String getEmailPassanger(int passengerId) {
+    try (Connection connection = DatabaseContection.getConnettion()) {
+        String query = "SELECT * FROM passengers WHERE passenger_id = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, passengerId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("email");
+                } else {
+                    // No passenger found with the given ID
+                    return "lỗi"; // Return an appropriate default value (e.g., empty string)
+                }
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        // Handle the exception, maybe throw a custom exception or return a default value
+        return "lỗi"; // Return an appropriate default value (e.g., empty string)
+    }
+}
+//    lấy email khách hàng
+
     //đổi mật khẩu
     public static boolean updatePassword(int passengerId, String newPassword) {
         String sql = "UPDATE passengers\n" +
@@ -604,6 +629,24 @@ public class DatabaseController {
         }
     }
     // xóa tài khoản
+
+//    xóa bảng bookinf dựa vào id khách hàng
+public static boolean DeleteAcountForPasId(int passengerId) {
+    String sql = "DELETE FROM bookings\n" +
+            "WHERE passenger_id = ?";
+    try (Connection connection = DatabaseContection.getConnettion();
+         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        preparedStatement.setInt(1, passengerId);
+        int rowsAffected = preparedStatement.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
+//    xóa bảng bookinf dựa vào id khách hàng
+
 
     // lấy ra id đặt vé toàn bộ
 // lấy ra id đặt vé toàn bộ

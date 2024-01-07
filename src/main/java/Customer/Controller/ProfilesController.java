@@ -16,6 +16,10 @@ import java.io.IOException;
 
 public class ProfilesController  {
     @FXML
+    private Label namePassger;
+    @FXML
+    private Label mailPass;
+    @FXML
     private TextField name_main_txt;
     @FXML
     private TextField password_txt;
@@ -38,14 +42,20 @@ public class ProfilesController  {
     public static void getIdPassender(int Id){
         IdPassenger = Id;
     }
+
+
     @FXML
     private void initialize(){
+
         String birthday = DatabaseController.getBir(IdPassenger);
         String phoneNumber = DatabaseController.getPhonePhone(IdPassenger);
         String namePassanger = DatabaseController.getNamePassanger(IdPassenger);
+        String emailPassanger = DatabaseController.getEmailPassanger(IdPassenger);
         birthday_txt.setText(birthday);
         number_txt.setText(phoneNumber);
         name_main_txt.setText(namePassanger);
+        namePassger.setText(namePassanger);
+        mailPass.setText(emailPassanger);
     }
     @FXML
     private void EditPasswordClick(){
@@ -83,34 +93,51 @@ public class ProfilesController  {
         label1.setVisible(false);
         password_txt.setEditable(false);
     }
-
+    @FXML
+    private Button sh;
     @FXML
     private void ShowIDClick(){
         id_pass_txt.setText(Integer.toString(IdPassenger));
+        sh.setVisible(false);
     }
 
     @FXML
-    private void DeleteAcountClick(){
-    ShowWarning();
-    if(warning == ButtonType.YES){
-        boolean isDelete = DatabaseController.DeleteAcount(IdPassenger);
-        if (isDelete){
-            SignupPassController.showAlert("Thống báo","Tài khoản của bạn sẽ xóa sau 24h !");
-        }else {
-            SignupPassController.showAlert("Thống báo","Lỗi !");
+    private void DeleteAcountClick(ActionEvent event)throws IOException{
+        ShowWarning();
+        if(warning == ButtonType.YES){
+            boolean is = DatabaseController.DeleteAcountForPasId(IdPassenger);
+            if (is) {
+                boolean isDelete = DatabaseController.DeleteAcount(IdPassenger);
+                if (isDelete){
+                    SignupPassController.showAlert("Thông báo","Tài khoản của bạn sẽ xóa sau vài phút!");
+//            chuyển về form đăng nhập
+                    Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+
+                }else {
+                    SignupPassController.showAlert("Thông báo","Lỗi !");
+                }
+            }else {
+                return;
+            }
+            }else {
+            BaseController.showAlert("Lỗi","Có Lỗi !");
         }
-    }else {
-        return;
-    }
+
+
 
 
     }
+
     private ButtonType warning;
     private void ShowWarning(){
         Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationDialog.setTitle("Xác nhận");
         confirmationDialog.setHeaderText("Bạn có chắc chắn muốn xóa toàn khoản!");
-        confirmationDialog.setContentText("Tài khoản của bạn sẽ được xóa sau 24h sau khi xác nhận xóa tài khoản !");
+        confirmationDialog.setContentText("Vé của bạn đã đặt sẽ bị hủy toàn bộ và xóa tài khoản, Bạn có chắc chắn !");
         confirmationDialog.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
         warning = confirmationDialog.showAndWait().orElse(ButtonType.NO);
     }

@@ -171,5 +171,12 @@ public class AllFlightController{
         mainPane.getStylesheets().add(getClass().getResource("/Customer/CustomerAccess/Base.css").toExternalForm());
         mainVBox.getChildren().add(mainPane);
     }
-
+    @FXML
+    private void back_click(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

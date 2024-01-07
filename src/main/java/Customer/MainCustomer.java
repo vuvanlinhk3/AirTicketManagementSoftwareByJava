@@ -23,7 +23,7 @@ public class MainCustomer extends Application {
         stage.setMinWidth(1400);
         stage.setMinHeight(650);
 
-        stage.setTitle("Hello!");
+        stage.setTitle("Trang chủ!");
         stage.setScene(scene);
         stage.show();
     }

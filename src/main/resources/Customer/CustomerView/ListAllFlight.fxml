@@ -58,6 +58,7 @@
                         <Font name="Cambria" size="16.0" />
                      </font>
                   </Label>
+                  <Button layoutY="29.0" mnemonicParsing="false" onAction="#back_click" text="↺  Quay Trở Lại" />
                </children>
             </Pane>
          </top>

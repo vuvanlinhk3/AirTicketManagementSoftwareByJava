@@ -83,12 +83,12 @@
                      <center>
                         <Pane prefHeight="157.0" prefWidth="1200.0" styleClass="node-with-bottom-border" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutY="14.0" text="Vũ Văn Linh">
+                              <Label fx:id="namePassger" layoutY="14.0" text="Vũ Văn Linh">
                                  <font>
                                     <Font name="Cambria Bold" size="22.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="57.0" text="vanlinh30122003@gmail.com">
+                              <Label fx:id="mailPass" layoutX="14.0" layoutY="57.0" text="vanlinh30122003@gmail.com">
                                  <font>
                                     <Font name="Cambria" size="14.0" />
                                  </font>
@@ -182,7 +182,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button layoutX="546.0" layoutY="166.0" mnemonicParsing="false" onAction="#ShowIDClick" prefHeight="30.0" prefWidth="47.0" text="Xem">
+                                    <Button fx:id="sh" layoutX="546.0" layoutY="166.0" mnemonicParsing="false" onAction="#ShowIDClick" prefHeight="30.0" prefWidth="47.0" text="Xem">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

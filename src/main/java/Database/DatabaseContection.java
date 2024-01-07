@@ -1,5 +1,6 @@
 package Database;
 
+import Admin.Controller.BaseController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import java.sql.Connection;
@@ -10,8 +11,9 @@ import java.util.concurrent.locks.Condition;
 
 
 public class DatabaseContection  {
+    private static Connection databaselink = null;
     public static Connection getConnettion(){
-        Connection databaselink =null;
+
         try {
             // đăng ký mysql driver với drivermanager
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
@@ -26,8 +28,18 @@ public class DatabaseContection  {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            BaseController.showAlert("lỖI","Không có kết nối mạng !");
         }
         return databaselink;
     }
+    public static void closeConnettion(){
+        try {
+            if (databaselink !=null){
+                databaselink.close();
+            }
 
+        }catch (Exception e){
+        e.printStackTrace();
+        }
+    }
 }

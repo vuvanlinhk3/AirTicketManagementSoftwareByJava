@@ -47,6 +47,13 @@ public class LoginController  {
             BaseController.showAlert("Trống","Vui lòng nhập tên đăng nhập !");
         }
     }
-
+    @FXML
+    private void loginPass(ActionEvent event)throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerAccess/Login.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

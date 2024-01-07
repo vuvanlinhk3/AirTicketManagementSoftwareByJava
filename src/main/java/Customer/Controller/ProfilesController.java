@@ -126,10 +126,6 @@ public class ProfilesController  {
             }else {
             BaseController.showAlert("Lỗi","Có Lỗi !");
         }
-
-
-
-
     }
 
     private ButtonType warning;
@@ -156,6 +152,7 @@ public class ProfilesController  {
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
     private void LogoutClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Login.fxml"));

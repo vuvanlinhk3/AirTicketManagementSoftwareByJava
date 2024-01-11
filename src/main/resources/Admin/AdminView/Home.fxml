@@ -872,18 +872,27 @@
                               </Tab>
                            </tabs>
                         </TabPane>
-                        <Pane layoutX="1400.0" prefHeight="94.0" prefWidth="200.0">
+                        <Pane layoutX="1309.0" prefHeight="94.0" prefWidth="291.0">
                            <children>
-                              <Label fx:id="nameAdmin" layoutX="14.0" layoutY="16.0" text="Vũ Văn Linh">
+                              <Label fx:id="nameAdmin" layoutX="99.0" layoutY="16.0" text="Vũ Văn Linh">
                                  <font>
                                     <Font name="Cambria" size="20.0" />
                                  </font>
                               </Label>
-                              <ImageView fitHeight="62.0" fitWidth="71.0" layoutX="129.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="62.0" fitWidth="71.0" layoutX="214.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../Customer/CustomerAccess/img.png" />
                                  </image>
                               </ImageView>
+                              <Button layoutY="12.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="33.0" prefWidth="102.0" text="Đăng xuất">
+                                 <font>
+                                    <Font name="Cambria" size="14.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="transparent-button" />
+                                    <String fx:value="orange-text_hover" />
+                                 </styleClass>
+                              </Button>
                            </children>
                         </Pane>
                      </children>

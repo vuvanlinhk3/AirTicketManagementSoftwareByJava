@@ -772,11 +772,11 @@ public class HomeController {
     @FXML
     private void addChairsClick() {
         String chairName = chair_name.getText();
-        int FLId = Integer.parseInt(FL_id.getText());
         String Compart = select_chair.getValue();
         int IDCompart = DatabaseController.getSeatType(Compart);
 
-        if (chairName != null && FLId != 0 && Compart != null) {
+        if (chairName != null && FL_id.getText() != null && Compart != null) {
+            int FLId = Integer.parseInt(FL_id.getText());
             boolean isAddSeat = DatabaseController.addSeatNumber(FLId, chairName, "0", IDCompart);
             if (isAddSeat) {
                 BaseController.showAlert("Thành công", "Thêm thành công");
@@ -784,6 +784,8 @@ public class HomeController {
             } else {
                 BaseController.showAlert("Lỗi", "Thêm Thất bại");
             }
+        }else{
+            BaseController.showAlert("Lỗi" , "Không được để trống 1 vùng");
         }
     }
     @FXML
@@ -1048,25 +1050,29 @@ public class HomeController {
     @FXML
     private void AddAirlineClick() {
         String NewNameAirline = TxtNameAirline.getText();
-        if (NewNameAirline != null) {
-            boolean IsAddAirline = DatabaseController.addAirline(NewNameAirline);
-            if (IsAddAirline) {
-                BaseController.showAlert("Thành công", "Thêm thành công !");
-                 initAllAirline();
+
+            if (NewNameAirline.isEmpty()) {
+                BaseController.showAlert("Trống", "Vui lòng nhập !");
+
+            } else {
+                boolean IsAddAirline = DatabaseController.addAirline(NewNameAirline);
+                if (IsAddAirline) {
+                    BaseController.showAlert("Thành công", "Thêm thành công !");
+                    initAllAirline();
 
                 } else {
-                BaseController.showAlert("Lỗi", "Thêm thất bại !");
+                    BaseController.showAlert("Lỗi", "Thêm thất bại !");
 
+                }
             }
-        } else {
-            BaseController.showAlert("Trống", "Vui lòng nhập !");
-        }
     }
 
     @FXML
     private void DeleteAirlineClick() {
         String NewNameAirline = TxtNameAirline.getText();
-        if (NewNameAirline != null) {
+        if (NewNameAirline.isEmpty()) {
+            BaseController.showAlert("Trống", "Vui lòng nhập !");
+        } else {
             boolean IsAddAirline = DatabaseController.deleteAirline(NewNameAirline);
             if (IsAddAirline) {
                 BaseController.showAlert("Thành công", "xóa thành công !");
@@ -1075,8 +1081,7 @@ public class HomeController {
                 BaseController.showAlert("Lỗi", "xóa thất bại !");
 
             }
-        } else {
-            BaseController.showAlert("Trống", "Vui lòng nhập !");
+
         }
     }
 
@@ -1107,17 +1112,20 @@ public class HomeController {
     @FXML
     private void FindAirlineClick(){
         String tx = AirlineText.getText();
-        if(tx != null){
+        if (tx.isEmpty()) {
+
+            BaseController.showAlert("Lỗi","Không được để trống !");
+
+        }else {
             boolean is = DatabaseController.FindAirline(tx);
-                if(is){
+            if(is){
 
-                    ListAirlines.clear();
-                    DatabaseController.FindAirline(tx);
-                    FindAirline();
-                }else {
-                    BaseController.showAlert("Null","");
-                }
-
+                ListAirlines.clear();
+                DatabaseController.FindAirline(tx);
+                FindAirline();
+            }else {
+                BaseController.showAlert("Null","");
+            }
         }
     }
 
@@ -1313,4 +1321,15 @@ public class HomeController {
 
     }
     // doannh thu
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    @FXML
+    private void logoutClick(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Admin/AdminView/Login.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

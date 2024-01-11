@@ -28,7 +28,7 @@ public class DatabaseContection  {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            BaseController.showAlert("lỖI","Không có kết nối mạng !");
+            BaseController.showAlert("No database connection","Không có kết nối mạng !");
         }
         return databaselink;
     }

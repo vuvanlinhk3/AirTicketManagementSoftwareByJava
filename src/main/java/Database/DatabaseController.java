@@ -1587,7 +1587,6 @@ public static boolean DeleteAcountForPasId(int passengerId) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, airlineName);
                 int rowsAffected = preparedStatement.executeUpdate();
-
                 return rowsAffected > 0;
             }
         } catch (SQLException e) {
@@ -1628,9 +1627,11 @@ public static boolean DeleteAcountForPasId(int passengerId) {
                 while (resultSet.next()) {
                     String ID1 = resultSet.getString("airline_id");
                     String ID2 = resultSet.getString("airline_name");
-                    Admin.Controller.HomeController.ListAirlines.add(new Admin.Controller.HomeController.Airlines(ID1,ID2));
+                    Admin.Controller.HomeController.ListAirlines.add(
+                            new Admin.Controller.HomeController.Airlines(ID1,ID2)
+                    );
                 }
-                return !Admin.Controller.HomeController.ListAirport.isEmpty();
+                return !Admin.Controller.HomeController.ListAirlines.isEmpty();
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;

@@ -598,7 +598,10 @@ public class HomeController {
     private void addAriportClick() {
         newAirport = airportName.getText();
         newLocation = locationAirport.getText();
-        if (newAirport != null && newLocation != null) {
+        if (newAirport.isEmpty()  || newLocation.isEmpty()) {
+            BaseController.showAlert("Trống", "Vui lòng nhập đầy đủ thông tin !");
+
+        } else {
             boolean isAddAirport = DatabaseController.addAirport(newAirport, newLocation);
             if (isAddAirport) {
                 BaseController.showAlert("Thành công", "Thêm sân bay thành công !");
@@ -606,8 +609,6 @@ public class HomeController {
             } else {
                 BaseController.showAlert("Lỗi", "Lỗi Thêm sân bay,Hãy kiếm tra lại !");
             }
-        } else {
-            BaseController.showAlert("Trống", "Vui lòng nhập đầy đủ thông tin !");
         }
     }
 
@@ -628,11 +629,21 @@ public class HomeController {
     private void deleteAirport() {
         newAirport = airportName.getText();
         newLocation = locationAirport.getText();
-        IDAir = Integer.parseInt(airport_ID.getText());
+
         if (true) {
             ShowWarning();
             if (warning == ButtonType.YES) {
-                if (newAirport.isEmpty() || newAirport != null && IDAir != 0) {
+                if (newAirport != null && airport_ID.getText().isEmpty()) {
+                    boolean isDeleteAirport = DatabaseController.deleteAirportForName(newAirport);
+                    if (isDeleteAirport) {
+                        BaseController.showAlert("Thành công", "Xóa thành công sân bay !");
+                        initAllAirport();
+                    } else {
+                        BaseController.showAlert("Lỗi", "Tên không tồn tại");
+                    }
+                }
+                if (newAirport.isEmpty() || newAirport != null && airport_ID.getText() !=null) {
+                    IDAir = Integer.parseInt(airport_ID.getText());
                     boolean isDeleteAirport = DatabaseController.deleteAirport(IDAir);
                     if (isDeleteAirport) {
                         BaseController.showAlert("Thành công", "Xóa thành công sân bay !");
@@ -641,15 +652,7 @@ public class HomeController {
                         BaseController.showAlert("Lỗi", "ID chuyến bay không tồn tại");
                     }
                 }
-                if (newAirport != null && IDAir == 0) {
-                    boolean isDeleteAirport = DatabaseController.deleteAirportForName(newAirport);
-                    if (isDeleteAirport) {
-                        BaseController.showAlert("Thành công", "Xóa thành công sân bay !");
-                        initAllAirport();
-                    } else {
-                        BaseController.showAlert("Lỗi", "ID chuyến bay không tồn tại");
-                    }
-                }
+
             } else {
                 return;
             }
@@ -1105,7 +1108,6 @@ public class HomeController {
             TableViewAirline.setItems(ListAirlines);
 
         }
-
     }
     @FXML
     private TextField AirlineText;

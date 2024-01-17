@@ -673,6 +673,7 @@ public static boolean DeleteAcountForPasId(int passengerId) {
 
     // xóa đặt vé
     public static boolean DeleteBook(int ID) {
+        boolean t =true;
         String sql = "DELETE FROM bookings\n" +
                 "WHERE booking_id = ?";
         try (Connection connection = DatabaseContection.getConnettion();
@@ -681,8 +682,9 @@ public static boolean DeleteAcountForPasId(int passengerId) {
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
         } catch (SQLException e) {
+            t = false;
             e.printStackTrace();
-            return false;
+            return t;
         }
     }
     // xóa đặt vé
@@ -1043,19 +1045,23 @@ public static boolean DeleteAcountForPasId(int passengerId) {
     // xóa sân bay dựa vào tên
     public static boolean deleteAirportForName(String nameAirport) {
         try (Connection connection = DatabaseContection.getConnettion()) {
+            // Trước hết, xóa dữ liệu liên quan trong các bảng khác
             deleteSeatNumbersAndTicketPricesAndBookingByAirportName(connection, nameAirport);
             deleteFlightsByAirportName(connection, nameAirport);
 
+            // Sau đó, xóa dữ liệu trong bảng Airports
             String sql = "DELETE FROM Airports WHERE airport_name = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, nameAirport);
-                preparedStatement.executeUpdate();
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+
+                // Thực hiện truy vấn DELETE
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                // Kiểm tra số dòng bị ảnh hưởng để xác định liệu xóa thành công hay không
+                if (rowsAffected > 0) {
+                    return true;
+                } else {
+                    return false;
                 }
             }
         } catch (SQLException e) {
@@ -1063,6 +1069,7 @@ public static boolean DeleteAcountForPasId(int passengerId) {
             return false;
         }
     }
+
 
     // Hàm xóa chuyến bay có sân bay xuất phát hoặc đến
     private static void deleteFlightsByAirportName(Connection connection, String Name) throws SQLException {

@@ -54,21 +54,19 @@ public class HomeController  {
     private Scene scene;
     private Parent root;
     @FXML
-    public void Bookedclick(ActionEvent event) throws IOException{
+    public void Bookedclick(ActionEvent event) throws IOException {
+        BookedController frm = new BookedController();
+        frm.IdPassenger = IdPassenger;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Booked.fxml"));
+        Parent root = loader.load();
+
+
         Platform.runLater(() -> {
-            try {
-                BookedController frm = new BookedController();
-                frm.IdPassenger = IdPassenger;
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Customer/CustomerView/Booked.fxml"));
-                Parent root = loader.load();
-
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.hide();
         });
     }
     @FXML

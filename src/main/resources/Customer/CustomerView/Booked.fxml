@@ -24,7 +24,7 @@
                <left>
                   <Pane prefHeight="80.0" prefWidth="168.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button layoutX="6.0" layoutY="5.0" mnemonicParsing="false" onAction="#back_click" prefHeight="35.0" text="↺  Quay Trở Lại">
+                        <Button layoutX="6.0" layoutY="5.0" mnemonicParsing="false" onAction="#backClick" prefHeight="35.0" text="↺  Quay Trở Lại">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -127,7 +127,7 @@
                                     <TableView fx:id="flightTableView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c6d5c8;" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
                                       <columns>
                                           <TableColumn fx:id="flightIdColumn" prefWidth="45.0" text="ID" />
-                                        <TableColumn fx:id="flightDestionColumn" prefWidth="108.0" text="Sân bay đi" />
+                                        <TableColumn id="flightDespartionColumn" fx:id="flightDestionColumn" prefWidth="108.0" text="Sân bay đi" />
                                         <TableColumn fx:id="flightDestinationColumn" minWidth="0.0" prefWidth="135.0" text="Sân bay đến" />
                                           <TableColumn fx:id="flightDepartureTimeColumn" minWidth="0.0" prefWidth="138.0" text="Thời gian khởi hành" />
                                           <TableColumn fx:id="flightSeatTypeColumn" minWidth="0.0" prefWidth="124.0" text="Hạng khoang" />

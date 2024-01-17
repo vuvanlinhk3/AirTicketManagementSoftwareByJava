@@ -27,7 +27,8 @@ public class BookedController {
     private TableView<Book> flightTableView;
     @FXML
     private TableColumn<Book, String> flightIdColumn;
-
+    @FXML
+    private TableColumn<Book,String> flightDestionColumn;
     @FXML
     private TableColumn<Book, String> flightDestinationColumn;
 
@@ -46,29 +47,32 @@ public class BookedController {
     public static int IdPassenger;
 
     public static ObservableList<Book> ListBook = FXCollections.observableArrayList();
-
-
+    private boolean isInit = false;
+    int IDpas;
     @FXML
     private void initialize() {
-        int IDpas = IdPassenger;
+        isInit = true;
+        IDpas = IdPassenger;
         System.out.println(IDpas);
-
-        if (DatabaseController.getBooked(IDpas)) {
+//        ListBook.clear();
+        showCombo();
             // Assuming showCombo() is another method in your controller
-            showCombo();
+            renderList();
 
-            // Assuming ListBook is a class variable
-            flightTableView.setItems(ListBook);
-            flightIdColumn.setCellValueFactory(new PropertyValueFactory<>("booking_id"));
-            flightDestinationColumn.setCellValueFactory(new PropertyValueFactory<>("departure_airport"));
-            flightDepartureTimeColumn.setCellValueFactory(new PropertyValueFactory<>("departure_datetime"));
-            flightSeatTypeColumn.setCellValueFactory(new PropertyValueFactory<>("seat_type_name"));
-            flightSeatNumberColumn.setCellValueFactory(new PropertyValueFactory<>("seat_number"));
-            flightPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        }
 
     }
-
+    private void renderList(){
+        DatabaseController.getBooked(IDpas);
+        flightTableView.setItems(ListBook);
+        flightIdColumn.setCellValueFactory(new PropertyValueFactory<>("booking_id"));
+        flightDestinationColumn.setCellValueFactory(new PropertyValueFactory<>("destination_airport"));
+        flightDestionColumn.setCellValueFactory(new PropertyValueFactory<>("departure_airport"));
+        flightDepartureTimeColumn.setCellValueFactory(new PropertyValueFactory<>("departure_datetime"));
+        flightSeatTypeColumn.setCellValueFactory(new PropertyValueFactory<>("seat_type_name"));
+        flightSeatNumberColumn.setCellValueFactory(new PropertyValueFactory<>("seat_number"));
+        flightPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        flightTableView.refresh();
+    }
 
 
     @FXML
@@ -152,7 +156,14 @@ public class BookedController {
             int SelecID = Integer.parseInt(TxtD.getText());
             Boolean IsDelete = DatabaseController.DeleteBook(SelecID);
             if (IsDelete) {
+
                 SignupPassController.showAlert("Thành công", "Hủy vé thành công !");
+                showCombo();
+                if (isInit){
+                    isInit =false;
+                    ListBook.clear();
+                    renderList();
+                }
             } else {
                 SignupPassController.showAlert("Lỗi", "Hủy vé thất bại !");
             }
@@ -166,7 +177,7 @@ public class BookedController {
     private Parent root;
 
     @FXML
-    private void back_click(ActionEvent event) throws IOException {
+    private void backClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Customer/CustomerView/Home.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
